@@ -1,0 +1,117 @@
+.headerPaga {
+    @include headerP('../../../../public/img/headers/bg-asad.jpg');
+   
+}
+
+.scAsados {
+    @include dFlex(center, center, column nowrap);
+    width: 100%;
+
+    .cntSec1 {
+        @include dFlex(center, center, row wrap);
+        width: 100%;
+
+
+        &__cntDatos {
+            @include dFlex(center, center, column nowrap);
+            width: 50%;
+            margin: 0 10px;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                // display: flex;
+                // justify-content: center;
+                // align-items: center;
+                // place-items: center center;
+                // place-content: center;
+                bottom: 0;
+                // left: 0;
+                width: 350px;
+                height: 420px;
+                background: url(../../../../public/img/grill/campfire.png);
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                opacity: 0.1;
+                z-index: -1;
+            }
+
+            h3 {
+                font-family: $font-segunda;
+                font-size: 4vmin;
+                color: #000;
+                letter-spacing: 1px;
+                text-align: center;
+                font-weight: 200;
+            }
+
+        }
+
+        &__cntProducts {
+            @include dFlex(center, flex-start, column nowrap);
+
+            h4 {
+                font-family: $font-segunda;
+                font-size: 3.7vmin;
+                color: #000;
+                letter-spacing: 1px;
+                text-align: center;
+                font-weight: 200;
+                margin-top: 15px;
+            }
+
+            p {
+                // font-family: $font-cuarta;
+                font-size: 18px;
+                color: #000;
+                text-align: justify;
+                font-weight: 400;
+                margin: 15px;
+            }
+
+        }
+
+        &__cntImages {
+            // width: 50%;
+            // height: 100%;
+            display: grid;
+            // grid-template-areas: "img1 ";
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto;
+            grid-template-areas:
+                "item1 ."
+                ". item2"
+                "item3 .";
+            gap: 20px;
+            margin: 0 10px;
+            // justify-items: center;]
+            img {
+                width: 140px;
+                height: 160px;
+                // object-fit: cover;
+
+                &:nth-child(1) {
+                    grid-area: item1;
+                }
+
+                &:nth-child(2) {
+                    grid-area: item2;
+                }
+
+                &:nth-child(3) {
+                    grid-area: item3;
+                }
+            }
+
+            @include Tablet() {
+                // opacity: 0;
+                display: none;
+            }
+
+        }
+
+    }
+
+}
