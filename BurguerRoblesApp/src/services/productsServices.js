@@ -33,12 +33,12 @@ export async function getProductByCategory(id){
 
 export async function saveProduct(product){
     try{
-        console.log(product);
-        // const resp = await axios({
-        //     url: 'http://localhost:8080/api/realTimeProducts',
-        //     method: 'POST',
-        //     data: product
-        // })
+        // console.log('ffffffffffffff', product);
+        await axios({
+            url: 'http://localhost:8080/api/realTimeProducts',
+            method: 'POST',
+            data: product
+        })
     }catch(e){
         console.log('Erroro al conextarse al servidor paa guardar', e);
     }

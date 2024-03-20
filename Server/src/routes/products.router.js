@@ -51,39 +51,3 @@ router.delete('/:id', async (req, res) => {
 
 export default router
 // module.exports = router
-
-
-
-// {
-//     "ingrePrep": "Lengua de res marinada",
-//     "nombre": "Baguette de Lengua de res",
-//     "pan": "Pan Baguette Integral",
-//     "precio": 60,
-//     "preparacion": "Lengua",
-//     "tipo": {
-//         "id": "bagP",
-//         "nombre": "baguette",
-//         "url": "../public/img/menu/baguettes/baguet.png"
-//     },
-//     "thumbnails": "../public/img/menu/baguettes/baguet.png",
-//     "vegetales": [
-//         {
-//             "id": "4",
-//             "nombre": "aguacate"
-//         },
-//         {
-//             "id": "5",
-//             "nombre": "frijoles"
-//         },
-//         {
-//             "id": "6",
-//             "nombre": "lechuga"
-//         },
-//         {
-//             "id": "3",
-//             "nombre": "rajas"
-//         }
-//     ],
-//     "status": "true",
-//     "stock": 0
-// },

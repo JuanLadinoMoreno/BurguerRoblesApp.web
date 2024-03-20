@@ -40,14 +40,16 @@ export default class ProductManager {
     }
 
     validaDatos(produc){
-        if((produc.ingrePrep === "" || !produc.ingrePrep) || 
-            (produc.nombre === "" || !produc.nombre) ||
+        if((produc.ingrePrep === "" || !produc.ingrePrep) ||
+            (produc.nombre === "" || !produc.nombre)  ||
             (produc.pan === "" || !produc.pan) ||
             (isNaN(produc.precio) || produc.precio < 0) ||
             (produc.preparacion === "" || !produc.preparacion) ||
             (!produc.tipo || produc.tipo === "") ||
-            (!produc.status || (produc.status != "true" && produc.status != "false") ) ||
-            (isNaN(produc.stock) ||  produc.stock < 0) ){
+            (!produc.status || (produc.status != true && produc.status != false) ) || 
+            (isNaN(produc.stock) ||  produc.stock < 0) 
+            )
+        {
             // console.log("Verifique que los campos esten coorectos o llenos");
             throw new Error(`Verifique que los campos esten coorectos o llenos`)
         }
@@ -96,7 +98,7 @@ export default class ProductManager {
         
         await this.#updateFile();
         
-        // console.log('productooooooooo', produc.stock);
+        console.log('productooooooooo', product);
         return product
 
 

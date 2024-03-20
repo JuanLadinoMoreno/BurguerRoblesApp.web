@@ -190,3 +190,7 @@ export const useGetProductsByCategorys = (id) => {
 
     return { productsData }
 }
+
+export const useCreateProd = () => {
+
+}

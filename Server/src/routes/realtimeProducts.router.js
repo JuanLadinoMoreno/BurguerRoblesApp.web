@@ -7,14 +7,19 @@ const fileName = `./server/assets/Products.json`
 const productManager = new ProductManager(fileName);
 
 router.post('/', async (req, res) => {
+    //falta try/catch
+    // console.log('asdasdadlaksjfkahlsd', req.body);
 
-    console.log('asdasdadlaksjfkahlsd', req.body);
+    
+    const product = req.body
+    const prodCreado = await productManager.createProduct(product);
 
-    // const wsServer = req.app.get('ws')
+    // const products = await productManager.getProducts();
 
-    // const product = req.body
-    // const prodCreado = await productManager.createProduct(product);
-    // res.status(201).json(prodCreado)
-})
+    //Opcion 2 emit para ael server con el producto creado
+    req.app.get('ws').emit('newProduct', prodCreado)
+
+    res.status(201).json(prodCreado)
+}) 
 
 export default router
