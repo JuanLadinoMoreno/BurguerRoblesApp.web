@@ -65,6 +65,8 @@ export default class ProductManager {
         // valida campos
         this.validaDatos(produc)
 
+        // JSON.parse(produc.aderesos)
+
         //  Valida que el codigo no exista       
         // const valCode = this.#products.find(prod => prod.code === code);
         // if (valCode) {

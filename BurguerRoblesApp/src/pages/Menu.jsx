@@ -14,7 +14,7 @@ export default function Menu() {
         <>
             <Head title={'Menu'}/>
 
-            <ItemListContainer productsDatas = {productsData}/>
+            <ItemListContainer productsData = {productsData}/>
         </>
     )
 }

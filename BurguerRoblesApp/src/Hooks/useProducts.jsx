@@ -134,13 +134,18 @@ export const useGetProductsById = (id, collectionName = "products") => {
 
 
 //LLENA EL MENU DE CATEGORIAS
+// export const useGetCategories = (collectionName = "categories") => {
 export const useGetCategories = (collectionName = "categories") => {
+
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+
+
         // setTimeout(() => {}, 3200);
 
+        // FIREBASE
         const db = getFirestore();
         const productsCollection = collection(db, collectionName);
         getDocs(productsCollection).then((snapshot) => {

@@ -1,18 +1,9 @@
 [
 	{
 		"aderesos": [
-			{
-				"id": "1",
-				"nombre": "Catsup"
-			},
-			{
-				"id": "2",
-				"nombre": "Mayonesa"
-			},
-			{
-				"id": "3",
-				"nombre": "Mostaza"
-			}
+			"Catsup",
+			"Mayonesa",
+			"Mostaza"
 		],
 		"id": 1,
 		"ingrePrep": "tradiconal",
@@ -23,36 +14,18 @@
 		"tipo": "burguerP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/burgMex.png",
 		"vegetales": [
-			{
-				"id": "1",
-				"nombre": "jitomate"
-			},
-			{
-				"id": "2",
-				"nombre": "cebolla"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"jitomate",
+			"cebolla",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
 	},
 	{
 		"aderesos": [
-			{
-				"id": "1",
-				"nombre": "Catsup"
-			},
-			{
-				"id": "2",
-				"nombre": "Mayonesa"
-			},
-			{
-				"id": "3",
-				"nombre": "Mostaza"
-			}
+			"Catsup",
+			"Mayonesa",
+			"Mostaza"
 		],
 		"id": 2,
 		"ingrePrep": "Lonchas de tocino",
@@ -63,36 +36,18 @@
 		"tipo": "burguerP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/burToci.png",
 		"vegetales": [
-			{
-				"id": "1",
-				"nombre": "jitomate"
-			},
-			{
-				"id": "2",
-				"nombre": "cebolla"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"jitomate",
+			"cebolla",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
 	},
 	{
 		"aderesos": [
-			{
-				"id": "1",
-				"nombre": "Catsup"
-			},
-			{
-				"id": "2",
-				"nombre": "Mayonesa"
-			},
-			{
-				"id": "3",
-				"nombre": "Mostaza"
-			}
+			"Catsup",
+			"Mayonesa",
+			"Mostaza"
 		],
 		"id": 3,
 		"ingrePrep": "Piña y jamón",
@@ -103,36 +58,18 @@
 		"tipo": "burguerP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/burgMex.png",
 		"vegetales": [
-			{
-				"id": "1",
-				"nombre": "jitomate"
-			},
-			{
-				"id": "2",
-				"nombre": "cebolla"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"jitomate",
+			"cebolla",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
 	},
 	{
 		"aderesos": [
-			{
-				"id": "1",
-				"nombre": "Catsup"
-			},
-			{
-				"id": "2",
-				"nombre": "Mayonesa"
-			},
-			{
-				"id": "3",
-				"nombre": "Mostaza"
-			}
+			"Catsup",
+			"Mayonesa",
+			"Mostaza"
 		],
 		"id": 4,
 		"ingrePrep": "Champiñones con queso",
@@ -143,36 +80,18 @@
 		"tipo": "burguerP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/burgMex.png",
 		"vegetales": [
-			{
-				"id": "1",
-				"nombre": "jitomate"
-			},
-			{
-				"id": "2",
-				"nombre": "cebolla"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"jitomate",
+			"cebolla",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
 	},
 	{
 		"aderesos": [
-			{
-				"id": "1",
-				"nombre": "Catsup"
-			},
-			{
-				"id": "2",
-				"nombre": "Mayonesa"
-			},
-			{
-				"id": "3",
-				"nombre": "Mostaza"
-			}
+			"Catsup",
+			"Mayonesa",
+			"Mostaza"
 		],
 		"id": 5,
 		"ingrePrep": "Chorizo de la casa con queso y aguacate",
@@ -183,36 +102,18 @@
 		"tipo": "burguerP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/burgMex.png",
 		"vegetales": [
-			{
-				"id": "1",
-				"nombre": "jitomate"
-			},
-			{
-				"id": "2",
-				"nombre": "cebolla"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"jitomate",
+			"cebolla",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
 	},
 	{
 		"aderesos": [
-			{
-				"id": "1",
-				"nombre": "Catsup"
-			},
-			{
-				"id": "2",
-				"nombre": "Mayonesa"
-			},
-			{
-				"id": "3",
-				"nombre": "Mostaza"
-			}
+			"Catsup",
+			"Mayonesa",
+			"Mostaza"
 		],
 		"id": 6,
 		"ingrePrep": "Lonchas de tocino",
@@ -223,36 +124,18 @@
 		"tipo": "hotdogP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/hotdog.png",
 		"vegetales": [
-			{
-				"id": "1",
-				"nombre": "jitomate"
-			},
-			{
-				"id": "2",
-				"nombre": "cebolla"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"jitomate",
+			"cebolla",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
 	},
 	{
 		"aderesos": [
-			{
-				"id": "1",
-				"nombre": "Catsup"
-			},
-			{
-				"id": "2",
-				"nombre": "Mayonesa"
-			},
-			{
-				"id": "3",
-				"nombre": "Mostaza"
-			}
+			"Catsup",
+			"Mayonesa",
+			"Mostaza"
 		],
 		"id": 7,
 		"ingrePrep": "Queso, cebolla y jitomate",
@@ -263,18 +146,9 @@
 		"tipo": "hotdogP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/hotdog.png",
 		"vegetales": [
-			{
-				"id": "1",
-				"nombre": "jitomate"
-			},
-			{
-				"id": "2",
-				"nombre": "cebolla"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"jitomate",
+			"cebolla",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -289,22 +163,10 @@
 		"tipo": "hotdogP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/baguet.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -319,22 +181,10 @@
 		"tipo": "bagP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/baguet.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -349,22 +199,10 @@
 		"tipo": "bagP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/baguet.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -379,22 +217,10 @@
 		"tipo": "bagP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/baguet.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -409,22 +235,10 @@
 		"tipo": "sandP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/sandw.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -439,22 +253,10 @@
 		"tipo": "sandP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/sandw.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -469,22 +271,10 @@
 		"tipo": "sandP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/sandw.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -499,22 +289,10 @@
 		"tipo": "sandP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/sandw.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -529,22 +307,10 @@
 		"tipo": "burrP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/hotGrand.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -559,22 +325,10 @@
 		"tipo": "burrP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/hotGrand.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -589,22 +343,10 @@
 		"tipo": "burrP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/hotGrand.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
@@ -619,34 +361,68 @@
 		"tipo": "burrP",
 		"thumbnail": "https://burguerroblesss.com.mx/assets/img/menu/hotGrand.png",
 		"vegetales": [
-			{
-				"id": "4",
-				"nombre": "aguacate"
-			},
-			{
-				"id": "5",
-				"nombre": "frijoles"
-			},
-			{
-				"id": "6",
-				"nombre": "lechuga"
-			},
-			{
-				"id": "3",
-				"nombre": "rajas"
-			}
+			"aguacate",
+			"frijoles",
+			"lechuga",
+			"rajas"
 		],
 		"status": "true",
 		"stock": 0
 	},
 	{
 		"id": 20,
+		"nombre": "baguette de lengua",
+		"preparacion": "lengua marinada  ",
+		"ingrePrep": "lengua    ",
+		"tipo": "bagP",
+		"pan": " pan     ",
+		"selectAllAde": false,
+		"aderesos": [
+			"Mayonesa"
+		],
+		"selectAllVeg": false,
+		"vegetales": [
+			"Jitomate",
+			"Cebolla",
+			"Rajas"
+		],
+		"precio": 80,
+		"status": true,
+		"stock": 10
+	},
+	{
+		"id": 21,
+		"nombre": "baguette de lengua 10",
+		"preparacion": "lengua marinada  ",
+		"ingrePrep": "lengua    ",
+		"tipo": "bagP",
+		"pan": " pan     ",
+		"selectAllAde": "allAde",
+		"aderesos": false,
+		"selectAllVeg": "allVeg",
+		"vegetales": false,
+		"precio": 80,
+		"status": true,
+		"stock": 10
+	},
+	{
+		"id": 22,
 		"nombre": "baguette de lengua 4",
 		"preparacion": "lengua marinada  ",
 		"ingrePrep": "lengua    ",
-		"tipo": "hotdogP",
+		"tipo": "bagP",
 		"pan": " pan     ",
-		"precio": 50,
+		"aderesos": [
+			"Mayonesa",
+			"Mostaza"
+		],
+		"vegetales": [
+			"Jitomate",
+			"Cebolla",
+			"Aguacate",
+			"Lechuga"
+		],
+		"precio": 80,
 		"status": true,
 		"stock": 10
 	}
