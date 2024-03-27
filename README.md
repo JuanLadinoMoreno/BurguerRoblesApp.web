@@ -1,1 +1,5 @@
 # BurguerRoblesApp.web
+
+Dentro de la seccion de “menú” del sitio nos va a mandar a la seccion de la actividad, va a mostrar un listado de productos, tambien aparece un forumulario el cual envia los datos por websocket(me hace falta crear que se cargue el arreglo para las opciones de vegetales y aderesos, aún no se como resolverlo), al dar click en enviar el producto se muestra al final de la lista de productos.
+
+Para el desarrollo, dentro de la carpeta burguerRoblesApp se encuentra la carpeta Pages, ahi se encuentra el archivo Menu, este tiene un componente hijo que es ItemListContainer (ubicado en components/Menu/ItemListContainer.jsx) el cual contiene la actividad, en la funcion saveProduct() del formulario nos manda al post de la ruta realTimeProducts del archivo realtimeProducts.router del servidor. (Perdón por todos los comentarios y consol log, pero estuve con varias dificultades, no se los quite ya que quiero ver en que puedo mejorar)
