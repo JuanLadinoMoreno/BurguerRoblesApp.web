@@ -11,7 +11,8 @@ import { ItemCount } from '../../ItemCount'
 export default function ItemDetailContainer() {
 
     const { id } = useParams() //Obtiene id de la ruta para mostrar el producto
-    const { productData, isLoading } = useGetProductsById(id, 'products')
+    // const { productData, isLoading } = useGetProductsById(id, 'products') //firestore
+    const { productData, isLoading } = useGetProductsById(id)
 
 
 

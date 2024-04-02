@@ -7,14 +7,14 @@ Head
 
 export default function Menu() {
 
-     const { productsData } = useGetProducts()
+     const { productsData, setProductsData } = useGetProducts()
 
 
     return (
         <>
             <Head title={'Menu'}/>
 
-            <ItemListContainer productsData = {productsData}/>
+            <ItemListContainer productsData = {productsData} setProductsData = {setProductsData}/>
         </>
     )
 }

@@ -32,6 +32,7 @@ import MenuProducts from "../components/Pages/Menu/MenuProducts";
 
 export const Cart = () => {
 
+  // count es el arreglo de los productos del carrito, solo viene el id y la cantidad
   const { count, setCount } = useContext(CarContext);
   
 

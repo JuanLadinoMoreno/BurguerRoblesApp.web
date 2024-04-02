@@ -55,6 +55,10 @@ app.set('ws', wsServer)
 wsServer.on('connection', (socket) => {
     console.log('nuevo cliente conectado');
 
+    // socket.on('usr:deleteProduct', (id) => {
+    //     console.log('bbbbbbbbbbbbbbbbbb', id);
+    // })
+
     // opcion 1  , => la opcion2 esta en raltimeProducts.router
     // socket.on('productDataForm', (data) => {
     //     console.log('lado servidor',data);

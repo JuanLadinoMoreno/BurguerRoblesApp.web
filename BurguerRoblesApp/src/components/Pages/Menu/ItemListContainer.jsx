@@ -1,10 +1,10 @@
-import { Link, useLoaderData } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import io from 'socket.io-client'
 import MenuProducts from "./MenuProducts"
 import ProdBig from "../../ProdBig"
-import { useGetProducts } from "../../../Hooks/useProducts"
-import { saveProduct } from '../../../services/index'
+import { useGetProducts, useDeleteProd } from "../../../Hooks/useProducts"
+import { saveProduct, deleteProduct } from '../../../services/index'
 import { useEffect, useState } from "react"
 
 
@@ -13,9 +13,11 @@ const socketIo = io.connect('http://localhost:8080/')
 // import { useGetCategories } from "../../../Hooks/useProducts";
 
 
-export default function ItemListContainer({ productsData }) {
+export default function ItemListContainer({ productsData, setProductsData }) {
 
-    const { isLoading, setIsLoading } = useGetProducts('products')
+    const { isLoading, setIsLoading } = useGetProducts()
+
+    
 
     // let arre = productsDatas
 
@@ -41,7 +43,8 @@ export default function ItemListContainer({ productsData }) {
     //Para seleccionar y todas los checks de aderesos y vegetales
     // const watchAllAde = watch('selectAllAde')
     // console.log('selectAllAde', watchAllAde)
-    const watchAllVeg = watch('selectAllVeg')
+
+    // const watchAllVeg = watch('selectAllVeg')
 
     // const asigProds = (prods) => {
     //     setProductsState(prods)
@@ -128,6 +131,10 @@ export default function ItemListContainer({ productsData }) {
         //OJO ESTA SE EJECUTA
         socketIo.on("newProduct", reciveProd)
 
+        socketIo.on('deleteProduct', (prod) => {
+            setProductsData(prod)
+        })
+
         // socketIo.on('newProduct', (prod) => {
         //     console.log('1111111111111111111', productsState);
         //     reciveProd
@@ -157,12 +164,58 @@ export default function ItemListContainer({ productsData }) {
     }, [])
 
     const reciveProd = (prod) => {
-        setProductsState((state) => [...state, prod])
+        // setProductsState((state) => [...state, prod])
+        setProductsData((state) => [...state, prod])
 
     }
 
-    const deleteProd = () => {
+    const deleteProdId = (id) => {
+        console.log('lasñdkñalsd');
+        
+        deleteProduct(id)
 
+        const clonProds = structuredClone(productsData);
+        const index = clonProds.findIndex(prod => prod.id === id);
+        clonProds.splice(index, 1);
+        setProductsData(clonProds);
+
+        socketIo.emit('usr:deleteProduct', id)
+
+        // // useDeleteProd(id)
+        // const {isDelete} = useDeleteProd(id)
+        // if (isDelete) {
+        //     console.log('simon');
+        // }
+
+        // productsData = {...productsData}
+
+        // const prodctIndex = productsData.findIndex(prod => prod.id === id)
+        // productsData.splice(prodctIndex, 1)
+
+        // console.log('productsData', productsData);
+    }
+    const deleteProdIds = (id) => {
+        console.log('lasñdkñalsd');
+        
+        deleteProduct(id)
+
+        const clonProds = structuredClone(productsState);
+        const index = clonProds.findIndex(prod => prod.id === id);
+        clonProds.splice(index, 1);
+        setProductsState(clonProds);
+
+        // // useDeleteProd(id)
+        // const {isDelete} = useDeleteProd(id)
+        // if (isDelete) {
+        //     console.log('simon');
+        // }
+
+        // productsData = {...productsData}
+
+        // const prodctIndex = productsData.findIndex(prod => prod.id === id)
+        // productsData.splice(prodctIndex, 1)
+
+        // console.log('productsData', productsData);
     }
 
     // console.log('6 useeffect', productsState);
@@ -298,7 +351,7 @@ export default function ItemListContainer({ productsData }) {
                                 <input type="checkbox"
                                     // value={JSON.stringify({"id": 2, "nombre": "Mayonesa"})}
                                     value="Cebolla"
-                                    checked={watchAllVeg}
+                                    // checked={watchAllVeg}
                                     {...register("vegetales")}
                                 />
                             </div>
@@ -308,7 +361,7 @@ export default function ItemListContainer({ productsData }) {
                                 <input type="checkbox"
                                     // value={JSON.stringify({"id": 3, "nombre": "Mostaza"})}
                                     value="Rajas"
-                                    checked={watchAllVeg}
+                                    // checked={watchAllVeg}
                                     {...register("vegetales")}
                                 />
                             </div>
@@ -318,7 +371,7 @@ export default function ItemListContainer({ productsData }) {
                                 <input type="checkbox"
                                     // value={JSON.stringify({"id": 3, "nombre": "Mostaza"})}
                                     value="Aguacate"
-                                    checked={watchAllVeg}
+                                    // checked={watchAllVeg}
                                     {...register("vegetales")}
                                 />
                             </div>
@@ -328,7 +381,7 @@ export default function ItemListContainer({ productsData }) {
                                 <input type="checkbox"
                                     // value={JSON.stringify({"id": 3, "nombre": "Mostaza"})}
                                     value="Frijoles"
-                                    checked={watchAllVeg}
+                                    // checked={watchAllVeg}
                                     {...register("vegetales")}
                                 />
                             </div>
@@ -338,7 +391,7 @@ export default function ItemListContainer({ productsData }) {
                                 <input type="checkbox"
                                     // value={JSON.stringify({"id": 3, "nombre": "Mostaza"})}
                                     value="Lechuga"
-                                    checked={watchAllVeg}
+                                    // checked={watchAllVeg}
                                     {...register("vegetales")}
                                 />
                             </div>
@@ -442,7 +495,7 @@ export default function ItemListContainer({ productsData }) {
                                                 </ul>
                                             </div>
                                             <Link to={`/menu/item/${products.id}`} className="btnAnadirP" ><i className="bi bi-cart-plus-fill"></i>Ordenar</Link>
-                                            <button onClick={deleteProd(products.id)}> eliminar </button>
+                                            <button onClick={() => { deleteProdId(products.id) }} > eliminar </button>
                                         </div>
 
 
@@ -458,51 +511,7 @@ export default function ItemListContainer({ productsData }) {
 
                             {/* <div className="dvProductos"></div> */}
 
-                            {
-
-                                productsState.map(products => {
-                                    return (
-
-                                        <div className="dvProducto" key={products.id}>
-
-
-                                            <h3>{products.nombre}</h3>
-
-
-                                            <div className="datProd">
-
-                                                <Link to={`/menu/item/${products.id}`}>
-                                                    <img className="imgProducto" src={products.thumbnail} alt="" />
-                                                </Link>
-
-                                                <ul className="ulIngre">
-                                                    <li >{products.ingrePrep}</li>
-                                                    <li >{products.pan}</li>
-
-                                                    {
-                                                        products.aderesos ? products.aderesos.map((adereso, index) => (<li key={products.nombre + index}> {adereso} </li>)) : null
-                                                        // products.aderesos ? products.aderesos.map((adereso) => (<li key={products.nombre + adereso.id}>{adereso.nombre}</li>)) : null
-                                                    }
-
-
-                                                    {
-                                                        products.vegetales ? products.vegetales.map((vegetal, index) => (<li key={products.nombre + index}> {vegetal} </li>)) : null
-                                                        // products.vegetales ? products.vegetales.map((adereso) => (<li key={products.nombre + adereso.id}>{adereso.nombre}</li>)) : null
-                                                    }
-                                                    <li >{products.precio}</li>
-
-                                                </ul>
-                                            </div>
-                                            <Link to={`/menu/item/${products.id}`} className="btnAnadirP" ><i className="bi bi-cart-plus-fill"></i>Ordenar</Link>
-                                            <button onClick={deleteProd(products.id)}> eliminar </button>
-                                        </div>
-
-
-                                    )
-
-                                })
-
-                            }
+                            
 
 
                         </div>

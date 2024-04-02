@@ -100,7 +100,7 @@ export default class ProductManager {
         
         await this.#updateFile();
         
-        console.log('productooooooooo', product);
+        // console.log('productooooooooo', product);
         return product
 
 
@@ -139,7 +139,7 @@ export default class ProductManager {
                 throw new Error('Product is not exist') 
             }
             
-            console.log('prodctIndex',prodctIndex);
+            // console.log('prodctIndex',prodctIndex);
             // console.log('productUpd',productUpd);
             
             // if (!productUpd != null) {
@@ -162,7 +162,7 @@ export default class ProductManager {
 
             await this.#updateFile();
 
-            console.log('productData', productData);
+            // console.log('productData', productData);
             return productData;
 
         } catch (exp) {
@@ -175,10 +175,11 @@ export default class ProductManager {
         try {
             this.#products = await this.getProductsFile();
             const prodctIndex = this.#products.findIndex(prod => prod.id === id)
+            // console.log('id', id);
             // console.log('prod index', prodctIndex);
 
             if (prodctIndex < 0) {
-                throw 'Product id is not exist'
+                throw 'Product id is not exist for delete'
             }
 
             // const productData = { ...this.#products[prodctIndex], ...productUpd }

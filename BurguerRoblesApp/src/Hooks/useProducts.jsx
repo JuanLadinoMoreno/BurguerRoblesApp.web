@@ -2,10 +2,11 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs, doc, getDoc, getFirestore, query, where, orderBy } from 'firebase/firestore';
 import { Logger } from 'sass';
-import {getProducts} from '../services'
+import {getProducts, getProductById, deleteProduct} from '../services'
 
 
-export const useGetProducts = (collectionName = 'products') => {
+// export const useGetProducts = (collectionName = 'products') => {
+export const  useGetProducts = () => {
     const [productsData, setProductsData] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
 
@@ -13,7 +14,7 @@ export const useGetProducts = (collectionName = 'products') => {
 
     useEffect(() => {
         setTimeout(() => {
-
+ 
             getProducts()
             .then((resp) => {
                 setProductsData(resp.data)
@@ -38,7 +39,7 @@ export const useGetProducts = (collectionName = 'products') => {
         
     }, []);
 
-    return { productsData, isLoading, setIsLoading }
+    return { productsData, setProductsData, isLoading, setIsLoading }
 }
 
 export const useGetProductsCat = (id) => {
@@ -111,21 +112,30 @@ export const useGetProductsCart = (carrito) => {
 }
 
 
-export const useGetProductsById = (id, collectionName = "products") => {
+// export const useGetProductsById = (id, collectionName = "products") => {
+export const useGetProductsById = (id) => {
     const [productData, setProductData] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        setTimeout(() => {
+        setTimeout(() => { 
 
-            const db = getFirestore();
-            const docRef = doc(db, collectionName, id)
-            getDoc(docRef).then((doc) => {
-                setProductData({ id: doc.id, ...doc.data() });
+            getProductById(id)
+            .then((resp) => {
+                setProductData(resp.data)
+            })
+            .catch((err) => {
+                console.log(err);
             })
 
+        //     const db = getFirestore();
+        //     const docRef = doc(db, collectionName, id)
+        //     getDoc(docRef).then((doc) => {
+        //         setProductData({ id: doc.id, ...doc.data() });
+        //     })
+
             setIsLoading(false);
-        }, .3500);
+        }, 3500);
 
     }, []);
 
@@ -198,4 +208,22 @@ export const useGetProductsByCategorys = (id) => {
 
 export const useCreateProd = () => {
 
+}
+
+export const useDeleteProd = (id) => {
+    const [isDelete, setIsDelete] = useState(false)
+
+    // useEffect(() => {}, [])
+        deleteProduct(id)
+        .then((resp) => {
+            console.log("Producto eliminado");
+            setIsDelete(true)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    
+    
+    
+    return { isDelete}
 }
