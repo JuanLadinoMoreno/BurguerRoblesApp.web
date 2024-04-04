@@ -8,9 +8,6 @@ export default class CartsManager {
     #path
     static #ultimoCart = 1
 
-
-
-
     constructor(path) {
         this.#path = path
     }

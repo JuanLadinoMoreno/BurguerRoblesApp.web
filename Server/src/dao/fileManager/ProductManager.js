@@ -72,7 +72,7 @@ export default class ProductManager {
         // if (valCode) {
         //     console.error(`El code ${code} ya existe, favor poner un code nuevo`);
         //     return;
-        //     // throw `Elllll code ${code} ya existe, favor poner un code nuevo`
+        //     // throw `Ell code ${code} ya existe, favor poner un code nuevo`
         // }
 
         //  Valida que el id no exista para no se repita

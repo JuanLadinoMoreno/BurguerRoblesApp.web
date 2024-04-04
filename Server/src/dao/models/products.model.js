@@ -59,7 +59,6 @@ const prodSchema = new Schema({
     vegetales: {
         type: [String],
         required: true,
-        // unique: true
     },
 
     status: {

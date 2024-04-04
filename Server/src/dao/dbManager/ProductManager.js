@@ -4,9 +4,6 @@ import proMod from '../models/products.model.js'
 
 export default class ProductManager {
 
-    // #products
-    // #path
-    // static #ultimoIdProduct = 1
 
     // constructor(paths) {
     //     this.#path = paths;
