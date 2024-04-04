@@ -3,12 +3,18 @@ import express from 'express'
 import http from 'http'
 import { Server } from 'socket.io';
 import cors from 'cors'
+import mongoose from 'mongoose'
 
 import productsRouter from './routes/products.router.js'
 import realtimeProducts from './routes/realtimeProducts.router.js'
+import { connectMDb } from './dao/database.js';
 
-import cartsRouter from './routes/carts.router.js'
-import ProductManager from './ProductManager.js';
+
+//El profe lo importa acay lo setea en app
+// import ProductManager from './dao/dbManager/ProductManager.js';
+
+// import cartsRouter from './routes/carts.router.js'
+// import ProductManager from './ProductManager.js';
 
 //  const productsRouter = require('./routes/products.router.js')
 
@@ -44,28 +50,46 @@ const httpServer = app.listen(PORT, () => {
 });
 
 //servidor socket.io
-const wsServer = new Server(httpServer,{
-    cors: {origin: '*' }
+const wsServer = new Server(httpServer, {
+    cors: { origin: '*' }
 }
-    
+
 )
 
 app.set('ws', wsServer)
 
-wsServer.on('connection', (socket) => {
-    console.log('nuevo cliente conectado');
 
-    // socket.on('usr:deleteProduct', (id) => {
-    //     console.log('bbbbbbbbbbbbbbbbbb', id);
-    // })
 
-    // opcion 1  , => la opcion2 esta en raltimeProducts.router
-    // socket.on('productDataForm', (data) => {
-    //     console.log('lado servidor',data);
-    //     socket.emit('newProduct', data)
-    // })
+const manin = async => {
+    
+    // se conecta a la bd de mongoose
+    connectMDb()
 
-})
+    //ACA EL PROFE SETEA EL PRODUCT MANAGER
+    // const productManager = new ProductManager();
+    // await productManager.initialize
+    // app.set('productsManager', productManager)
+    
+    wsServer.on('connection', (socket) => {
+        console.log('nuevo cliente conectado');
+    
+        // socket.on('usr:deleteProduct', (id) => {
+        //     console.log('bbbbbbbbbbbbbbbbbb', id);
+        // })
+    
+        // opcion 1  , => la opcion2 esta en raltimeProducts.router
+        // socket.on('productDataForm', (data) => {
+        //     console.log('lado servidor',data);
+        //     socket.emit('newProduct', data)
+        // })
+    
+    })
+}
+
+manin()
+
+
+
 
 
 

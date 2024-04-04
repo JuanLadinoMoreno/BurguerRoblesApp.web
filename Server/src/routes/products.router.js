@@ -1,5 +1,7 @@
 import {Router} from 'express'
-import ProductManager from '../ProductManager.js';
+// import ProductManager from '../dao/fileManager/ProductManager.js';
+import ProductManager from '../dao/dbManager/ProductManager.js';
+
 // import ProductManager from  'src/ProductManager.js'
 
 
@@ -7,18 +9,18 @@ const router = Router()
 
 const fileName = `./server/assets/Products.json`
 // const fileName = `${_dirname}/../../assets/Products.json`
-const productManager = new ProductManager(fileName);
+const productManager = new ProductManager();
 
 
 
 router.get('/', async (req, res) => {
     let limit = +req.query.limit
     const products = await productManager.getProducts();
+    console.log('get products', products);
     if (limit > 0) return res.json(products.slice(0, limit))
 
     res.status(200).json(products)
 
-    // console.log('get products');
 
 });
 router.get('/:id', async (req, res) => {
