@@ -7,7 +7,12 @@ import mongoose from 'mongoose'
 
 import productsRouter from './routes/products.router.js'
 import realtimeProducts from './routes/realtimeProducts.router.js'
+import categoriesRouter from './routes/categories.router.js'
+
+
 import { connectMDb } from './dao/database.js';
+
+import 'dotenv/config'
 
 
 //El profe lo importa acay lo setea en app
@@ -18,7 +23,7 @@ import { connectMDb } from './dao/database.js';
 
 //  const productsRouter = require('./routes/products.router.js')
 
-const PORT = 8080;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -43,6 +48,7 @@ app.use(cors({
 
 app.use('/api/products', productsRouter)
 app.use('/api/realTimeProducts', realtimeProducts)
+app.use('/api/categories', categoriesRouter)
 // app.use('/api/carts', cartsRouter)
 
 const httpServer = app.listen(PORT, () => {

@@ -7,8 +7,8 @@ import ProductManager from '../dao/dbManager/ProductManager.js';
 
 const router = Router()
 
-const fileName = `./server/assets/Products.json`
-const productManager = new ProductManager(fileName);
+// const fileName = `./server/assets/Products.json`
+// const productManager = new ProductManager(fileName);
 
 router.post('/', async (req, res) => {
     //falta try/catch
@@ -26,6 +26,7 @@ router.post('/', async (req, res) => {
         res.status(201).json(prodCreado)
 
     } catch (error) {
+        res.status(400)
         console.log(error);
     }
 
@@ -34,8 +35,9 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
 
     try {
-        await productManager.deleteProduct(+req.params.id);
+        await productManager.deleteProduct(req.params.id);
 
+        // devuelce productos
         const products = await productManager.getProducts();
         // console.log('ggggggggggggggggggggggggggggg', products);
 
@@ -48,6 +50,7 @@ router.delete('/:id', async (req, res) => {
         res.status(200)
 
     } catch (error) {
+        res.status(400)
         console.log(error);
     }
 })

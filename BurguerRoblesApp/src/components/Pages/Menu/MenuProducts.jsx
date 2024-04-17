@@ -11,6 +11,8 @@ export default function MenuProducts() {
     const { categories, isLoading } = useGetCategories('categories');
     const { count } = useContext(CarContext);
 
+    console.log('categories', categories);
+
 
 
     return (
@@ -33,7 +35,7 @@ export default function MenuProducts() {
 
                                 categories.map((cate) => {
                                     return (
-                                        <Link key={cate.id} to={`/menu/category/${cate.id}`} >
+                                        <Link key={cate.ids} to={`/menu/category/${cate.ids}`} >
                                             <li className="btn-prin btnMenu btnMenuProducto">
                                                 {cate.nombre}
                                             </li>

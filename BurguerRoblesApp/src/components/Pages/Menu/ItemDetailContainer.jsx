@@ -13,6 +13,7 @@ export default function ItemDetailContainer() {
     const { id } = useParams() //Obtiene id de la ruta para mostrar el producto
     // const { productData, isLoading } = useGetProductsById(id, 'products') //firestore
     const { productData, isLoading } = useGetProductsById(id)
+    console.log('productData', productData);
 
 
 
@@ -39,7 +40,7 @@ export default function ItemDetailContainer() {
 
                             <div className="dvProductDetail">
 
-                                <div className="dvProducto" key={productData.id}>
+                                <div className="dvProducto" key={productData._id}>
                                     <h3>{productData.nombre}</h3>
 
 
@@ -50,11 +51,14 @@ export default function ItemDetailContainer() {
                                             <li >{productData.ingrePrep}</li>
                                             <li >{productData.pan}</li>
                                             {
-                                                productData.aderesos ? productData.aderesos.map((adereso) => (<li key={adereso.id}> {adereso.nombre} </li>)) : null
+                                                productData.aderesos ? productData.aderesos.map((adereso, index) => (<li key={productData.nombre + index}> {adereso} </li>)) : null
+                                                // productData.aderesos ? productData.aderesos.map((adereso) => (<li key={adereso.id}> {adereso.nombre} </li>)) : null
                                             }
                                             {
-                                                productData.vegetales ? productData.vegetales.map((adereso) => (<li key={adereso.id}>{adereso.nombre}</li>)) : null
+                                                productData.vegetales ? productData.vegetales.map((vegetal, index) => (<li key={productData.nombre + index}> {vegetal} </li>)) : null
+                                                // productData.vegetales ? productData.vegetales.map((adereso) => (<li key={adereso.id}>{adereso.nombre}</li>)) : null
                                             }
+                                            <li>{productData.precio}</li>
                                         </ul>
                                     </div>
 

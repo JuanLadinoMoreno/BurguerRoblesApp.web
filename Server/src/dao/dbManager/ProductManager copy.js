@@ -1,7 +1,7 @@
 import fs from 'fs';
 import productModel from '../models/products.model'
 
-export default class ProductManager {
+export default class ProductManager0 {
 
     #products
     #path

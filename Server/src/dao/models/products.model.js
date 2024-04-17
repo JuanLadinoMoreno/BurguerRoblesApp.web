@@ -68,15 +68,20 @@ const prodSchema = new Schema({
     },
 
     stock: {
-        type: Boolean,
+        type: Number,
         required: true,
         // unique: true
     }
     
-    
 })
+
+prodSchema.virtual('id').get(function () {
+    return this._id.toString();
+})
+
+
 // export default  mongoose.model('Poduct', prodSchema, 'products')
-const proMod =  model('Poduct', prodSchema, 'products')
-export default  proMod
+const productModel =  model('Poduct', prodSchema, 'products')
+export default  productModel
 //  module.exports = model('Poduct', prodSchema, 'products')
 // export default model('Poduct', prodSchema, 'products')

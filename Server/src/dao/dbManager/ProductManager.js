@@ -1,5 +1,7 @@
-import fs from 'fs';
-import proMod from '../models/products.model.js'
+// import fs from 'fs';
+import categoriesModel from '../models/categories.models.js';
+import productModel from '../models/products.model.js'
+import { ObjectId } from 'mongodb'
 
 
 export default class ProductManager {
@@ -12,34 +14,89 @@ export default class ProductManager {
     async initialize() {
         // this.#products = await this.getProductsFile();
     }
- 
 
-    async getProducts(){
+    validaDatos(produc) {
+        if ((produc.ingrePrep === "" || !produc.ingrePrep) ||
+            (produc.nombre === "" || !produc.nombre) ||
+            (produc.pan === "" || !produc.pan) ||
+            (isNaN(produc.precio) || produc.precio < 0) ||
+            (produc.preparacion === "" || !produc.preparacion) ||
+            (!produc.tipo || produc.tipo === "") ||
+            ((produc.status != true && produc.status != false)) ||
+            (isNaN(produc.stock) || produc.stock < 0)
+        ) {
+            // console.log("Verifique que los campos esten coorectos o llenos");
+            throw new Error(`Verifique que los campos esten coorectos o llenos`)
+        }
+    }
+
+    async getProducts() {
         try {
-            const datos = await  proMod.find();
-            console.log('datos', datos)
-            return datos
+            const productos = await productModel.find();
+            // console.log('datos', datos)
+            // return datos
+            return productos.map(p => p.toObject({ virtuals: true }))
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async findProductById(id) {
+        try {
+            const product = await productModel.findOne({ _id: id });
+            return product.toObject({ virtuals: true });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
+
+    async createProduct(produc) {
+        try {
+            this.validaDatos(produc);
+            await productModel.create(produc)
+        } catch (e) {
+            console.log('Error al crear producto', e);
+        }
+    }
+    // 
+
+    // async deleteProduct(id = '6619a998eacc45356e34ea2c') {
+    async deleteProduct(id) {
+        try {
+            console.log('id deleteProduct', id);
+            await productModel.deleteOne({ _id: id })
+
+        } catch (exp) {
+            console.log(exp);
+            // return [];
+        }
+    }
+
+    async getProductsByCategory(ids){
+        try {
+            const productosByCategory = await  productModel.find({tipo: ids});
+            // console.log('datos', datos)
+            // return datos
+            return productosByCategory.map(p => p.toObject())
             
         } catch (error) {
             console.log(error);
         }
     }
-    
 
 
-    validaDatos(produc){
-        if((produc.ingrePrep === "" || !produc.ingrePrep) ||
-            (produc.nombre === "" || !produc.nombre)  ||
-            (produc.pan === "" || !produc.pan) ||
-            (isNaN(produc.precio) || produc.precio < 0) ||
-            (produc.preparacion === "" || !produc.preparacion) ||
-            (!produc.tipo || produc.tipo === "") ||
-            (!produc.status || (produc.status != true && produc.status != false) ) || 
-            (isNaN(produc.stock) ||  produc.stock < 0) 
-            )
-        {
-            // console.log("Verifique que los campos esten coorectos o llenos");
-            throw new Error(`Verifique que los campos esten coorectos o llenos`)
+    // llena menu de categorias
+    async getCategories(){
+        try {
+            const categories = await  categoriesModel.find();
+            return categories.map(p => p.toObject())
+            
+        } catch (error) {
+            console.log(error);
         }
     }
 

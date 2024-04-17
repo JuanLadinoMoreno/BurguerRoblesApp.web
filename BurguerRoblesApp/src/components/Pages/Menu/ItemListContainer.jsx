@@ -6,6 +6,7 @@ import ProdBig from "../../ProdBig"
 import { useGetProducts, useDeleteProd } from "../../../Hooks/useProducts"
 import { saveProduct, deleteProduct } from '../../../services/index'
 import { useEffect, useState } from "react"
+import Swal from 'sweetalert2'
 
 
 const socketIo = io.connect('http://localhost:8080/')
@@ -17,7 +18,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
     const { isLoading, setIsLoading } = useGetProducts()
 
-    
+
 
     // let arre = productsDatas
 
@@ -28,7 +29,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
     // const {categories} = useGetCategories();
 
     // const [isLoading, setMenuState] = useState(true);
-    // console.log('1 productsData', productsData);
+    console.log('1 productsData', productsData);
     // console.log('2 productsDatas', productsDatas);
     // console.log('3 productss', productss);
 
@@ -51,37 +52,37 @@ export default function ItemListContainer({ productsData, setProductsData }) {
     //     // console.log('4 setProductsState', productsState);
     // }
 
-    
 
-//     // Función para manejar el clic en el checkbox "Select All"
-//   const handleSelectAll = () => {
-//     const aderesos = watch('aderesos'); // Obtener el valor actual de los checkboxes aderesos
-//     const newValue = !selectAll; // Cambiar el valor de selectAll
 
-//     setSelectAll(newValue); // Actualizar el estado local de selectAll
+    //     // Función para manejar el clic en el checkbox "Select All"
+    //   const handleSelectAll = () => {
+    //     const aderesos = watch('aderesos'); // Obtener el valor actual de los checkboxes aderesos
+    //     const newValue = !selectAll; // Cambiar el valor de selectAll
 
-//     // Si selectAll es true, seleccionar todos los checkboxes; de lo contrario, deseleccionarlos
-//     if (newValue) {
-//       const updatedAderesos = aderesos.map((adereso) => adereso = true);
-//       setValue("aderesos", updatedAderesos); // Actualizar los valores de los checkboxes aderesos
-//     } else {
-//       const updatedAderesos = aderesos.map((adereso) => adereso = false);
-//       setValue("aderesos", updatedAderesos); // Actualizar los valores de los checkboxes aderesos
-//     }
-//   };
+    //     setSelectAll(newValue); // Actualizar el estado local de selectAll
 
-  // Función para manejar el clic en el checkbox "Select All"
-//   const handleSelectAll = () => {
-//     const newValue = !selectAll;
-//     setSelectAll(newValue);
+    //     // Si selectAll es true, seleccionar todos los checkboxes; de lo contrario, deseleccionarlos
+    //     if (newValue) {
+    //       const updatedAderesos = aderesos.map((adereso) => adereso = true);
+    //       setValue("aderesos", updatedAderesos); // Actualizar los valores de los checkboxes aderesos
+    //     } else {
+    //       const updatedAderesos = aderesos.map((adereso) => adereso = false);
+    //       setValue("aderesos", updatedAderesos); // Actualizar los valores de los checkboxes aderesos
+    //     }
+    //   };
 
-//     // Actualizar el estado de aderesos para reflejar la selección de todos los checkboxes
-//     const updatedAderesos = aderesos.map(() => newValue);
-//     setAderesos(updatedAderesos);
+    // Función para manejar el clic en el checkbox "Select All"
+    //   const handleSelectAll = () => {
+    //     const newValue = !selectAll;
+    //     setSelectAll(newValue);
 
-//     // Actualizar los valores de los checkboxes aderesos utilizando setValue de React Hook Form
-//     setValue("aderesos", updatedAderesos);
-//   };
+    //     // Actualizar el estado de aderesos para reflejar la selección de todos los checkboxes
+    //     const updatedAderesos = aderesos.map(() => newValue);
+    //     setAderesos(updatedAderesos);
+
+    //     // Actualizar los valores de los checkboxes aderesos utilizando setValue de React Hook Form
+    //     setValue("aderesos", updatedAderesos);
+    //   };
 
     //Funcion de click enviar enviar producto, data variable gen que los datos del form
     const onSubmitProduct = (data) => {
@@ -91,6 +92,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
         // setProducts(productsData)
 
         //OJO ESTO SE EJECUTA
+        console.log('data', data);
         saveProduct(data)
 
 
@@ -169,17 +171,85 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
     }
 
+
+
+
     const deleteProdId = (id) => {
-        console.log('lasñdkñalsd');
-        
-        deleteProduct(id)
 
-        const clonProds = structuredClone(productsData);
-        const index = clonProds.findIndex(prod => prod.id === id);
-        clonProds.splice(index, 1);
-        setProductsData(clonProds);
 
-        socketIo.emit('usr:deleteProduct', id)
+        try {
+
+            // console.log('save', save);
+            Swal.fire({
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+
+
+                    // OPCION CON THEN
+                    // saveProduct(data)
+                    //     .then((resp) => {
+                    //         if (resp === true) {
+                    //             // console.log('resp', resp);
+                    //             Swal.fire("Producto creado!", "", "info");
+
+                    //         }
+                    //         else {
+                    //             Swal.fire("No fue posible guardar el producto", "", "danger");
+
+                    //         }
+                    //     })
+                    //     .catch((err) => {
+                    //         Swal.fire("Error al guardar el producto", "", "danger");
+                    //         console.log('err', err);
+                    //     })
+
+                    deleteProduct(id)
+                        .then((resp) => {
+
+                            if (resp === true) {
+                                const clonProds = structuredClone(productsData);
+                                const index = clonProds.findIndex(prod => prod.id === id);
+                                clonProds.splice(index, 1);
+                                setProductsData(clonProds);
+
+                                socketIo.emit('usr:deleteProduct', id)
+
+                                Swal.fire("Producto eliminado!", "", "info");
+
+                            }
+                            else {
+                                Swal.fire("No fue posible eliminar el producto", "", "danger");
+
+                            }
+
+
+                        })
+                        .catch((err) => {
+                            Swal.fire("Error al eliminar el producto", "", "danger");
+                            console.log('err', err);
+                        })
+
+
+
+                }
+                else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                }
+            });
+
+        } catch (error) {
+            console.log('error', error);
+        }
+
+
+
+
 
         // // useDeleteProd(id)
         // const {isDelete} = useDeleteProd(id)
@@ -196,7 +266,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
     }
     const deleteProdIds = (id) => {
         console.log('lasñdkñalsd');
-        
+
         deleteProduct(id)
 
         const clonProds = structuredClone(productsState);
@@ -222,227 +292,6 @@ export default function ItemListContainer({ productsData, setProductsData }) {
     return (
         <>
 
-            <section className="container d-flex justify-content-center align-item-center">
-
-                {/* <form onSubmit={handleSubmit(onSubmitProduct)}> */}
-                <form onSubmit={handleSubmit(onSubmitProduct)} className=" d-flex flex-column justify-content-center align-item-center gap-3 p-3 w-75">
-                    <h2>Crear Producto</h2>
-                    <div className="d-flex flex-column">
-                        <input
-                            type="text"
-                            placeholder="nombre producto"
-                            // nombre del campo para el form
-                            {...register('nombre', {
-                                required: true
-                            })}
-                        />
-                        {errors.nombre?.type === 'required' && <p className="text-danger"> El campo nombre es requerido</p>}
-                    </div>
-
-                    <div className="d-flex flex-column">
-                        <input
-                            type="text"
-                            placeholder="preparacion"
-                            {...register('preparacion', {
-                                required: true
-                            })}
-                        />
-                        {errors.preparacion?.type === 'required' && <p className="text-danger"> El campo nombre es requerido</p>}
-                    </div>
-
-                    <div className="d-flex flex-column">
-                        <input
-                            type="text"
-                            placeholder="ingrediente preparacion"
-                            {...register('ingrePrep', {
-                                required: true
-                            })}
-
-                        />
-                        {errors.ingrePrep?.type === 'required' && <p className="text-danger"> El campo nombre es requerido</p>}
-                    </div>
-
-                    <select {...register('tipo')}>
-                        <option value="burguerP">Hamburguesa</option>
-                        <option value="hotdogP" >Hot dog</option>
-                        <option value="bagP">Baguette</option>
-                        <option value="sandP">Sandwiche</option>
-                        <option value="burrP">Burrito</option>
-                    </select>
-
-
-
-                    <div className="d-flex flex-column">
-                        <input
-                            type="text"
-                            placeholder="nombre pan"
-                            {...register('pan', {
-                                required: true
-                            })}
-                        />
-                        {errors.pan?.type === 'required' && <p className="text-danger"> El campo nombre es requerido</p>}
-                    </div>
-
-
-                    <div className="d-flex flex-column ">
-                        <h3>ADERESOS</h3>
-
-                        <div className="d-flex justify-content-between align-item-center">
-
-                            
-
-                            <div className="mb-3">
-                                <p>Catsup</p>
-                                <input type="checkbox"
-                                    // value={JSON.stringify({"id": 1, "nombre": "Catsup"})}
-                                    value="Catsup"
-                                    // checked= {watchAllAde}
-                                    {...register("aderesos")}
-                                />
-                            </div>
-
-                            <div className="mb-2">
-                                <p>Mayonesa</p>
-                                <input type="checkbox"
-                                    // value={JSON.stringify({"id": 2, "nombre": "Mayonesa"})}
-                                    value="Mayonesa"
-                                    // checked= {watchAllAde}
-                                    {...register("aderesos")}
-                                />
-                            </div>
-
-                            <div className="mb-3">
-                                <p>Mostaza</p>
-                                <input type="checkbox"
-                                    // value={JSON.stringify({"id": 3, "nombre": "Mostaza"})}
-                                    value="Mostaza"
-                                    // checked= {watchAllAde}
-                                    {...register("aderesos")}
-                                />
-                            </div>
-
-                        </div>
-
-                        {/* <div>
-                            {errors.aderesos && <span className="text-danger"> {errors.aderesos.message}</span>}
-                        </div> */}
-
-                    </div>
-
-                    <div className="d-flex flex-column ">
-                        <h3>VEGETALES</h3>
-
-                        <div className="d-flex justify-content-between align-item-center">
-
-                            
-
-                            <div className="mb-3">
-                                <p>Jitomate</p>
-                                <input type="checkbox"
-                                    // value={JSON.stringify({"id": 1, "nombre": "Catsup"})}
-                                    value="Jitomate"
-                                    // checked={watchAllVeg}
-                                    {...register("vegetales")}
-                                />
-                            </div>
-
-                            <div className="mb-2">
-                                <p>Cebolla</p>
-                                <input type="checkbox"
-                                    // value={JSON.stringify({"id": 2, "nombre": "Mayonesa"})}
-                                    value="Cebolla"
-                                    // checked={watchAllVeg}
-                                    {...register("vegetales")}
-                                />
-                            </div>
-
-                            <div className="mb-3">
-                                <p>Rajas</p>
-                                <input type="checkbox"
-                                    // value={JSON.stringify({"id": 3, "nombre": "Mostaza"})}
-                                    value="Rajas"
-                                    // checked={watchAllVeg}
-                                    {...register("vegetales")}
-                                />
-                            </div>
-
-                            <div className="mb-3">
-                                <p>Aguacate</p>
-                                <input type="checkbox"
-                                    // value={JSON.stringify({"id": 3, "nombre": "Mostaza"})}
-                                    value="Aguacate"
-                                    // checked={watchAllVeg}
-                                    {...register("vegetales")}
-                                />
-                            </div>
-
-                            <div className="mb-3">
-                                <p>Frijoles</p>
-                                <input type="checkbox"
-                                    // value={JSON.stringify({"id": 3, "nombre": "Mostaza"})}
-                                    value="Frijoles"
-                                    // checked={watchAllVeg}
-                                    {...register("vegetales")}
-                                />
-                            </div>
-
-                            <div className="mb-3">
-                                <p>Lechuga</p>
-                                <input type="checkbox"
-                                    // value={JSON.stringify({"id": 3, "nombre": "Mostaza"})}
-                                    value="Lechuga"
-                                    // checked={watchAllVeg}
-                                    {...register("vegetales")}
-                                />
-                            </div>
-
-                        </div>
-
-                        {/* <div>
-                            {errors.vegetales && <span className="text-danger"> {errors.vegetales.message}</span>}
-                        </div> */}
-
-                    </div>
-
-
-                    <div className="d-flex flex-column">
-                        <input
-                            type="text"
-                            placeholder="Precio"
-                            {...register('precio', {
-                                required: true,
-                                valueAsNumber: true
-                            })}
-                        />
-                        {errors.precio?.type === 'required' && <p className="text-danger"> El campo nombre es requerido</p>}
-                    </div>
-
-                    <div className="d-flex flex-column">
-                        Status
-                        <input type="checkbox"
-                            {...register('status')}
-                        />
-                    </div>
-
-                    <div className="d-flex flex-column">
-                        <input
-                            type="text"
-                            placeholder="productos en stock"
-                            {...register('stock', {
-                                required: true,
-                                valueAsNumber: true
-                            })}
-                        />
-                        {errors.tipo?.type === 'required' && <p className="text-danger"> El campo nombre es requerido</p>}
-                    </div>
-
-                    <button type="submit">Enviar</button>
-
-
-                </form>
-            </section>
-
-
             <section className="contMen">
                 <MenuProducts />
                 {
@@ -457,14 +306,14 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
 
 
-                        <div className="dvProductos">
+                        <div className="dvProductos" >
 
                             {
 
                                 productsData.map(products => {
                                     return (
 
-                                        <div className="dvProducto" key={products.id}>
+                                        <div className="dvProducto" key={products._id}>
 
 
                                             <h3>{products.nombre}</h3>
@@ -472,7 +321,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
                                             <div className="datProd">
 
-                                                <Link to={`/menu/item/${products.id}`}>
+                                                <Link to={`/menu/item/${products._id}`}>
                                                     <img className="imgProducto" src={products.thumbnail} alt="" loading="lazy" />
                                                 </Link>
 
@@ -494,8 +343,8 @@ export default function ItemListContainer({ productsData, setProductsData }) {
                                                     <li>{products.precio}</li>
                                                 </ul>
                                             </div>
-                                            <Link to={`/menu/item/${products.id}`} className="btnAnadirP" ><i className="bi bi-cart-plus-fill"></i>Ordenar</Link>
-                                            <button onClick={() => { deleteProdId(products.id) }} > eliminar </button>
+                                            <Link to={`/menu/item/${products._id}`} className="btnAnadirP" ><i className="bi bi-cart-plus-fill"></i>Ordenar</Link>
+                                            <button onClick={() => { deleteProdId(products._id) }} > eliminar </button>
                                         </div>
 
 
@@ -511,7 +360,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
                             {/* <div className="dvProductos"></div> */}
 
-                            
+
 
 
                         </div>

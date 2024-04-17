@@ -2,10 +2,11 @@ import mongoose from 'mongoose'
 
 export const connectMDb = () => {
 
-    const MONGODB_URI = 'mongodb://localhost:27017/BurguerRobles'
+    const {NOTES_APP_MONGODB_HOST, NOTES_APP_MONGODB_DATABASE} = process.env
+
+    const MONGODB_URI = `mongodb://${NOTES_APP_MONGODB_HOST}/${NOTES_APP_MONGODB_DATABASE}`
 
     mongoose.connect(MONGODB_URI, {
-        dbName: 'BurguerRobles',
         
     })
         .then(db => console.log('Database is conected'))

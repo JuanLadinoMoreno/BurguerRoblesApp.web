@@ -2,26 +2,26 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs, doc, getDoc, getFirestore, query, where, orderBy } from 'firebase/firestore';
 import { Logger } from 'sass';
-import {getProducts, getProductById, deleteProduct} from '../services'
+import { getProducts, getProductById, deleteProduct, saveProduct, getCategories, getProductByCategory } from '../services'
 
 
 // export const useGetProducts = (collectionName = 'products') => {
-export const  useGetProducts = () => {
+export const useGetProducts = () => {
     const [productsData, setProductsData] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
 
-    
+
 
     useEffect(() => {
         setTimeout(() => {
- 
+
             getProducts()
-            .then((resp) => {
-                setProductsData(resp.data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+                .then((resp) => {
+                    setProductsData(resp.data)
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
 
             // setProductsData(getProducts.map((doc) => ({ id: doc.id, ...doc.data() })))
 
@@ -36,7 +36,7 @@ export const  useGetProducts = () => {
 
             setIsLoading(false);
         }, 2500);
-        
+
     }, []);
 
     return { productsData, setProductsData, isLoading, setIsLoading }
@@ -45,21 +45,20 @@ export const  useGetProducts = () => {
 export const useGetProductsCat = (id) => {
     const [productsData, setProductsData] = useState([]);
     // const [isLoading, setIsLoading] = useState(true)
-    
+
     useEffect(() => {
-        
+
         // setTimeout(() => {
 
-            const db = getFirestore();
-
-            const productsCollection = collection(db, 'products');
-
-            const quer = query(productsCollection, where("category", "==", id));
-
-            getDocs(quer).then((snapshot) => {
-                setProductsData(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
-            })
-            // setIsLoading(false);
+        getProductByCategory(id)
+                .then((resp) => {
+                    setProductsData(resp.data)
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        
+        // setIsLoading(false);
         // }, 3500);
 
     }, [id]);
@@ -73,7 +72,7 @@ export const useGetProductsCart = (carrito) => {
     const [cart, setCart] = useState([])
 
     useEffect(() => {
-        
+
         setTimeout(() => {
 
             const db = getFirestore();
@@ -118,21 +117,21 @@ export const useGetProductsById = (id) => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        setTimeout(() => { 
+        setTimeout(() => {
 
             getProductById(id)
-            .then((resp) => {
-                setProductData(resp.data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+                .then((resp) => {
+                    setProductData(resp.data)
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
 
-        //     const db = getFirestore();
-        //     const docRef = doc(db, collectionName, id)
-        //     getDoc(docRef).then((doc) => {
-        //         setProductData({ id: doc.id, ...doc.data() });
-        //     })
+            //     const db = getFirestore();
+            //     const docRef = doc(db, collectionName, id)
+            //     getDoc(docRef).then((doc) => {
+            //         setProductData({ id: doc.id, ...doc.data() });
+            //     })
 
             setIsLoading(false);
         }, 3500);
@@ -144,25 +143,23 @@ export const useGetProductsById = (id) => {
 
 
 //LLENA EL MENU DE CATEGORIAS
-// export const useGetCategories = (collectionName = "categories") => {
 export const useGetCategories = (collectionName = "categories") => {
 
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-
-
         // setTimeout(() => {}, 3200);
 
-        // FIREBASE
-        const db = getFirestore();
-        const productsCollection = collection(db, collectionName);
-        getDocs(productsCollection).then((snapshot) => {
-            setCategories(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
-        })
+        getCategories()
+                .then((resp) => {
+                    setCategories(resp.data)
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
 
-        setIsLoading(false);
+        // setIsLoading(false);
 
     }, []);
 
@@ -173,7 +170,7 @@ export const useGetCategories = (collectionName = "categories") => {
 
 
 
-export const useGetProductsByCategorys = (id) => {
+export const useGetProductsByCategory = (id) => {
     const [productsData, setProductsData] = useState([]);
 
     useEffect(() => {
@@ -206,15 +203,24 @@ export const useGetProductsByCategorys = (id) => {
     return { productsData }
 }
 
-export const useCreateProd = () => {
-
+export const useCreateProd = (product) => {
+    const [isCreated, setIsCreated] = useState(false)
+    saveProduct(product)
+        .then((resp) => {
+            console.log("guardado");
+            setIsCreated(true)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        return { isCreated }
 }
 
 export const useDeleteProd = (id) => {
     const [isDelete, setIsDelete] = useState(false)
 
     // useEffect(() => {}, [])
-        deleteProduct(id)
+    deleteProduct(id)
         .then((resp) => {
             console.log("Producto eliminado");
             setIsDelete(true)
@@ -222,8 +228,8 @@ export const useDeleteProd = (id) => {
         .catch((err) => {
             console.log(err);
         })
-    
-    
-    
-    return { isDelete}
+
+
+
+    return { isDelete }
 }
