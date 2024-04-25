@@ -66,42 +66,64 @@ export const useGetProductsCat = (id) => {
     return { productsData }
 }
 
+
+//obtiene los productos del carrito
 export const useGetProductsCart = (carrito) => {
     // const [productsData, setProductsData] = useState([]);
+
+    // console.log('carrito', carrito);
     const [isLoading, setIsLoading] = useState(true)
     const [cart, setCart] = useState([])
 
     useEffect(() => {
 
         setTimeout(() => {
-
-            const db = getFirestore();
-
-            const productsCollection = collection(db, 'products');
-
             const arrCart = []
-
-            getDocs(productsCollection).then((snapshot) => {
-
-
-                snapshot.docs.map((doc) => {
-
-                    for (let i = 0; i < carrito.length; i++) {
-                        if (doc.id === carrito[i].id) {
-                            arrCart.push({ ...doc.data(), id: doc.id, quantity: carrito[i].quantity })
+            
+            getProducts()
+            .then((products) => {
+                // console.log('products.data', products.data);
+                products.data.map(product => {
+                    // console.log('product', product);
+                    for (let i = 0; i < carrito.length; i++){
+                        if (carrito[i].pid == product.id) {
+                            arrCart.push({ product, id: product.id, quantity: carrito[i].quantity })
                         }
-
                     }
-
-
                 })
 
-
                 setCart(arrCart);
-                // setProductsData(arrCart);
                 setIsLoading(false);
 
             })
+            .catch((err) => {
+                console.log(err);
+            })
+
+            // console.log('cartUse',cart);
+
+            // const db = getFirestore();
+            // const productsCollection = collection(db, 'products');
+            // getDocs(productsCollection).then((snapshot) => {
+
+            //     snapshot.docs.map((doc) => {
+
+            //         for (let i = 0; i < carrito.length; i++) {
+            //             if (doc.id === carrito[i].id) {
+            //                 arrCart.push({ ...doc.data(), id: doc.id, quantity: carrito[i].quantity })
+            //             }
+
+            //         }
+
+
+            //     })
+
+
+            //     setCart(arrCart);
+            //     // setProductsData(arrCart);
+            //     setIsLoading(false);
+
+            // })
 
         }, 1000);
 

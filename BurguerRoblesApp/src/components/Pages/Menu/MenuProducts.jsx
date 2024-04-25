@@ -11,7 +11,7 @@ export default function MenuProducts() {
     const { categories, isLoading } = useGetCategories('categories');
     const { count } = useContext(CarContext);
 
-    console.log('categories', categories);
+    // console.log('categories', categories);
 
 
 

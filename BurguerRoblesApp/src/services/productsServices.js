@@ -44,10 +44,10 @@ export async function saveProduct(product){
             method: 'POST',
             data: product
         })
-        console.log('true');
+        // console.log('true');
         return true
     }catch(e){
-        console.log('false');
+        // console.log('false');
         console.log('Erroro al conextarse al servidor paa guardar', e);
         return false
     }
@@ -55,7 +55,7 @@ export async function saveProduct(product){
 
 export async function deleteProduct(id){
 
-    console.log('deleteProduc llamada axios', id);
+    // console.log('deleteProduc llamada axios', id);
     try {
          await axios.delete(`http://localhost:8080/api/realTimeProducts/${id}`);
          return true
@@ -94,4 +94,33 @@ export async function getCategories(){
         console.log('url not found');
     }
     
+}
+
+export async function getProductsInCart(){
+    // return await axios.get('https://run.mocky.io/v3/407c83b9-74d8-4d7a-a2d5-9383309833fc');
+    // return await axios.get('https://apimocha.com/burguerrobles/products');
+    // return await axios.get('https://run.mocky.io/v3/d4883467-9de7-4fb4-97d6-9c985bcbaa5e');
+    try {
+        return await axios.get('http://localhost:8080/api/carts');
+        
+    } catch (error) {
+        console.log('url not found');
+    }
+}
+
+export async function saveCart(cart){
+    try{
+        console.log('cart', cart);
+        await axios({
+            url: 'http://localhost:8080/api/carts',
+            method: 'POST',
+            data: cart
+        })
+        // console.log('true');
+        return true
+    }catch(e){
+        // console.log('false');
+        console.log('Erroro al conextarse al servidor paa guardar', e);
+        return false
+    }
 }

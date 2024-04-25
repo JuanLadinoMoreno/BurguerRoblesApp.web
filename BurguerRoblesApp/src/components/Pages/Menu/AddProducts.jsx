@@ -19,7 +19,7 @@ const onSubmitProducts = async (data) => {
 
     // console.log('save', save);
     Swal.fire({
-      title: "Do you want to save the changes?",
+      title: "Desea guardar el producto?",
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Save",
@@ -41,7 +41,7 @@ const onSubmitProducts = async (data) => {
         saveProduct(data)
           .then((resp) => {
             if (resp === true) {
-              console.log('resp', resp);
+              // console.log('resp', resp);
               Swal.fire("Producto creado!", "", "info");
 
             }
@@ -72,7 +72,7 @@ const onSubmitProducts = async (data) => {
 
 
 
-    console.log('data', data);
+    // console.log('data', data);
   } catch (error) {
     console.log('error', error);
   }
@@ -80,11 +80,6 @@ const onSubmitProducts = async (data) => {
 
 
 }
-
-
-
-
-
 
 
 // if (onSubmitProducts) {

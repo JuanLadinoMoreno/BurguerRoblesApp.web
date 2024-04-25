@@ -13,7 +13,7 @@ export default function ItemDetailContainer() {
     const { id } = useParams() //Obtiene id de la ruta para mostrar el producto
     // const { productData, isLoading } = useGetProductsById(id, 'products') //firestore
     const { productData, isLoading } = useGetProductsById(id)
-    console.log('productData', productData);
+    // console.log('productData', productData);
 
 
 

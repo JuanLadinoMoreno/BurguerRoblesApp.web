@@ -29,7 +29,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
     // const {categories} = useGetCategories();
 
     // const [isLoading, setMenuState] = useState(true);
-    console.log('1 productsData', productsData);
+    // console.log('1 productsData', productsData);
     // console.log('2 productsDatas', productsDatas);
     // console.log('3 productss', productss);
 
@@ -92,7 +92,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
         // setProducts(productsData)
 
         //OJO ESTO SE EJECUTA
-        console.log('data', data);
+        // console.log('data', data);
         saveProduct(data)
 
 
@@ -265,7 +265,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
         // console.log('productsData', productsData);
     }
     const deleteProdIds = (id) => {
-        console.log('lasñdkñalsd');
+        // console.log('lasñdkñalsd');
 
         deleteProduct(id)
 

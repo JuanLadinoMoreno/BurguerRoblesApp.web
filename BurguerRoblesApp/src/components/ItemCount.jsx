@@ -7,6 +7,7 @@ import { CarContext } from '../context/CarContext'
 
 export const ItemCount = ({ productId, productName }) => {
 
+    //count es el arreglo de productos del carrito
     const { count, setCount } = useContext(CarContext);
     const [countItem, setCountItem] = useState(1);
 
@@ -30,8 +31,11 @@ export const ItemCount = ({ productId, productName }) => {
             quantity: countItem
         }
 
-        const IndexFind = count.findIndex(item => item.id === productId)
+        //verifica que el producto ya exista en count(carrito) en caso de no existir (else) se crea el producto con su cantidad en count (carrito)
+        //en caso de existir suma la cantidad
+        const IndexFind = count.findIndex(item => item.pid === productId)
         if (IndexFind >= 0) {
+            
             const newCart = structuredClone(count);
             newCart[IndexFind].quantity += countItem
             setCountItem(1);
@@ -53,7 +57,7 @@ export const ItemCount = ({ productId, productName }) => {
             setCount(prevState => ([
                 ...prevState,
                 {
-                    id: productId,
+                    pid: productId,
                     quantity: countItem
                 }
             ]))

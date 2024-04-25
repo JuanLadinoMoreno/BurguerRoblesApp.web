@@ -3,19 +3,19 @@
 		"cid": 1,
 		"products": [
 			{
-				"pid": 1,
+				"pid": "660dba3063b4664603416291",
 				"quantity": 34
 			},
 			{
-				"pid": 2,
+				"pid": "660dba3063b4664603416292",
 				"quantity": 52
 			},
 			{
-				"pid": 10,
+				"pid": "660dba3063b4664603416293",
 				"quantity": 30
 			},
 			{
-				"pid": 11,
+				"pid": "660dba3063b4664603416294",
 				"quantity": 10
 			}
 		]

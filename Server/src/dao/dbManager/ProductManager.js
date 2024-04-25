@@ -67,7 +67,7 @@ export default class ProductManager {
     // async deleteProduct(id = '6619a998eacc45356e34ea2c') {
     async deleteProduct(id) {
         try {
-            console.log('id deleteProduct', id);
+            // console.log('id deleteProduct', id);
             await productModel.deleteOne({ _id: id })
 
         } catch (exp) {

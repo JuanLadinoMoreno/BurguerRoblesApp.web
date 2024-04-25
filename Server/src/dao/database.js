@@ -12,3 +12,10 @@ export const connectMDb = () => {
         .then(db => console.log('Database is conected'))
         .catch(err => console.log(err))
 }
+
+// Función para desconectar de la base de datos
+export const disconnectMDb = () => {
+    mongoose.disconnect()
+    .then(() => console.log('Database is disconnected'))
+    .catch((err) => console.error('Database disconnection error:', err));
+};
