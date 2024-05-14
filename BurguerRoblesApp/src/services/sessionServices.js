@@ -41,6 +41,7 @@ export async function onRegister(user){
 }
 
 
+
 export async function getContador(){
     // return await axios.get('https://run.mocky.io/v3/407c83b9-74d8-4d7a-a2d5-9383309833fc');
     // return await axios.get('https://apimocha.com/burguerrobles/products');

@@ -23,6 +23,7 @@ const onSubmitRegister = (data) => {
 
 }
 
+
 export default function Register() {
     const { register, formState: { errors }, handleSubmit } = useForm()
 

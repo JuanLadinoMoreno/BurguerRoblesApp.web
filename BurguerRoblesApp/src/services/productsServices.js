@@ -25,6 +25,7 @@ export async function getProductById(id){
     
 }
 
+
 export async function getProductByCategory(id){
     try {
         // return await axios.get(`https://apimocha.com/burguerrobles/menu/category/${id}`);

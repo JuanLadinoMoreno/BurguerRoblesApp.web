@@ -95,6 +95,7 @@ router.get('/sesiones', (req, res) => {
 export default router
 
 
+
 // {
 //     "firstName": "test1",
 //     "lastName": "test1ape",
