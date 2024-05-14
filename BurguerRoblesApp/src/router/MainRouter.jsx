@@ -9,6 +9,11 @@ import { Cart } from '../pages/Cart.jsx'
 import { About } from '../pages/About.jsx'
 import { Grill } from '../pages/Grill.jsx'
 import AddProducts from '../components/Pages/Menu/AddProducts.jsx'
+import Login from '../components/Pages/Login/Login.jsx'
+import Register from '../components/Pages/Login/Register.jsx'
+import Index from '../components/Pages/Login/Index.jsx'
+
+
 
 
 
@@ -26,6 +31,9 @@ export default function MainRouter() {
         <Route path='/about' element={<About/>} />
         <Route path='/grill' element={<Grill/>} />
         <Route path='/menu/addproduct' element={<AddProducts />} />
+        <Route path='/session/login' element={<Login/>} />
+        <Route path='/session/register' element={<Register/>} />
+        <Route path='/session/index' element={<Index/>} />
       </Routes>
       <Footer/>
     </BrowserRouter>

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 import Swal from 'sweetalert2'
 
 
-const socketIo = io.connect('http://localhost:8080/')
+// const socketIo = io.connect('http://localhost:8080/') //socketIO 
 
 // import { useGetCategories } from "../../../Hooks/useProducts";
 
@@ -119,57 +119,57 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
 
 
-    useEffect(() => {
-        // asigProds()
+    // useEffect(() => {
+    //     // asigProds()
 
-        // setProductsState(arre)
-
-
-        // setProductss([productsDatas])s
-        // console.log('setProducts([...productsDatas])', productss);
-        // console.log('55 arre useefect', arre);
+    //     // setProductsState(arre)
 
 
-        //OJO ESTA SE EJECUTA
-        socketIo.on("newProduct", reciveProd)
+    //     // setProductss([productsDatas])s
+    //     // console.log('setProducts([...productsDatas])', productss);
+    //     // console.log('55 arre useefect', arre);
 
-        socketIo.on('deleteProduct', (prod) => {
-            setProductsData(prod)
-        })
 
-        // socketIo.on('newProduct', (prod) => {
-        //     console.log('1111111111111111111', productsState);
-        //     reciveProd
-        //     // setProductss([productsDatas])
+    //     //OJO ESTA SE EJECUTA
+    //     socketIo.on("newProduct", reciveProd)
 
-        //     // setProductss([1,2,3])
-        //     console.log('newProduct useEffect', prod)
-        //     // productsDatas.push(prod)
-        //     // productsDatas = [...productsDatas, prod]
+    //     socketIo.on('deleteProduct', (prod) => {
+    //         setProductsData(prod)
+    //     })
 
-        //     // console.log('socjet on newProduct', productss);
-        //     // setproducts([...products, prod])
-        //     // productsDatas = prod
-        //     console.log('arre socket NewProd sin push', arre)
-        //     // arre.push(prod)
-        //     // arre = prod
-        //     console.log('arre socket NewProd con push', arre)
-        //     // productsDatas.push(prod)
-        //     console.log(' productsData useEffect', productsDatas);
-        // })
+    //     // socketIo.on('newProduct', (prod) => {
+    //     //     console.log('1111111111111111111', productsState);
+    //     //     reciveProd
+    //     //     // setProductss([productsDatas])
 
-        // control para duplicar
-        return () => {
-            socketIo.off('newProduct', reciveProd)
-        }
+    //     //     // setProductss([1,2,3])
+    //     //     console.log('newProduct useEffect', prod)
+    //     //     // productsDatas.push(prod)
+    //     //     // productsDatas = [...productsDatas, prod]
 
-    }, [])
+    //     //     // console.log('socjet on newProduct', productss);
+    //     //     // setproducts([...products, prod])
+    //     //     // productsDatas = prod
+    //     //     console.log('arre socket NewProd sin push', arre)
+    //     //     // arre.push(prod)
+    //     //     // arre = prod
+    //     //     console.log('arre socket NewProd con push', arre)
+    //     //     // productsDatas.push(prod)
+    //     //     console.log(' productsData useEffect', productsDatas);
+    //     // })
 
-    const reciveProd = (prod) => {
-        // setProductsState((state) => [...state, prod])
-        setProductsData((state) => [...state, prod])
+    //     // control para duplicar
+    //     return () => {
+    //         socketIo.off('newProduct', reciveProd)
+    //     }
 
-    }
+    // }, [])
+
+    // const reciveProd = (prod) => {
+    //     // setProductsState((state) => [...state, prod])
+    //     setProductsData((state) => [...state, prod])
+
+    // }
 
 
 
