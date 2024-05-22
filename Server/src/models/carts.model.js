@@ -21,6 +21,10 @@ const cartsSchema = new Schema({
     products:{
         type: [productSchema],
         default: []
+    },
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
     }
     // products: [productSchema],
 

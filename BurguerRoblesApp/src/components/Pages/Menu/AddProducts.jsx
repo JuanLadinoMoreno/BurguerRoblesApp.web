@@ -27,6 +27,9 @@ const onSubmitProducts = async (data) => {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+
+        
+
         // const aa = save(data)
         //   console.log('aa',aa);
         // if (aa === true) {
@@ -40,6 +43,7 @@ const onSubmitProducts = async (data) => {
         // OPCION CON THEN
         saveProduct(data)
           .then((resp) => {
+            console.log('resp', resp);
             if (resp === true) {
               // console.log('resp', resp);
               Swal.fire("Producto creado!", "", "info");
@@ -54,6 +58,12 @@ const onSubmitProducts = async (data) => {
             Swal.fire("Error guardar el producto", "", "danger");
             console.log('err', err);
           })
+
+         
+
+
+
+          
 
 
         // if (saveProduct(data) === false) {

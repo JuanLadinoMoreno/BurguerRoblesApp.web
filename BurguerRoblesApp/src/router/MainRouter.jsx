@@ -9,11 +9,13 @@ import { Cart } from '../pages/Cart.jsx'
 import { About } from '../pages/About.jsx'
 import { Grill } from '../pages/Grill.jsx'
 import AddProducts from '../components/Pages/Menu/AddProducts.jsx'
-import Login from '../components/Pages/Login/Login.jsx'
+// import Login from '../components/Pages/Login/Login.jsx'
 import Register from '../components/Pages/Login/Register.jsx'
 import Index from '../components/Pages/Login/Index.jsx'
-// import login from '../components/Pages/Login/login.jsx'
+import Login from '../components/Pages/Login/Login.jsx'
 
+import ProtectedRoute from '../components/ProtectedRoute.jsx'
+// import login from '../components/Pages/Login/login.jsx'
 
 
 
@@ -25,18 +27,24 @@ export default function MainRouter() {
       <NavBar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/grill' element={<Grill />} />
+
+        
+
+        <Route path='/session/login' element={<Login />} />
+        <Route path='/session/register' element={<Register />} />
+        <Route path='/session/index' element={<Index />} />
+
+        <Route element={<ProtectedRoute/>}>
         <Route path='/menu' element={<Menu />} />
         <Route path='/menu/category/:id' element={<Category />} />
         <Route path='/menu/item/:id' element={<DetailProduct />} />
-        <Route path='/cart' element={<Cart/>} />
-        <Route path='/about' element={<About/>} />
-        <Route path='/grill' element={<Grill/>} />
+        </Route>
         <Route path='/menu/addproduct' element={<AddProducts />} />
-        <Route path='/session/login' element={<Login/>} />
-        <Route path='/session/register' element={<Register/>} />
-        <Route path='/session/index' element={<Index/>} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   )
 }

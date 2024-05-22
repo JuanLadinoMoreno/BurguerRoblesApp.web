@@ -16,7 +16,7 @@ import sessionRouter from './routes/session.router.js'
 
 
 import mongoStorage from './session/mongoStorage.js';
-import userModel from './dao/models/user.model.js';
+import userModel from './models/user.model.js';
 
 
 import { connectMDb } from './dao/database.js';
@@ -41,6 +41,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 
+app.use(cors({
+    // origin: 'http://127.0.0.1:5173',
+    origin: 'http://localhost:5173',
+    credentials: true
+}))
+
 // app.use((req, res, next) => {
 //     res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5173');
 //     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -49,11 +55,6 @@ app.use(express.json())
 //     next();
 // });
 
-
-app.use(cors({
-    origin: 'http://127.0.0.1:5173',
-    credentials: true,
-}))
 
 // app.use(session({
 //     // store: new RedisStore({ url: 'redis://localhost:6379' }), // Cambia esto con tu configuración de Redis

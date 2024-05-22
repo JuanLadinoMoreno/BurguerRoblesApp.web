@@ -1,6 +1,6 @@
 // import fs from 'fs';
-import categoriesModel from '../models/categories.models.js';
-import productModel from '../models/products.model.js'
+import categoriesModel from '../../models/categories.models.js';
+import productModel from '../../models/products.model.js'
 import { ObjectId } from 'mongodb'
 
 
@@ -33,8 +33,10 @@ export default class ProductManager {
     async getProducts() {
         try {
             const productos = await productModel.find();
-            // console.log('datos', datos)
-            // return datos
+
+            // Para traer productos creados por el usuario            
+            // const productos = await productModel.find({ user: id}).populate('user');
+
             return productos.map(p => p.toObject({ virtuals: true }))
 
         } catch (error) {
@@ -53,10 +55,12 @@ export default class ProductManager {
 
 
 
-
+    // falata agregar los campos de producto    ojo aca esta mal
     async createProduct(produc) {
+        console.log(produc);
         try {
             this.validaDatos(produc);
+            
             await productModel.create(produc)
         } catch (e) {
             console.log('Error al crear producto', e);
@@ -67,8 +71,14 @@ export default class ProductManager {
     // async deleteProduct(id = '6619a998eacc45356e34ea2c') {
     async deleteProduct(id) {
         try {
+            console.log(id);
             // console.log('id deleteProduct', id);
-            await productModel.deleteOne({ _id: id })
+            // await productModel.deleteOne({ _id: id })
+            const prod = await productModel.findByIdAndDelete(id)
+            console.log(prod);
+           
+
+            return prod
 
         } catch (exp) {
             console.log(exp);

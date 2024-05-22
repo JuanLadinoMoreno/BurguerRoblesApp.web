@@ -1,6 +1,6 @@
 // import { Mongoose } from "mongoose"
 // const { default: mongoose } = require("mongoose")
-import {Schema, model} from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
 
 
@@ -12,13 +12,13 @@ const prodSchema = new Schema({
         required: true,
         // unique: true
     },
-    
+
     nombre: {
         type: String,
         required: true,
         // unique: true
     },
-    
+
     preparacion: {
         type: String,
         required: true,
@@ -37,7 +37,7 @@ const prodSchema = new Schema({
         required: true,
         // unique: true
     },
-    
+
     pan: {
         type: String,
         required: true,
@@ -71,9 +71,18 @@ const prodSchema = new Schema({
         type: Number,
         required: true,
         // unique: true
+    },
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
     }
-    
-})
+
+
+},
+    {
+        timestamps: true,
+    }
+)
 
 prodSchema.virtual('id').get(function () {
     return this._id.toString();
@@ -81,7 +90,7 @@ prodSchema.virtual('id').get(function () {
 
 
 // export default  mongoose.model('Poduct', prodSchema, 'products')
-const productModel =  model('Poduct', prodSchema, 'products')
-export default  productModel
+const productModel = model('Poduct', prodSchema, 'products')
+export default productModel
 //  module.exports = model('Poduct', prodSchema, 'products')
 // export default model('Poduct', prodSchema, 'products')

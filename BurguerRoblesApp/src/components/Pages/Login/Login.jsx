@@ -1,50 +1,60 @@
 import { useForm } from "react-hook-form"
-import { onLogin } from "../../../services/";
+import { useAuth } from "../../../context/AuthContext";
+// import { onLogin } from "../../../services/";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
 
+// const onSubmitLogin = (data) => {
 
-const onSubmitLogin = (data) => {
+//   // OPCION CON THEN
+//   onLogin(data)
+//     .then((resp) => {
+//       if (resp === true) {
+//         // console.log('resp', resp);
+//         Swal.fire("Producto Usuario login!", "", "info");
 
-  // OPCION CON THEN
-  onLogin(data)
-    .then((resp) => {
-      if (resp === true) {
-        // console.log('resp', resp);
-        Swal.fire("Producto Usuario login!", "", "info");
+//       }
+//       else {
+//         Swal.fire("No fue posible login", "", "danger");
 
-      }
-      else {
-        Swal.fire("No fue posible login", "", "danger");
+//       }
+//     })
+//     .catch((err) => {
+//       Swal.fire("Error guardar el producto", "", "danger");
+//       console.log('err', err);
+//     })
 
-      }
-    })
-    .catch((err) => {
-      Swal.fire("Error guardar el producto", "", "danger");
-      console.log('err', err);
-    })
-
-}
-
+// }
 
 
-export default function login() {
+
+ function login() {
   const { register, formState: { errors }, handleSubmit, watch, setValue } = useForm()
 
+  const {signIn, isAuthenticated} = useAuth()
+
+  const navigate = useNavigate()
+  
+  const onSubmitLogin =  async (data) => {
+    await signIn(data);
+  }
+
   useEffect(() => {
-    // function checkLogin() {
-     const cookies = Cookies.get();
-     console.log('cookies', cookies);
-    // }
-    
-  }, [])
+    if (isAuthenticated) {
+      navigate("/menu");
+    }
+  }, [isAuthenticated]);
+
+
+
 
   return (
     <>
-      <section className="container d-flex justify-content-center align-item-center">
+      <section className="container d-flex justify-content-center align-item-center flex-column">
 
         <form onSubmit={handleSubmit(onSubmitLogin)} className=" d-flex flex-column justify-content-center align-item-center gap-3 p-3 w-75">
 
@@ -117,7 +127,13 @@ export default function login() {
 
 
         </form>
+
+        <p>
+          No tienes cuenta?? <Link to="/session/register"> Registrate </Link>
+        </p>
       </section>
     </>
   )
 }
+
+export default login

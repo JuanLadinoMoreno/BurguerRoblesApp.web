@@ -22,39 +22,45 @@ export default function MenuProducts() {
 
                 // <h2>cargando</h2> :
 
-                    <div className="dvMenProductos">
-                        <ul className="ulMenu">
+                <div className="dvMenProductos">
 
-                            <Link to='/menu' >
-                                <li className="btn-prin btnMenu btnMenuProducto">
-                                    Todos los productos
-                                </li>
-                            </Link>
+                    {/* <Link className='text-sm-left' to='/session/login'>
+                        <i class="bi bi-box-arrow-in-right"> Salir</i>
+                    </Link> */}
 
-                            {
 
-                                categories.map((cate) => {
-                                    return (
-                                        <Link key={cate.ids} to={`/menu/category/${cate.ids}`} >
-                                            <li className="btn-prin btnMenu btnMenuProducto">
-                                                {cate.nombre}
-                                            </li>
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </ul>
+                    <ul className="ulMenu">
 
-                        <Link className="btn-transparent" to='/cart'> 
-                        
-                            <i className="bi bi-cart-fill"></i>
-                            En carrito
-
-                            <span id="cantidadProductos" className="prodCant "> {count.reduce((acc, prod) => acc + prod.quantity, 0)} </span>
-                        
+                        <Link to='/menu' >
+                            <li className="btn-prin btnMenu btnMenuProducto">
+                                Todos los productos
+                            </li>
                         </Link>
-                        
-                    </div>
+
+                        {
+
+                            categories.map((cate) => {
+                                return (
+                                    <Link key={cate.ids} to={`/menu/category/${cate.ids}`} >
+                                        <li className="btn-prin btnMenu btnMenuProducto">
+                                            {cate.nombre}
+                                        </li>
+                                    </Link>
+                                )
+                            })
+                        }
+                    </ul>
+
+                    <Link className="btn-transparent" to='/cart'>
+
+                        <i className="bi bi-cart-fill"></i>
+                        En carrito
+
+                        <span id="cantidadProductos" className="prodCant "> {count.reduce((acc, prod) => acc + prod.quantity, 0)} </span>
+
+                    </Link>
+
+                </div>
             }
 
         </>

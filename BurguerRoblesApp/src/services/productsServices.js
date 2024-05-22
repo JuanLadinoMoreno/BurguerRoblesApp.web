@@ -1,11 +1,12 @@
 import axios from "axios";
+import axiosD from "./axios";
 
 export async function getProducts(){
     // return await axios.get('https://run.mocky.io/v3/407c83b9-74d8-4d7a-a2d5-9383309833fc');
     // return await axios.get('https://apimocha.com/burguerrobles/products');
     // return await axios.get('https://run.mocky.io/v3/d4883467-9de7-4fb4-97d6-9c985bcbaa5e');
     try {
-        return await axios.get('http://localhost:8080/api/products');
+        return await axiosD.get('/products');
         
     } catch (error) {
         console.log('url not found');
@@ -17,7 +18,7 @@ export async function getProductById(id){
     // return await axios.get(`https://apimocha.com/burgrob/products/${id}`);
 
     try {
-        return await axios.get(`http://localhost:8080/api/products/${id}`);
+        return await axiosD.get(`/products/${id}`);
         
     } catch (error) {
         console.log('url not found');
@@ -29,7 +30,7 @@ export async function getProductById(id){
 export async function getProductByCategory(id){
     try {
         // return await axios.get(`https://apimocha.com/burguerrobles/menu/category/${id}`);
-        return await axios.get(`http://localhost:8080/api/products/category/${id}`);
+        return await axiosD.get(`/products/category/${id}`);
         
     } catch (error) {
         console.log('url not found');
@@ -37,11 +38,13 @@ export async function getProductByCategory(id){
 
 }
 
+// export const saveProduct = async (product) => axiosD.post(`/products`, product);
+
 export async function saveProduct(product){
     try{
         // console.log('ffffffffffffff', product);
-        await axios({
-            url: 'http://localhost:8080/api/realTimeProducts',
+        await axiosD({
+            url: '/products',
             method: 'POST',
             data: product
         })
@@ -58,7 +61,7 @@ export async function deleteProduct(id){
 
     // console.log('deleteProduc llamada axios', id);
     try {
-         await axios.delete(`http://localhost:8080/api/realTimeProducts/${id}`);
+         await axiosD.delete(`/products/${id}`);
          return true
         // return getProducts()
     } catch (error) {

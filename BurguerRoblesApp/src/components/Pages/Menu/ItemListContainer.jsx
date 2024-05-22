@@ -181,33 +181,14 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
             // console.log('save', save);
             Swal.fire({
-                title: "Do you want to save the changes?",
+                title: "Do you want delete product?",
                 showDenyButton: true,
                 showCancelButton: true,
-                confirmButtonText: "Save",
-                denyButtonText: `Don't save`
+                confirmButtonText: "Yes",
+                denyButtonText: `No`
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-
-
-                    // OPCION CON THEN
-                    // saveProduct(data)
-                    //     .then((resp) => {
-                    //         if (resp === true) {
-                    //             // console.log('resp', resp);
-                    //             Swal.fire("Producto creado!", "", "info");
-
-                    //         }
-                    //         else {
-                    //             Swal.fire("No fue posible guardar el producto", "", "danger");
-
-                    //         }
-                    //     })
-                    //     .catch((err) => {
-                    //         Swal.fire("Error al guardar el producto", "", "danger");
-                    //         console.log('err', err);
-                    //     })
 
                     deleteProduct(id)
                         .then((resp) => {
@@ -218,7 +199,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
                                 clonProds.splice(index, 1);
                                 setProductsData(clonProds);
 
-                                socketIo.emit('usr:deleteProduct', id)
+                                // socketIo.emit('usr:deleteProduct', id)
 
                                 Swal.fire("Producto eliminado!", "", "info");
 
@@ -264,31 +245,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
         // console.log('productsData', productsData);
     }
-    const deleteProdIds = (id) => {
-        // console.log('lasñdkñalsd');
-
-        deleteProduct(id)
-
-        const clonProds = structuredClone(productsState);
-        const index = clonProds.findIndex(prod => prod.id === id);
-        clonProds.splice(index, 1);
-        setProductsState(clonProds);
-
-        // // useDeleteProd(id)
-        // const {isDelete} = useDeleteProd(id)
-        // if (isDelete) {
-        //     console.log('simon');
-        // }
-
-        // productsData = {...productsData}
-
-        // const prodctIndex = productsData.findIndex(prod => prod.id === id)
-        // productsData.splice(prodctIndex, 1)
-
-        // console.log('productsData', productsData);
-    }
-
-    // console.log('6 useeffect', productsState);
+   
     return (
         <>
 
