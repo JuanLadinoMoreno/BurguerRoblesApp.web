@@ -156,7 +156,7 @@ export const useGetProductsById = (id) => {
             //     })
 
             setIsLoading(false);
-        }, 3500);
+        }, 2000);
 
     }, []);
 

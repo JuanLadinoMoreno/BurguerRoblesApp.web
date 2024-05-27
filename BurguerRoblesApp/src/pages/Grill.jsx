@@ -1,4 +1,5 @@
 import { Head } from "../components/Head"
+import NavBar from "../components/NavBar"
 import BanEventos from "../components/Pages/Home/BanEventos"
 
 
@@ -11,6 +12,8 @@ export const Grill = () => {
 
                 </div>
             </header>
+
+            <NavBar />
             {/* <Head title={'Al grill'}/> */}
 
             <section class="scAsados">

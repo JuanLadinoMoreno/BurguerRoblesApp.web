@@ -1,6 +1,7 @@
 import React from 'react'
 import { Head } from '../components/Head'
 import BanEventos from '../components/Pages/Home/BanEventos'
+import NavBar from '../components/NavBar'
 BanEventos
 
 export const About = () => {
@@ -15,6 +16,8 @@ export const About = () => {
 
                 </div>
             </header>
+
+            <NavBar />
 
             <div className="sectAbo">
                 <div className="row  sectAbo__conte">

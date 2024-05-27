@@ -11,7 +11,7 @@ import { Grill } from '../pages/Grill.jsx'
 import AddProducts from '../components/Pages/Menu/AddProducts.jsx'
 // import Login from '../components/Pages/Login/Login.jsx'
 import Register from '../components/Pages/Login/Register.jsx'
-import Index from '../components/Pages/Login/Index.jsx'
+import Index from '../components/Dash/Index.jsx'
 import Login from '../components/Pages/Login/Login.jsx'
 
 import ProtectedRoute from '../components/ProtectedRoute.jsx'
@@ -19,28 +19,33 @@ import ProtectedRoute from '../components/ProtectedRoute.jsx'
 
 
 
-
 export default function MainRouter() {
   return (
     // BrowserRouter trabaja con children, su hijo es Routes
     <BrowserRouter>
-      <NavBar />
+      {/* <NavBar /> */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/about' element={<About />} />
         <Route path='/grill' element={<Grill />} />
 
-        
 
+        {/* register y login */}
         <Route path='/session/login' element={<Login />} />
         <Route path='/session/register' element={<Register />} />
-        <Route path='/session/index' element={<Index />} />
 
-        <Route element={<ProtectedRoute/>}>
-        <Route path='/menu' element={<Menu />} />
-        <Route path='/menu/category/:id' element={<Category />} />
-        <Route path='/menu/item/:id' element={<DetailProduct />} />
+        {/* index dashboard */}
+        <Route path='/dash/index' element={<Index />} />
+
+        <Route element={<ProtectedRoute />}>
+          
+
+          
+          <Route path='/menu' element={<Menu />} />
+          <Route path='/menu/category/:id' element={<Category />} />
+          <Route path='/menu/item/:id' element={<DetailProduct />} />
+          
         </Route>
         <Route path='/menu/addproduct' element={<AddProducts />} />
       </Routes>

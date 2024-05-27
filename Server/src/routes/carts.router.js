@@ -1,18 +1,10 @@
 import { Router} from "express";
-import CartsManager from "../dao/dbManager/CartsManager.js";
+import { createCart, getCarts } from "../controllers/carts.controller.js";
 
 
 const router = Router()
-const path = `./server/assets/Carts.json`
-const cartsManager = new CartsManager()
 
-router.get('/', async (req, res) => {
-    let limit = +req.query.limit
-    const carts = await cartsManager.getCarts()
-    if(limit > 0) return res.json(carts.slice(0, limit))
-    
-    res.json(carts)
-})
+router.get('/', getCarts)
 
 // router.get('/:id', async (req, res) => {
 //     const id = +req.params.id
@@ -20,11 +12,7 @@ router.get('/', async (req, res) => {
 //     res.json(product)
 // });
 
-router.post('/',async (req, res) => {
-    const cart = req.body
-    const cartCreado = await cartsManager.createCart(cart)
-    res.status(201).json(cartCreado)
-})
+router.post('/', createCart)
 
 // router.post('/:cid/product/:pid',async (req, res) => {
 //     const prod = req.body

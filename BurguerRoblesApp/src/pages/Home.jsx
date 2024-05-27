@@ -7,6 +7,7 @@ import BanAsados from '../components/Pages/Home/BanAsados.jsx'
 import BanGalle from '../components/Pages/Home/BanGalle.jsx'
 import BanEventos from '../components/Pages/Home/BanEventos.jsx'
 import HidenButtons from '../components/HidenButtons.jsx'
+import NavBar from '../components/NavBar.jsx'
 
 
 
@@ -18,6 +19,7 @@ export default function Home() {
 
   return (
     <>
+    <NavBar />
     <Header />
     <BestSeller/>
     <MenuIndex/>
