@@ -1,19 +1,8 @@
-// import fs from 'fs';
 import categoriesModel from '../mongo/models/categories.models.js';
 import productModel from '../mongo/models/products.model.js'
-import { ObjectId } from 'mongodb'
 
 
-export default class ProductManager {
-
-
-    // constructor(paths) {
-    //     this.#path = paths;
-    // }
-
-    async initialize() {
-        // this.#products = await this.getProductsFile();
-    }
+export default class productsDAO {
 
     validaDatos(produc) {
         if ((produc.ingrePrep === "" || !produc.ingrePrep) ||
@@ -109,6 +98,5 @@ export default class ProductManager {
             console.log(error);
         }
     }
-
 
 }

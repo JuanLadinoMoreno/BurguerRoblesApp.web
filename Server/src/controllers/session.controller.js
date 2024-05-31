@@ -1,32 +1,39 @@
 import { TOKEN_SECRET } from "../config/config.js";
 import { createAccessToken } from "../libs/jwts.js";
-import userModel from "../models/user.model.js";
+import userModel from "../dao/mongo/models/user.model.js";
 import bcryptjs from "bcryptjs";
 import jwt from 'jsonwebtoken'
+import UsersManager from "../dao/mongo/users.dao.js";
 
+
+const usersManager = new UsersManager()
 
 export const register = async (req, res) => {
 
     try {
         const { firstName, lastName, email, age, password } = req.body
 
-        const userFound = await userModel.findOne({ email });
+        const usr = await usersManager.createUser(firstName, lastName, age, email, password)
+        if (!usr){
+            return res.sendError({ message: 'Something went wrong!' })
+        }
+        // const userFound = await userModel.findOne({ email });
 
-        if (userFound)
-            return res.status(400).json({
-                message: ["The email is already in use"],
-            });
+        // if (userFound)
+        //     return res.status(400).json({
+        //         message: ["The email is already in use"],
+        //     });
 
-        const pswHash = await bcryptjs.hash(password, 11)
+        // const pswHash = await bcryptjs.hash(password, 11)
 
 
-        const usr = await userModel.create({
-            firstName,
-            lastName,
-            age: +age,
-            email,
-            password: pswHash
-        })
+        // const usr = await userModel.create({
+        //     firstName,
+        //     lastName,
+        //     age: +age,
+        //     email,
+        //     password: pswHash
+        // })
 
         console.log('usrusrusrusr', usr);
 
@@ -47,7 +54,7 @@ export const register = async (req, res) => {
         // console.log('usr', usr);
 
 
-        res.json({
+         return res.status(201).json({
             id: usr._id,
             firstName: usr.firstName,
             email: usr.email

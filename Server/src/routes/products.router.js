@@ -5,7 +5,7 @@ import { authMdw } from '../middlewares/auth.middleware.js';
 import { createProduct, deleteProduct, editProduct, getProductById, getProducts, getProductsByCat } from '../controllers/products.controller.js';
 
 
-
+// import {  } from "../../public/img/menu/burguers/burgMex.png";
 // import ProductManager from  'src/ProductManager.js'
 
 
@@ -17,9 +17,9 @@ const router = Router()
 
 
 
-router.get('/', authMdw,  getProducts);
+router.get('/',   getProducts);
 
-router.get('/:id', authMdw, getProductById);
+router.get('/:id',  getProductById);
 
 //ESTO DE MODIFICO  ---OJO  en createProduct----
 router.post('/', authMdw, createProduct)

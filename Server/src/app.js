@@ -16,10 +16,10 @@ import sessionRouter from './routes/session.router.js'
 
 
 import mongoStorage from './session/mongoStorage.js';
-import userModel from './models/user.model.js';
+// import userModel from './models/user.model.js';
 
 
-import { connectMDb } from './dao/database.js';
+import { connectMDb } from '../src/config/database.js';
 
 import 'dotenv/config'
 
