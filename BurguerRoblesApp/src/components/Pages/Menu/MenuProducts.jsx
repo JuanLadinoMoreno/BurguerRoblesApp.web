@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { useGetCategories } from '../../../Hooks/useProducts';
 import { CarContext } from '../../../context/CarContext';
 
-
-
 export default function MenuProducts() {
 
     const { categories, isLoading } = useGetCategories('categories');
@@ -24,33 +22,6 @@ export default function MenuProducts() {
 
                 <div className="dvMenProductos">
 
-                    {/* <Link className='text-sm-left' to='/session/login'>
-                        <i class="bi bi-box-arrow-in-right"> Salir</i>
-                    </Link> */}
-
-
-                    <ul className="ulMenu">
-
-                        <Link to='/menu' >
-                            <li className="btn-prin btnMenu btnMenuProducto">
-                                Todos los productos
-                            </li>
-                        </Link>
-
-                        {
-
-                            categories.map((cate) => {
-                                return (
-                                    <Link key={cate.ids} to={`/menu/category/${cate.ids}`} >
-                                        <li className="btn-prin btnMenu btnMenuProducto">
-                                            {cate.nombre}
-                                        </li>
-                                    </Link>
-                                )
-                            })
-                        }
-                    </ul>
-
                     <Link className="btn-transparent" to='/cart'>
 
                         <i className="bi bi-cart-fill"></i>
@@ -59,6 +30,46 @@ export default function MenuProducts() {
                         <span id="cantidadProductos" className="prodCant "> {count.reduce((acc, prod) => acc + prod.quantity, 0)} </span>
 
                     </Link>
+
+                    <ul className="ulMenu ">
+
+                        {/* <div className="container "> */}
+
+
+
+                            {/* <Link to='/menu' >
+                                <img src="../../public/img/bgTripl.png" alt="" className='w-50' />
+                                <li className="btn-prin btnMenu btnMenuProducto">
+                                    Todos los productos
+                                </li>
+                            </Link> */}
+
+                            {
+
+                                categories.map((cate) => {
+                                    return (
+                                        <>
+                                            <div className="container d-flex flex-wrap flex-column justify-content-center align-items-between gap-2">
+
+
+                                            <Link key={cate.ids} to={`/menu/category/${cate.ids}`} >
+                                                <img src={cate.thumbnail} alt="" className='w-100' />
+                                                <p>{cate.nombre}</p>
+                                                {/* <li className="btn-transparent btnMenu btnMenuProducto">
+                                                    {cate.nombre}
+
+                                                </li> */}
+                                            </Link>
+                                            </div>
+
+                                        </>
+                                    )
+                                })
+                            }
+                        {/* </div> */}
+                    </ul>
+
+
 
                 </div>
             }

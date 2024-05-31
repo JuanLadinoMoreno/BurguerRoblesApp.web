@@ -34,7 +34,7 @@ export default function Menu() {
 
                 {/* <Head title={'Menu'}/>
             <NavBar/> */}
-                <div className="main p-3">
+                <div className="main">
                     <ItemListContainer productsData={productsData} setProductsData={setProductsData} />
                 </div>
             </div>

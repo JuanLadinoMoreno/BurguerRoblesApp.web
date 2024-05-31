@@ -57,7 +57,7 @@
         z-index: 2;
         h1 {
             font-family: $font-primera;
-            font-size: 105px;
+            font-size: 45px;
             color: #FFF;
             padding: 0 15px;
             
@@ -68,11 +68,12 @@
             animation: efectTitle 2.5s linear infinite alternate-reverse;
             
             @include Tablet{
-                font-size: 65px;
+                // font-size: 65px;
+                display: none;
             }
 
             @include Phone{
-                font-size: 45px;
+                display: none;
             }
 
             i{
@@ -87,13 +88,18 @@
         }
 
         .img-center{
-            width: 180px;
-            height: 180px;
+            width: 190px;
+            height: 190px;
 
             @include Tablet{
-                display: none;
-                // width: 100px;
-                // height: 100px;
+                // display: none;
+                width: 130px;
+                height: 130px;
+            }
+
+            @include Phone{
+                width: 100px;
+                height: 100px;
             }
         }
     }

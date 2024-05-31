@@ -8,24 +8,25 @@ import BanGalle from '../components/Pages/Home/BanGalle.jsx'
 import BanEventos from '../components/Pages/Home/BanEventos.jsx'
 import HidenButtons from '../components/HidenButtons.jsx'
 import NavBar from '../components/NavBar.jsx'
-
+import BanFoodTruck from '../components/BanFoodTruck.jsx'
 
 
 export default function Home() {
-
-    useEffect(() => {
-        document.title = 'Burguer Robles - Home';
-    });
-
+  
+  useEffect(() => {
+    document.title = 'Burguer Robles - Home';
+  });
+  
   return (
     <>
     <NavBar />
     <Header />
-    <BestSeller/>
+    <BanFoodTruck/>
     <MenuIndex/>
     <BanIcons/>
     <BanAsados/>
     <BanGalle/>
+    <BestSeller/>
     <BanEventos/>
     <HidenButtons/>
     </>

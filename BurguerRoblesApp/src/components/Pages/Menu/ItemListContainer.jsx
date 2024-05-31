@@ -245,11 +245,16 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
         // console.log('productsData', productsData);
     }
-   
+
     return (
         <>
+            <div className=" d-flex flex-row-reverse p-3 border-bottom border-warning border-2">
+                <Link to={""}>
+                    <i className="bi bi-person-x p-2"> LogOut </i>
+                </Link>
+            </div>
 
-            <section className="contMen">
+            <section className="contMen d-block top-0 w-100">
                 <MenuProducts />
                 {
                     isLoading ?
@@ -263,7 +268,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
 
 
-                        <div className="dvProductos" >
+                        <div className="dvProductos " >
 
                             {
 
@@ -282,7 +287,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
                                                     <img className="imgProducto" src={products.thumbnail} alt="" loading="lazy" />
                                                 </Link>
 
-                                                <ul className="ulIngre">
+                                                {/* <ul className="ulIngre">
                                                     <li>{products.ingrePrep}</li>
                                                     <li>{products.pan}</li>
 
@@ -298,7 +303,7 @@ export default function ItemListContainer({ productsData, setProductsData }) {
                                                     }
 
                                                     <li>{products.precio}</li>
-                                                </ul>
+                                                </ul> */}
                                             </div>
                                             <Link to={`/menu/item/${products._id}`} className="btnAnadirP" ><i className="bi bi-cart-plus-fill"></i>Ordenar</Link>
                                             <button onClick={() => { deleteProdId(products._id) }} > eliminar </button>
@@ -329,9 +334,9 @@ export default function ItemListContainer({ productsData, setProductsData }) {
 
 
 
-                <ProdBig />
 
             </section>
+                <ProdBig />
         </>
     )
 }

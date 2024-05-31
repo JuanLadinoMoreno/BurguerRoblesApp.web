@@ -418,7 +418,7 @@
 
 
 .contMen {
-    @include dFlex(center, center, column nowrap);
+    @include dFlex(center, center, column wrap);
     // width: 100%;
     // background-color: #F2CB05;
     // height: 100vh;
@@ -427,17 +427,47 @@
         width: 100%;
         padding: 0 25px;
         // background-color: aquamarine;
-        @include dFlex(space-between, center, row nowrap);
+        @include dFlex(end, center, row wrap);
 
         .ulMenu {
             // background-color: #F28705;
-            width: 100%;
-            @include dFlex(center, center, row nowrap);
-            gap: 10px;
+            // min-width: 200px;
+            
+            @include dFlex(center, center, row wrap);
+            // display: grid;
+            // grid-template-columns: repeat(5, 1fr);
 
+            
+            width: 100%;
+            gap: 10px;
+            
+            .container {
+                max-width: 130px;
+                @include dFlex(center, center, column nowrap);
+            }
+            
+            @include Tablet() {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            @include Phone() {
+                display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            }
+            
+            p{
+               width: 100%; 
+                color: #F28705;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 0 5px;
+                text-transform: uppercase;
+            }
         }
 
         a {
+            max-width: 140px;
             color: $color-primero;
         }
 
@@ -457,28 +487,27 @@
 
     .dvProductos {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         padding: 0 50px;
         gap: 30px;
 
         @include CardProd();
     }
 
-    .dvProductDetail{
+    .dvProductDetail {
         @include dFlex(center, center, row nowrap);
         @include CardProd();
     }
 
 }
 
-.itemCount{
+.itemCount {
     width: 80%;
     @include dFlex(space-around, center, row wrap);
 
-    span{
+    span {
         margin-top: -20px;
         font-family: $font-primera;
         font-size: 30px;
     }
 }
-

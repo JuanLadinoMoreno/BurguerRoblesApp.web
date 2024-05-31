@@ -165,7 +165,7 @@ export const useGetProductsById = (id) => {
 
 
 //LLENA EL MENU DE CATEGORIAS
-export const useGetCategories = (collectionName = "categories") => {
+export const useGetCategories = () => {
 
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);

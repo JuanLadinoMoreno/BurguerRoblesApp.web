@@ -32,7 +32,6 @@ export default function ItemDetailContainer() {
                     <section className="contMen">
 
                         <MenuProducts />
-
                         {/* <div className="container"></div> */}
 
                             {/* ojo aca */}
@@ -46,7 +45,7 @@ export default function ItemDetailContainer() {
 
                                     <div className="datProd">
 
-                                        <img className="imgProducto" src={productData.urlImg} alt="" width='350px' />
+                                        <img className="imgProducto" src={productData.thumbnail} alt="" width='350px' />
                                         <ul className="ulIngre">
                                             <li >{productData.ingrePrep}</li>
                                             <li >{productData.pan}</li>

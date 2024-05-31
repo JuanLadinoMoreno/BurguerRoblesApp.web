@@ -31,7 +31,7 @@ export const Category = () => {
 
         <NavDash />
 
-        <div className="main p-3">
+        <div className="main ">
           <ItemListContainer productsData={productsData} />
         </div>
 

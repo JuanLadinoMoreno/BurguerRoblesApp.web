@@ -6,18 +6,26 @@ export default function Header() {
   return (
    
     <header className="header ">
-        <div className="bgBlack"></div>
-        <video className="" src={vgVideo} type="video/mp4" autoPlay loop muted></video>
-        <div className="header-content">
-            <h1>
-                <i className="fas fa-hamburger"></i>
-                Burguer Robles
-                <i className="fas fa-hamburger"></i>
-            </h1>
-            <img className="img-center" src='../../public/img/logoSl.png' alt="" data-aos="flip-left" data-aos-easing="linear"
-                data-aos-duration="2500"/>
-            <a className="btn-transparent" href="pages/about.html">Ver Mas</a>
-        </div>
+      <div className="bgBlack"></div>
+      <video className="" src={vgVideo} type="video/mp4" autoPlay loop muted></video>
+      <div className="header-content">
+        <img className="img-center" src='../../public/img/logoSl.png' alt="" data-aos="flip-left" data-aos-easing="linear"
+          data-aos-duration="2500" />
+        <h1>
+          <i className="fas fa-hamburger"></i>
+            Burguer Robles
+          <i className="fas fa-hamburger"></i>
+        </h1>
+
+        {/* <div className="sectAbout">
+          <div className="sectAbo__datosLogo  d-flex justify-content-center align-items-center flex-column ">
+            <h3>Burguer Robles</h3>
+            <h2>Food truck</h2>
+          </div>
+        </div> */}
+
+        <a className="btn-transparent" href="#sectAbo">Ver Mas</a>
+      </div>
     </header>
 
   );

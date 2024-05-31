@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function NavDash() {
 
@@ -10,7 +11,9 @@ function NavDash() {
         };
   return (
     <>
-    <aside id="sidebar " className={`sidebar ${isExpanded ? 'expand' : ''}` }>
+    <aside id="sidebar " className={`sidebar ${isExpanded ? 'expand' : ''} `}>
+    {/* <aside id="sidebar " className={`sidebar ${isExpanded ? 'expand' : ''}  z-3 position-absolute`}>  para q salga en frente */} 
+        {/* <aside id="sidebar " className="d-flex flex-column navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed bg-danger"> */}
         {/* <aside id="sidebar " className="d-flex flex-column navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed bg-danger"> */}
           <div className="d-flex ">
 
@@ -19,24 +22,27 @@ function NavDash() {
             </button>
 
             <div className="sidebar-logo">
-              <a href="#">CodzSword</a>
+              <a href="#">Burguer Robles</a>
             </div>
           </div>
 
           <ul className="sidebar-nav">
+
+            <li className="sidebar-item">
+              <Link to={"/menu"} className="sidebar-link">
+              <i className="bi bi-clipboard2-plus"></i>
+                <span>Ordenar</span>
+              </Link>
+            </li>
+
             <li className="sidebar-item">
               <a href="#" className="sidebar-link">
-                <i className="fab fa-instagram"></i>
-                <span>Profile</span>
+              <i class="bi bi-clipboard2-data"></i>
+                <span>Ordenes</span>
               </a>
             </li>
-            <li className="sidebar-item">
-              <a href="#" className="sidebar-link">
-                <i className="fab fa-twitter"></i>
-                <span>Task</span>
-              </a>
-            </li>
-            <li className="sidebar-item">
+
+            {/* <li className="sidebar-item">
               <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                 data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                 <i className="fab fa-youtube"></i>
@@ -85,14 +91,14 @@ function NavDash() {
                 <i className="lni lni-cog"></i>
                 <span>Setting</span>
               </a>
-            </li>
+            </li> */}
           </ul>
-          <div className="sidebar-footer">
+          {/* <div className="sidebar-footer">
             <a href="#" className="sidebar-link">
               <i className="lni lni-exit"></i>
               <span>Logout</span>
             </a>
-          </div>
+          </div> */}
         </aside>
     </>
   )
