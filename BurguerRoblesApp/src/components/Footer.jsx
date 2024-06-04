@@ -1,38 +1,74 @@
-import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 export default function Footer() {
-  return (
-    <footer>
+    return (
+        <footer>
 
-        <div className="cont-food">
-            <div className="food-menu">
-                <h3> MENU</h3>
-                <a href="">Hamburguesas</a>
-                <a href="">Hot-dog</a>
-                <a href="">Baguette</a>
-                <a href="">Sandwiches</a>
-                <a href="">Burritos</a>
+            {/* <div class="container">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div className="icons">
+                        <a href=""><i className="fab fa-facebook-f"></i></a>
+                        <a href=""> <i className="fab fa-instagram"></i></a>
+                        <a href=""><i className="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Legacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Careers</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <hr class="dropdown-divider"></hr>
+
+                    <p class="copyright">Company Name © 2018</p>
+                </div>
+            </div> */}
+
+            <div className='bg-foot'></div>
+
+            
+
+            <div className=" food-icons d-flex justify-content-center align-items-center flex-wrap col-md-12 gap-5">
+                <a className='' href=""><i className="fab fa-facebook-f"></i></a>
+                <a href=""> <i className="fab fa-instagram"></i></a>
+                <a href=""><i className="fab fa-twitter"></i></a>
+                <a href=""><i className="fab fa-twitter"></i></a>
             </div>
 
-            <div className="food-menu">
-                <h3> MENU</h3>
-                <a href="">Hamburguesas</a>
-                <a href="">Hot-dog</a>
-                <a href="">Baguette</a>
-                <a href="">Sandwiches</a>
-                <a href="">Burritos</a>
-            </div>
-            <div className="food-icons">
-                <img src="public/img/logoSl.png" alt=""/>
-                <div className="icons">
-                    <a href=""><i className="fab fa-facebook-f"></i></a>
-                    <a href=""> <i className="fab fa-instagram"></i></a>
-                    <a href=""><i className="fab fa-twitter"></i></a>
+            <div className='d-flex justify-content-center align-items-center flex-wrap col-md-8 '>
+
+                <div className="d-flex justify-content-center align-items-center flex-wrap col-md-9 col-sm-12 gap-4 mt-1">
+                    <Link to={"/"}>Inicio</Link>
+                    <Link to={"/menu"}>Menú</Link>
+                    <Link to={"/grill"}>Al grill</Link>
+                    <Link to={"/eventos"}>Eventos</Link>
                 </div>
 
+                <div className=" col-md-3 col-sm-12 d-flex flex-column justify-content-center align-items-center  p-2">
+                    <img src="public/img/logoSl.png" alt="" />
+                    <span>Burguer Robles</span>
+                </div>
             </div>
-        </div>
-        <p>© 2023. All Rights Reserved</p>
-    </footer>
-  )
+            
+            <p className='col-md-12'>© 2023. All Rights Reserved</p>
+        </footer>
+    )
 }
