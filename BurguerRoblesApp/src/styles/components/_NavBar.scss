@@ -121,10 +121,8 @@ nav {
 
 .dropdown-menus {
     @include dFlex(center, center, column nowrap);
-    // align-items: flex-end;
-    // position: absolute;
-    // width: 250px;
     @include cardBlur(75%, 75%);
+    max-width: 420px;
     height: 250px;
     top: 100px;
     right: 0;
