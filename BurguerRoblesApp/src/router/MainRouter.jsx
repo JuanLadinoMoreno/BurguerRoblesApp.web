@@ -1,14 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
 import NavBar from '../components/NavBar'
-import Menu from '../pages/Menu'
 import Footer from '../components/Footer.jsx'
 import { Category } from '../pages/Category.jsx'
 import DetailProduct from '../pages/DetailProduct.jsx'
 import { Cart } from '../pages/Cart.jsx'
 import { About } from '../pages/About.jsx'
 import { Grill } from '../pages/Grill.jsx'
+import MenuHome from '../pages/MenuHome.jsx'
+
+
+import Menu from '../pages/Menu'
 import AddProducts from '../components/Pages/Menu/AddProducts.jsx'
+
 // import Login from '../components/Pages/Login/Login.jsx'
 import Register from '../components/Pages/Login/Register.jsx'
 import Index from '../components/Dash/Index.jsx'
@@ -29,6 +33,9 @@ export default function MainRouter() {
         <Route path='/cart' element={<Cart />} />
         <Route path='/about' element={<About />} />
         <Route path='/grill' element={<Grill />} />
+        <Route path='/menuIndex' element={<MenuHome />} />
+        
+
 
 
         {/* register y login */}

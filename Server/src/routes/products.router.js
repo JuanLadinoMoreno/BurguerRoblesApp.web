@@ -17,9 +17,9 @@ const router = Router()
 
 
 
-router.get('/',   getProducts);
+router.get('/', authMdw,  getProducts);
 
-router.get('/:id',  getProductById);
+router.get('/:id', authMdw,  getProductById);
 
 //ESTO DE MODIFICO  ---OJO  en createProduct----
 router.post('/', authMdw, createProduct)

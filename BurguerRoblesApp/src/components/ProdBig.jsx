@@ -22,7 +22,7 @@ export default function ProdBig() {
                         <span className="spanMov"></span>
                         <span className="spanMov"></span>
                         <span className="spanMov"></span>
-                        <img className="" src="../../public/img/bgTripl.png" style={{ maxWidth: "70%" }} alt="" />
+                        <img className="" src="../../public/img/bgTripl.png" style={{ maxWidth: "70%" }} alt="big" loading="lazy"/>
                     </div>
 
 

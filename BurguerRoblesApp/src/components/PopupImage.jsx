@@ -6,7 +6,7 @@ export const PopupImage = ({ imageUrl, onClose }) => {
     <div className="lightboxEv">
             {/* <div className="popup-content"></div> */}
             <button className="btnClosEv btnPrin" onClick={onClose}>❌</button>
-            <img className='imgGra' src={imageUrl} alt="Popup" />
+            <img className='imgGra' src={imageUrl} alt="Popup" loading="lazy"/>
             
 
         </div>

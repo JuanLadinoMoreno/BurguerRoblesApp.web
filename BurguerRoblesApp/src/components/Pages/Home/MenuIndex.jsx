@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 export default function MenuIndex() {
   return (
@@ -15,7 +17,7 @@ export default function MenuIndex() {
                     <li>Champiñones</li>
                     <li>Mexicana</li>
                 </ul>
-                <a className="btn-transparent" href="pages/menu.html"> Ver mas</a>
+                <Link to={"/menuIndex"} className="btn-transparent" > Ver mas</Link>
                 <img src="../../public/img/menu/burguers/burgMex.png" alt="" loading="lazy"/>
             </div>
 
@@ -29,7 +31,7 @@ export default function MenuIndex() {
                     <li>Cochinita Pibil</li>
                     <li>Milanesa</li>
                 </ul>
-                <a className="btn-transparent" href="pages/menu.html"> Ver mas</a>
+                <Link to={"/menuIndex"} className="btn-transparent" > Ver mas</Link>
                 <img src="../../public/img/menu/baguettes/baguet.png" alt="" loading="lazy"/>
             </div>
 
@@ -43,7 +45,7 @@ export default function MenuIndex() {
                     <li>Cochinita Pibil</li>
                     <li>Milanesa</li>
                 </ul>
-                <a className="btn-transparent" href="pages/menu.html"> Ver mas</a>
+                <Link to={"/menuIndex"} className="btn-transparent" > Ver mas</Link>
                 <img src="../../public/img/menu/sandwiches/sandw.png" alt="" loading="lazy"/>
             </div>
             
@@ -56,7 +58,7 @@ export default function MenuIndex() {
                     <li>Revolcado</li>
                     <li>Gran Danés</li>
                 </ul>
-                <a className="btn-transparent" href="pages/menu.html"> Ver mas</a>
+                <Link to={"/menuIndex"} className="btn-transparent" > Ver mas</Link>
                 <img src="../../public/img/menu/hotdogs/hotdog.png" alt="" loading="lazy"/>
             </div>
 
@@ -70,7 +72,7 @@ export default function MenuIndex() {
                     <li>Cochinita Pibil</li>
                     <li>Milanesa</li>
                 </ul>
-                <a className="btn-transparent" href="pages/menu.html"> Ver mas</a>
+                <Link to={"/menuIndex"} className="btn-transparent" > Ver mas</Link>
                 <img src="../../public/img/menu/burritos/hotGrand.png" alt="" loading="lazy"/>
             </div>
 

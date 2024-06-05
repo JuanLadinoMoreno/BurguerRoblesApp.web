@@ -22,7 +22,7 @@
         left: 0;
         width: 100%;
         height: 15px;
-        background: url(../../assets/img/shape-white.png);
+        background: url(../../public/img/shape-white.png);
         transform: rotate(180deg);
     }
 
@@ -33,7 +33,7 @@
         left: 0;
         width: 100%;
         height: 15px;
-        background: url(../../assets/img/shape-white.png);
+        background: url(../../public/img/shape-white.png);
     }
 
 
@@ -179,7 +179,7 @@
             height: 100%;
             bottom: 0;
             right: 0;
-            background: url(../assets/img/icons/Papas.svg);
+            background: url(../public/img/icons/Papas.svg);
             background-repeat: no-repeat;
             background-position: center center;
             opacity: .3;
@@ -223,7 +223,7 @@
 
 
     &__menuVerti {
-        @include dFlex(center, end, column nowrap);
+        @include dFlex(center, center, column nowrap);
         width: 20%;
         gap: 15px;
         margin-top: 10px;

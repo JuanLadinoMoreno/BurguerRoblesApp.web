@@ -15,11 +15,11 @@ export default function NavBar() {
             <nav id="top-nav">
 
                 <Link to='/'>
-                    <img src='../../public/img/logoSl.png' className='nav-logo' alt="" />
+                    <img src='../../public/img/logoSl.png' className='nav-logo' alt="" loading="lazy"/>
                 </Link>
                 <ul>
                     <Link to='/'>Inicio</Link>
-                    <Link to='/menu'>Menu</Link>
+                    <Link to='/menuIndex'>Menu</Link>
                     <Link to='/grill'>Al grill</Link>
                     <Link to='/about'>Quienes somos</Link>
                     <li><a href="pages/eventos.html">Eventos</a></li>
@@ -48,7 +48,7 @@ export default function NavBar() {
             <div className={` ${isExpanded ? 'opens' : ''} dropdown-menus`}>
                 <ul>
                     <Link to='/'>Inicio</Link>
-                    <Link to='/menu'>Menu</Link>
+                    <Link to='/menuIndex'>Menu</Link>
                     <Link to='/grill'>Al grill</Link>
                     <Link to='/about'>Quienes somos</Link>
                 </ul>
