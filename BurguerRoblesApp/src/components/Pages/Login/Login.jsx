@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 
-
+import BanEventos from '../../Pages/Home/BanEventos'
 
 
 // const onSubmitLogin = (data) => {
@@ -132,6 +132,7 @@ import { Link, useNavigate } from "react-router-dom";
           No tienes cuenta?? <Link to="/session/register"> Registrate </Link>
         </p>
       </section>
+
     </>
   )
 }

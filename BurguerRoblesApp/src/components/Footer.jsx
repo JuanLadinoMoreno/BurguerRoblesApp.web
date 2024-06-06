@@ -64,7 +64,8 @@ export default function Footer() {
 
                 <div className=" col-md-3 col-sm-12 d-flex flex-column justify-content-center align-items-center  p-2">
                     <img src="public/img/logoSl.png" alt="" />
-                    <span>Burguer Robles</span>
+                    <Link to={"/session/login"} className='fs-6'> <span className='w-100'>Burguer Robles <i className="bi bi-person-lock ms-2 p-1 border border-warning border-3 rounded-circle fs-5"></i></span></Link>
+                    
                 </div>
             </div>
             
