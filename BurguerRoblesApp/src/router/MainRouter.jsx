@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
-import NavBar from '../components/NavBar'
 import Footer from '../components/Footer.jsx'
 import { Category } from '../pages/Category.jsx'
 import DetailProduct from '../pages/DetailProduct.jsx'
 import { Cart } from '../pages/Cart.jsx'
 import { About } from '../pages/About.jsx'
 import { Grill } from '../pages/Grill.jsx'
+import Events from '../pages/Events.jsx'
 import MenuHome from '../pages/MenuHome.jsx'
 
 
@@ -30,12 +30,13 @@ export default function MainRouter() {
       {/* <NavBar /> */}
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/cart' element={<Cart />} />
         <Route path='/about' element={<About />} />
         <Route path='/grill' element={<Grill />} />
         <Route path='/menuIndex' element={<MenuHome />} />
+        <Route path='/events' element={<Events />} />
         
 
+        <Route path='/cart' element={<Cart />} />
 
 
         {/* register y login */}

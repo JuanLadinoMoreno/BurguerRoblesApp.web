@@ -15,7 +15,7 @@ export const register = async (req, res) => {
 
         const usr = await usersManager.createUser(firstName, lastName, age, email, password)
         if (!usr){
-            return res.sendError({ message: 'Something went wrong!' })
+            return res.send({ message: 'Something went wrong!' })
         }
         // const userFound = await userModel.findOne({ email });
 

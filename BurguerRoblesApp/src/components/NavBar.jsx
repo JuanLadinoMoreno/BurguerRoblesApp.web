@@ -22,7 +22,7 @@ export default function NavBar() {
                     <Link to='/menuIndex'>Menu</Link>
                     <Link to='/grill'>Al grill</Link>
                     <Link to='/about'>Quienes somos</Link>
-                    <li><a href="pages/eventos.html">Eventos</a></li>
+                    <Link to='/events'>Eventos</Link>
                     <li>
 
                     </li>
@@ -50,7 +50,7 @@ export default function NavBar() {
                     <Link to='/'>Inicio</Link>
                     <Link to='/menuIndex'>Menu</Link>
                     <Link to='/grill'>Al grill</Link>
-                    <Link to='/about'>Quienes somos</Link>
+                    <Link to='/events'>Eventos</Link>
                 </ul>
             </div>
         </>
