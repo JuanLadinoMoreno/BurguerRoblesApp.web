@@ -90,7 +90,7 @@ prodSchema.virtual('id').get(function () {
 
 
 // export default  mongoose.model('Poduct', prodSchema, 'products')
-const productModel = model('Poduct', prodSchema, 'products')
+const productModel = model('Product', prodSchema, 'products')
 export default productModel
 //  module.exports = model('Poduct', prodSchema, 'products')
 // export default model('Poduct', prodSchema, 'products')

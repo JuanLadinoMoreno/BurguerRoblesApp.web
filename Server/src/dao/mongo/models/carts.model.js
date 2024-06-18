@@ -1,9 +1,9 @@
 import mongoose, { Schema, model } from "mongoose";
 
-const productSchema = new Schema({
+const productCartSchema = new Schema({
     pid: { 
-        type: mongoose.Types.ObjectId,
-        ref: 'Poduct', 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product', 
         required: true 
     },
     quantity: { 
@@ -19,7 +19,7 @@ const cartsSchema = new Schema({
         // required: true
     },
     products:{
-        type: [productSchema],
+        type: [productCartSchema],
         default: []
     },
     user: {

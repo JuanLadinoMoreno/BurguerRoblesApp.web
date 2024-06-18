@@ -1,27 +1,27 @@
 import { Router} from "express";
-import { createCart, getCarts } from "../controllers/carts.controller.js";
+import { addProdCart, createCart, deleteCartById, deleteProductCart, getCartById, getCarts, updProductQuant } from "../controllers/carts.controller.js";
 
 
 const router = Router()
 
-router.get('/', getCarts)
-
-// router.get('/:id', async (req, res) => {
-//     const id = +req.params.id
-//     const product = await cartsManager.findProductById(id)
-//     res.json(product)
-// });
-
 router.post('/', createCart)
 
-// router.post('/:cid/product/:pid',async (req, res) => {
-//     const prod = req.body
+router.get('/', getCarts)
 
-//     const cid = +req.params.cid
-//     const pid = +req.params.pid
-//     const cartCreado = await cartsManager.createProductInCart(prod, cid, pid)
-//     res.status(201).json(prod)
-// })
+router.get('/:cid', getCartById)
+
+router.delete('/:cid', deleteCartById)
+
+
+//Agrega producto al carrito
+router.post('/:cid/product/:pid', addProdCart)
+
+//Actualiza cantidad de producto
+router.put('/:cid/product/:pid', updProductQuant)
+
+//elimina producto del carrito
+router.delete('/:cid/product/:pid', deleteProductCart)
+
 
 
 export default router
