@@ -13,16 +13,17 @@ export const register = async (req, res) => {
     try {
         const { firstName, lastName, email, age, password } = req.body
 
+        const userFound = await userModel.findOne({ email });
+        if (userFound)
+            return res.status(400).json({
+                message: ["The email is already in use"],
+            });
+
         const usr = await usersManager.createUser(firstName, lastName, age, email, password)
         if (!usr){
-            return res.send({ message: 'Something went wrong!' })
+            return res.status(500)({ message: 'Something went wrong!' })
         }
-        // const userFound = await userModel.findOne({ email });
-
-        // if (userFound)
-        //     return res.status(400).json({
-        //         message: ["The email is already in use"],
-        //     });
+        
 
         // const pswHash = await bcryptjs.hash(password, 11)
 

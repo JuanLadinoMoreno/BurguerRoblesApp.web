@@ -6,6 +6,7 @@ const productManager = new ProductManager();
 
 export const getProducts = async (req, res) => {
     try {
+        
         let limit = +req.query.limit
 
         // este id se puede pasar a la funcion para que solo traiga productos creaos por ese usuario

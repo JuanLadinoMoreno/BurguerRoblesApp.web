@@ -6,9 +6,23 @@ import productsModel from '../mongo/models/products.model.js'
 export default class CartsManager {
 
 
-    async getCarts() {
+    async getCarts(usrId) {
         try {
-            const carts = await cartModel.find().populate('products.pid');
+            const carts = await cartModel.find().populate('products.pid')//.populate('user');
+            // const carts = await cartModel.find().populate('products.pid')//.populate('user');
+            // console.log('datos', productos)
+            // return datos
+            return carts.map(p => p.toObject({ virtuals: true }))
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getUserCarts(usrId) {
+        try {
+            const carts = await cartModel.find({user: usrId}).populate('products.pid')//.populate('user');
+            // const carts = await cartModel.find().populate('products.pid')//.populate('user');
             // console.log('datos', productos)
             // return datos
             return carts.map(p => p.toObject({ virtuals: true }))
