@@ -1,8 +1,12 @@
 import mongoose from "mongoose";
-import CartsManager from "../dao/dbManager/CartsManager.js";
-import userModel from "../dao/mongo/models/user.model.js";
+// import CartsManager from "../dao/dbManager/CartsManager.js";
+import CartsManager from "../dao/mongo/carts.dao.js";
+import UserManager from "../dao/mongo/users.dao.js";
+
+// import userModel from "../dao/mongo/models/user.model.js";
 
 const cartsManager = new CartsManager()
+const userManager = new UserManager()
 
 export const createCart = async (req, res) => {
     
@@ -40,7 +44,8 @@ export const getUserCarts = async (req, res) => {
         // const usrId = new mongoose.Types.ObjectId(req.user.id)
         const usrId = req.params.uid
 
-        const userFound = await userModel.findOne({_id: usrId})
+        // const userFound = await userModel.findOne({_id: usrId})
+        const userFound = await userManager.findUserById(usrId)
         if (!userFound) return res.status(400).json({ message: 'User not found!' })
 
         let limit = +req.query.limit

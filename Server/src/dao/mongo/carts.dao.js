@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
-import cartModel from '../mongo/models/carts.model.js'
-import productsModel from '../mongo/models/products.model.js'
+// import cartModel from './models/carts.model.js'
+// import productsModel from './models/products.model.js'
+import cartModel from './models/carts.model.js';
+import productsModel from './models/products.model.js';
 
 
 export default class CartsManager {
@@ -8,7 +10,7 @@ export default class CartsManager {
 
     async getCarts() {
         try {
-            const carts = await cartModel.find().populate('products.pid')//.populate('user');
+            const carts = await cartsModel.find().populate('products.pid')//.populate('user');
             // const carts = await cartModel.find().populate('products.pid')//.populate('user');
             // console.log('datos', productos)
             // return datos

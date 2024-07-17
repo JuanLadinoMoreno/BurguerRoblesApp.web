@@ -24,16 +24,37 @@ export default class usersDAO{
             return usr
             
         } catch (e) {
-            console.log('Error al crear producto', e);
+            console.log('Error al crear usuario', e);
+            return null
         }
     }
 
-    async onLogin (){
-        try {
+    async Onlogin (email) {
+        try {    
+            const userFound = await userModel.findOne({ email });
+            return userFound;    
             
         } catch (error) {
-            
+            console.log('Error on login', e);
+            return null
         }
     }
+
+    async findUserById (id) {
+        try {   
+            const userFound = await userModel.findById(id) 
+            if (!userFound)  return null
+            
+            return userFound;    
+            
+        } catch (error) {
+            console.log('Error on login', e);
+            return null
+        }
+    }
+
+        
+
+
 
 }

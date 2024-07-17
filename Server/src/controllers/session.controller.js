@@ -1,6 +1,6 @@
 import { TOKEN_SECRET } from "../config/config.js";
 import { createAccessToken } from "../libs/jwts.js";
-import userModel from "../dao/mongo/models/user.model.js";
+// import userModel from "../dao/mongo/models/user.model.js";
 import bcryptjs from "bcryptjs";
 import jwt from 'jsonwebtoken'
 import UsersManager from "../dao/mongo/users.dao.js";
@@ -13,7 +13,9 @@ export const register = async (req, res) => {
     try {
         const { firstName, lastName, email, age, password } = req.body
 
-        const userFound = await userModel.findOne({ email });
+        const userFound = await usersManager.createUser();
+        // const userFound = await userModel.findOne({ email });
+
         if (userFound)
             return res.status(400).json({
                 message: ["The email is already in use"],
@@ -74,11 +76,12 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(400).send('Invalid field!')
-            // return res.status(400).json({ error: 'Invalid credentials!' })
+            // return res.status(400).send('Invalid field!')
+            return res.status(400).json({ error: 'Invalid credentials!' })
         }
 
-        const userFound = await userModel.findOne({ email });
+        // const userFound = await userModel.findOne({ email });
+        const userFound = await usersManager.Onlogin(email)
 
         if (!userFound)
             return res.status(400).json({
@@ -127,7 +130,8 @@ export const logout = (req, res) => {
 
 export const dash = async (req, res) => {
     //piden datos del perfil del usuario
-    const userFound = await userModel.findById(req.user.id)
+    // const userFound = await userModel.findById(req.user.id)
+    const userFound = await usersManager.findUserById(req.user.id);
 
     if (!userFound) return res.status(400).json({ error: 'User not found!' })
 
@@ -149,7 +153,8 @@ export const verifyToken = async (req, res) => {
     jwt.verify(token, 'TOKEN_SECRET', async (error, user) => {
         if (error) return res.sendStatus(401).json({ message: "No autorizado" });
 
-        const userFound = await userModel.findById(user.id);
+        // const userFound = await userModel.findById(user.id);
+        const userFound = await UsersManager.findUserById(user.id);
         if (!userFound) return res.sendStatus(401).json({ message: "No autorizado" });
 
         return res.json({

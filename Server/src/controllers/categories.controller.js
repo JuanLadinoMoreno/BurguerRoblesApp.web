@@ -1,6 +1,11 @@
-import ProductManager from "../dao/dbManager/ProductManager.js";
+// import productsDAO from "../dao/mongo/products.dao";
 
-const productManager = new ProductManager()
+import ProductManager from "../dao/mongo/products.dao.js";
+
+// import ProductManager from "../dao/dbManager/ProductManager.js";
+
+
+const productManager = new ProductManager ()
 
 export const getCatProducts = async (req, res) => {
     const products = await productManager.getCategories();

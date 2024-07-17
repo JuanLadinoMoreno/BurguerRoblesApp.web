@@ -79,7 +79,7 @@ app.use(mongoStorage)// guarda session en mongoDB
 // })
 
 app.use('/api/products', productsRouter)
-app.use('/api/realTimeProducts', realtimeProducts)
+// app.use('/api/realTimeProducts', realtimeProducts)
 app.use('/api/categories', categoriesRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/api/session', sessionRouter)
