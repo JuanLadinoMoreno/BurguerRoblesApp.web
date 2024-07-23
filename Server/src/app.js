@@ -13,19 +13,20 @@ import realtimeProducts from './routes/realtimeProducts.router.js'
 import categoriesRouter from './routes/categories.router.js'
 import cartsRouter from './routes/carts.router.js'
 import sessionRouter from './routes/session.router.js'
+// import errorHandlere  from './middlewares/errors/index.js';
+import {errorHandler} from './middlewares/errors/index.js';
 
 
-import mongoStorage from './session/mongoStorage.js';
+
+// import mongoStorage from './session/mongoStorage.js';        //revisar
 // import userModel from './models/user.model.js';
 
 
 import { connectMDb } from '../src/config/database.js';
 
+
 import 'dotenv/config'
-
-
-//El profe lo importa acay lo setea en app
-// import ProductManager from './dao/dbManager/ProductManager.js';
+import { log } from 'console';
 
 
 
@@ -64,7 +65,7 @@ app.use(cors({
 //   }));
 
 app.use(cookieParser())
-app.use(mongoStorage)// guarda session en mongoDB
+// app.use(mongoStorage)// guarda session en mongoDB        revisar
 
 //server fazt
 // const server = http.createServer(app)
@@ -84,6 +85,8 @@ app.use('/api/categories', categoriesRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/api/session', sessionRouter)
 
+
+app.use(errorHandler)
 
 
 // app.get('/sesiones', (req, res) => {
@@ -113,9 +116,9 @@ app.use('/api/session', sessionRouter)
 
 // )
 
+// app.use(errorHandlere)
 
-
-
+console.log('ladsklajjiopjijoijoijoijoijoijoij')
 
 const manin = async => {
     
@@ -126,10 +129,7 @@ const manin = async => {
         console.log('Servidor preparado!!');
     });
     app.set('ws', httpServer)
-    //ACA EL PROFE SETEA EL PRODUCT MANAGER
-    // const productManager = new ProductManager();
-    // await productManager.initialize
-    // app.set('productsManager', productManager)
+
     
     // wsServer.on('connection', (socket) => {
     //     console.log('nuevo cliente conectado');

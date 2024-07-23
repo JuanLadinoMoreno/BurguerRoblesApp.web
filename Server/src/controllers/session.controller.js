@@ -5,6 +5,11 @@ import bcryptjs from "bcryptjs";
 import jwt from 'jsonwebtoken'
 import UsersManager from "../dao/mongo/users.dao.js";
 
+import CustomError from "../services/errors/CustomError.js";
+import ErrorCodes from "../services/errors/errorCodes.js";
+import { generateInvalidUserDataError } from "../services/errors/info.js";
+
+
 
 const usersManager = new UsersManager()
 
@@ -22,10 +27,10 @@ export const register = async (req, res) => {
             });
 
         const usr = await usersManager.createUser(firstName, lastName, age, email, password)
-        if (!usr){
+        if (!usr) {
             return res.status(500)({ message: 'Something went wrong!' })
         }
-        
+
 
         // const pswHash = await bcryptjs.hash(password, 11)
 
@@ -57,7 +62,7 @@ export const register = async (req, res) => {
         // console.log('usr', usr);
 
 
-         return res.status(201).json({
+        return res.status(201).json({
             id: usr._id,
             firstName: usr.firstName,
             email: usr.email
@@ -73,50 +78,66 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+    const { email, password } = req.body;
 
-        if (!email || !password) {
-            // return res.status(400).send('Invalid field!')
-            return res.status(400).json({ error: 'Invalid credentials!' })
-        }
+    console.log(email);
+    console.log(password);
 
-        // const userFound = await userModel.findOne({ email });
-        const userFound = await usersManager.Onlogin(email)
 
-        if (!userFound)
-            return res.status(400).json({
-                message: ["The email does not exist"],
-            });
+    if (!email || !password) {
+        // return res.status(400).send('Invalid field!')
 
-        const isMatch = await bcryptjs.compare(password, userFound.password);
-        if (!isMatch) {
-            return res.status(400).json({
-                message: ["Invalit credencials"],
-            });
-        }
-
-        //crea token
-        const token = await createAccessToken({ id: userFound._id })
-        //guarda token en cookie
-        res.cookie("token", token, {
-            // httpOnly: process.env.NODE_ENV !== "development",
-            httpOnly: false,
-            secure: true,
-            sameSite: "none",
+        console.log('alksdhlajkshdflñkahyspfhñjkyg');
+        CustomError.createError({
+            name: 'User creation error',
+            cause: generateInvalidUserDataError({ email, password }),
+            message: 'Error trying to create a new user',
+            code: ErrorCodes.INVALID_TYPES_ERROR
         })
 
-        //   const token = await createAccessToken({
-        //     id: userFound._id,
-        //     username: userFound.username,
-        //   });
+        // throw new Error()
 
-        res.json({
-            id: userFound._id,
-            fisrtsName: userFound.firstName,
-            email: userFound.email,
+        // return res.status(400).json({ error: 'Invalid credentials!' })
+    }
+
+    // const userFound = await userModel.findOne({ email });
+    const userFound = await usersManager.Onlogin(email)
+
+    if (!userFound)
+        return res.status(400).json({
+            message: ["The email does not exist"],
         });
+
+    const isMatch = await bcryptjs.compare(password, userFound.password);
+    if (!isMatch) {
+        return res.status(400).json({
+            message: ["Invalit credencials"],
+        });
+    }
+
+    //crea token
+    const token = await createAccessToken({ id: userFound._id })
+    //guarda token en cookie
+    res.cookie("token", token, {
+        // httpOnly: process.env.NODE_ENV !== "development",
+        httpOnly: false,
+        secure: true,
+        sameSite: "none",
+    })
+
+    //   const token = await createAccessToken({
+    //     id: userFound._id,
+    //     username: userFound.username,
+    //   });
+
+    res.json({
+        id: userFound._id,
+        fisrtsName: userFound.firstName,
+        email: userFound.email,
+    });
+    
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message, otro: 'jejeje' });
     }
 }
 
@@ -133,7 +154,7 @@ export const dash = async (req, res) => {
     // const userFound = await userModel.findById(req.user.id)
     const userFound = await usersManager.findUserById(req.user.id);
 
-    if (!userFound) return res.status(400).json({ error: 'User not found!' })
+    if (!userFound) return res.status(400).json({ message: 'User not found!' })
 
     console.log(userFound)
 
