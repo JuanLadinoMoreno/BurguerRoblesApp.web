@@ -13,7 +13,7 @@ export default class CartsManager {
 
     async getCarts() {
         try {
-            const carts = await cartsModel.find().populate('products.pid')//.populate('user');
+            const carts = await cartModel.find().populate('products.pid')//.populate('user');
             // const carts = await cartModel.find().populate('products.pid')//.populate('user');
             // console.log('datos', productos)
             // return datos
@@ -228,8 +228,11 @@ export default class CartsManager {
             if (!cart) return null
         
             const insufficientStockProducts = [];
-            let totalAmount = 0;
+            let cantiadTotal = 0;
             let productInStock = null
+
+            console.log('cart.products', cart.products);
+
             for (const product of cart.products) {
                productInStock = await productsModel.findById(product.pid);
         
@@ -241,25 +244,32 @@ export default class CartsManager {
                 });
               } else {
                 productInStock.stock -= product.quantity;
-                // await productInStock.save();
-                totalAmount += product.quantity * productInStock.precio; 
+                await productInStock.save();
+                cantiadTotal += product.quantity * productInStock.precio; 
               }
             }
         
-            if (insufficientStockProducts.length > 0) {
-            //   return {       ///OJO Como mandar el error de
-            //     message: 'Algunos productos no tienen suficiente stock.',
-            //     cart,
-            //     insufficientxStockProducts
-            //   };
-            return null
-            } else {        
+            // if (insufficientStockProducts.length > 0) {
+            // //   return {       ///OJO Como mandar el error de
+            // //     message: 'Algunos productos no tienen suficiente stock.',
+            // //     cart,
+            // //     insufficientxStockProducts
+            // //   };
+            // return null
+            // } else {        
 
             const updatedCart = await cartModel.findByIdAndUpdate(
                 cid,
                 { status: 'finalized' },
                 { new: true }
               );
+
+              //Guarda el cart los productos sin stock
+              cart.products = insufficientStockProducts.map(p => ({
+                pid: p.pid,
+                quantity: p.quantity
+              }));
+              await cart.save();
 
 
             //   const usrId = new mongoose.Types.ObjectId(uid)
@@ -268,14 +278,14 @@ export default class CartsManager {
               // Crear y guardar el ticket de compra
               const tiket = new ticketModel({
                 code: nanoid(6), // Generar un código único para la compra
-                amount: totalAmount,
+                amount: cantiadTotal,
                 purchaser: usrEmail.email, // Suponiendo que el usuario tiene un campo `email`
                 user: cart.user._id,
                 cart: cid
               });
         
               await tiket.save();
-              await productInStock.save();
+            //   await productInStock.save();
         
               return {
                 message: 'Purchase finalized successfully.',
@@ -283,7 +293,7 @@ export default class CartsManager {
                 tiket,
                 insufficientStockProducts
               };
-            }
+            // }
         
           } catch (error) {
             console.error(error);
