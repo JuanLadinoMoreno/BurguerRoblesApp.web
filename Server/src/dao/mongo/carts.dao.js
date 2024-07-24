@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 // import productsModel from './models/products.model.js'
 import cartModel from './models/carts.model.js';
 import productsModel from './models/products.model.js';
+import ticketModel from './models/ticket.model.js';
+import userModel from './models/user.model.js';
+import { nanoid } from 'nanoid'
 
 
 export default class CartsManager {
@@ -23,7 +26,7 @@ export default class CartsManager {
 
     async getUserCarts(usrId) {
         try {
-            const carts = await cartModel.find({user: usrId}).populate('products.pid')//.populate('user');
+            const carts = await cartModel.find({ user: usrId }).populate('products.pid')//.populate('user');
             // const carts = await cartModel.find().populate('products.pid')//.populate('user');
             // console.log('datos', productos)
             // return datos
@@ -209,7 +212,7 @@ export default class CartsManager {
 
             return updatedCart
 
-           
+
         } catch (e) {
             console.log('Error al eliminar el carrito', e);
             return null;
@@ -217,4 +220,74 @@ export default class CartsManager {
     }
 
 
+    async finalizePurchase(cid, uid) {
+        try {
+            // Verifica que el carrito exista y sea del usuario logeado
+            const cart = await cartModel.findOne({ _id: cid, user: uid, status: 'created' }).populate('products.pid');
+        
+            if (!cart) return null
+        
+            const insufficientStockProducts = [];
+            let totalAmount = 0;
+            let productInStock = null
+            for (const product of cart.products) {
+               productInStock = await productsModel.findById(product.pid);
+        
+              if (productInStock.stock < product.quantity) {
+                insufficientStockProducts.push({
+                  pid: product.pid,
+                  quantity: product.quantity,
+                  stock: productInStock.stock
+                });
+              } else {
+                productInStock.stock -= product.quantity;
+                // await productInStock.save();
+                totalAmount += product.quantity * productInStock.precio; 
+              }
+            }
+        
+            if (insufficientStockProducts.length > 0) {
+            //   return {       ///OJO Como mandar el error de
+            //     message: 'Algunos productos no tienen suficiente stock.',
+            //     cart,
+            //     insufficientxStockProducts
+            //   };
+            return null
+            } else {        
+
+            const updatedCart = await cartModel.findByIdAndUpdate(
+                cid,
+                { status: 'finalized' },
+                { new: true }
+              );
+
+
+            //   const usrId = new mongoose.Types.ObjectId(uid)
+              const usrEmail = await userModel.findById(uid)
+
+              // Crear y guardar el ticket de compra
+              const tiket = new ticketModel({
+                code: nanoid(6), // Generar un código único para la compra
+                amount: totalAmount,
+                purchaser: usrEmail.email, // Suponiendo que el usuario tiene un campo `email`
+                user: cart.user._id,
+                cart: cid
+              });
+        
+              await tiket.save();
+              await productInStock.save();
+        
+              return {
+                message: 'Purchase finalized successfully.',
+                cart: updatedCart,
+                tiket,
+                insufficientStockProducts
+              };
+            }
+        
+          } catch (error) {
+            console.error(error);
+            throw error;
+          }
+    }
 }

@@ -80,24 +80,20 @@ export const login = async (req, res) => {
     try {
     const { email, password } = req.body;
 
-    console.log(email);
-    console.log(password);
-
-
     if (!email || !password) {
         // return res.status(400).send('Invalid field!')
 
-        console.log('alksdhlajkshdflñkahyspfhñjkyg');
-        CustomError.createError({
-            name: 'User creation error',
-            cause: generateInvalidUserDataError({ email, password }),
-            message: 'Error trying to create a new user',
-            code: ErrorCodes.INVALID_TYPES_ERROR
-        })
+
+        // CustomError.createError({
+        //     name: 'User creation error',
+        //     cause: generateInvalidUserDataError({ email, password }),
+        //     message: 'Error trying to create a new user',
+        //     code: ErrorCodes.INVALID_TYPES_ERROR
+        // })
 
         // throw new Error()
 
-        // return res.status(400).json({ error: 'Invalid credentials!' })
+        return res.status(400).json({ message: 'Invalid credentials!' })
     }
 
     // const userFound = await userModel.findOne({ email });

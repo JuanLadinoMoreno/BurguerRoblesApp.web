@@ -133,3 +133,21 @@ export const deleteProductCart = async (req, res) => {
     }
 
 }
+
+export const finPurchase = async (req, res) => {
+    try{
+        const cartId = req.params.cid
+
+        //A la hora de generar el token se crea el objeto user para toda la aplicacion
+        // req.user.id
+
+        const ticket = await cartsManager.finalizePurchase(cartId, req.user.id)
+        
+        if(!ticket) return res.status(400).json({ message: 'Prolemas de stock, carrito no encontrado o no pertenece al usuario, o ya está finalizado.' })
+
+         res.status(200).json({ status: 'Created', payload: ticket })
+
+    }catch(error){
+        return res.status(500).json({ message: error.message })
+    }
+}

@@ -56,28 +56,10 @@ app.use(cors({
 //     next();
 // });
 
-
-// app.use(session({
-//     // store: new RedisStore({ url: 'redis://localhost:6379' }), // Cambia esto con tu configuración de Redis
-//     secret: 'adasd127812be', // Cambia esto con tu propia clave secreta
-//     resave: false,
-//     saveUninitialized: false
-//   }));
-
 app.use(cookieParser())
 // app.use(mongoStorage)// guarda session en mongoDB        revisar
 
-//server fazt
-// const server = http.createServer(app)
-// const io = new SocketServer(server, {
-//     cors: {
-//         origin: '*'
-//     }
-// })
 
-// io.on('connection', socket => {
-//     console.log(' client conected');
-// })
 
 app.use('/api/products', productsRouter)
 // app.use('/api/realTimeProducts', realtimeProducts)
@@ -89,36 +71,6 @@ app.use('/api/session', sessionRouter)
 app.use(errorHandler)
 
 
-// app.get('/sesiones', (req, res) => {
-
-//     if (req.session.counter) {
-//         req.session.counter++
-//         return res.send(`Esta es su visita nro. ${req.session.counter}`)
-//     }
-
-//     req.session.counter = 1
-//     res.send('Bienvenido! Esta es su primer visita!')
-// })
-
-// app.get('/profile', async (req, res) => {
-//     const user = req.session
-//     console.log('user', user);
-//     res.json(user)
-// })
-
-
-
-
-//servidor socket.io
-// const wsServer = new Server(httpServer, {
-//     cors: { origin: '*' }
-// }
-
-// )
-
-// app.use(errorHandlere)
-
-console.log('ladsklajjiopjijoijoijoijoijoijoij')
 
 const manin = async => {
     

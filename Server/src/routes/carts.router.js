@@ -1,5 +1,5 @@
 import { Router} from "express";
-import { addProdCart, createCart, deleteCartById, deleteProductCart, getCartById, getAllCarts, updProductQuant, getUserCarts } from "../controllers/carts.controller.js";
+import { addProdCart, createCart, deleteCartById, deleteProductCart, getCartById, getAllCarts, updProductQuant, getUserCarts, finPurchase } from "../controllers/carts.controller.js";
 import { authMdw } from "../middlewares/auth.middleware.js";
 import { verifyAdminRoleMdw } from "../middlewares/verifyRole.middleware.js";
 
@@ -27,5 +27,6 @@ router.put('/:cid/product/:pid', authMdw, verifyAdminRoleMdw, updProductQuant)
 router.delete('/:cid/product/:pid', authMdw, verifyAdminRoleMdw, deleteProductCart)
 
 
+router.get('/:cid/purchase', authMdw, finPurchase)
 
 export default router
