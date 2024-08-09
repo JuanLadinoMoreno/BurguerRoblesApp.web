@@ -9,7 +9,6 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 
 import productsRouter from './routes/products.router.js'
-import realtimeProducts from './routes/realtimeProducts.router.js'
 import categoriesRouter from './routes/categories.router.js'
 import cartsRouter from './routes/carts.router.js'
 import sessionRouter from './routes/session.router.js'

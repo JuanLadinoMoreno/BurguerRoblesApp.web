@@ -39,10 +39,14 @@ export default class CartsManager {
 
     async getCartById(id) {
         try {
-            const cart = await cartModel.find({ _id: id })//.populate('products.pid');
+            const cart = await cartModel.findOne({ _id: id })//.populate('products.pid');
             // console.log('datos', productos)
             // return datos
-            return cart//.map(p => p.toObject({ virtuals: true }))
+            // return cart//.map(p => p.toObject({ virtuals: true }))            
+
+            if(!cart) return null
+
+            return cart//.toObject({ virtuals: true });
 
         } catch (error) {
             console.log(error);

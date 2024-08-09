@@ -7,18 +7,31 @@ const usrSchema = new Schema(
             required: true,
             trim: true
         },
-        lastName: String,
-        age: Number,
+        lastName: {
+            type: String,
+            required: true,
+        },
+        age: {
+            type: Number,
+            required: true,
+        },
         email: {
             type: String,
-            unique: true
+            unique: true,
+            required: true,
         },
-        password: String,
-        role: String,
-        user: {
-            type: mongoose.Types.ObjectId,
-            ref: 'User'
+        password: {
+            type: String,
+            required: true,
+        },
+        role: {
+            type: String,
+            required: true,
         }
+        // user: {
+        //     type: mongoose.Types.ObjectId,
+        //     ref: 'User'
+        // }
     },
     {
         timestamps: true,

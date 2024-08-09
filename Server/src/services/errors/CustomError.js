@@ -11,7 +11,7 @@ export default class CustomError {
         error.name = name
         error.message = message
         error.code = code
-        console.log(error);
+        // console.log(error);
         throw error
     }
 

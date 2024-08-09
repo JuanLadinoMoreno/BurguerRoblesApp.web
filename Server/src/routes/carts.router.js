@@ -10,23 +10,26 @@ router.post('/', authMdw, verifyAdminRoleMdw, createCart)
 
 router.get('/', authMdw, verifyAdminRoleMdw, getAllCarts)
 
-router.get('/user/:uid', authMdw, verifyAdminRoleMdw, getUserCarts)//
+//Obtiene carritos del usuario
+router.get('/user/:uid', authMdw, getUserCarts)//
 
+//Solo el usuario admin obtiene todos los carritos
 router.get('/:cid', authMdw, verifyAdminRoleMdw, getCartById)
 
+//Solo el ususario admin puede eliminar un carrito
 router.delete('/:cid', authMdw, verifyAdminRoleMdw, deleteCartById)
 
 
 //Agrega producto al carrito
-router.post('/:cid/product/:pid', authMdw, verifyAdminRoleMdw, addProdCart)
+router.post('/:cid/product/:pid', authMdw, addProdCart)
 
 //Actualiza cantidad de producto
-router.put('/:cid/product/:pid', authMdw, verifyAdminRoleMdw, updProductQuant)
+router.put('/:cid/product/:pid', authMdw, updProductQuant)
 
-//elimina producto del carrito
+//elimina producto del carrito del usuario que lo creó
 router.delete('/:cid/product/:pid', authMdw, verifyAdminRoleMdw, deleteProductCart)
 
-
+//finaliza compra
 router.get('/:cid/purchase', authMdw, finPurchase)
 
 export default router

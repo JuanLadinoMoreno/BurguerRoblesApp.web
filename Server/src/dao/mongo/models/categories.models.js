@@ -3,7 +3,7 @@ import {Schema, model} from 'mongoose';
 
 const categoriesSchema = new Schema({
     ids: {
-        type: [String],
+        type: String,
         required: true,
         unique: true
     },

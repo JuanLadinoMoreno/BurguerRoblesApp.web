@@ -3,7 +3,40 @@ import bcryptjs from "bcryptjs";
 
 export default class usersDAO{
 
-    async createUser(firstName, lastName, age, email, password) {
+    async createUser(firstName, lastName, age, email, pswHash) {
+        try {
+
+            const usr = await userModel.create({
+                firstName,
+                lastName,
+                age: +age,
+                email,
+                password: pswHash,
+                role: 'user'
+            })
+
+            return usr
+
+        } catch (error) {
+            console.log('Error ', error);
+            return null
+        }
+    }
+
+    async getUserByEmail(email){
+        try {
+            const userFound = await userModel.findOne({ email });
+
+            if(!userFound) return null
+
+            return userFound;            
+        } catch (error) {
+            console.log('Error ', error);
+            return null
+        }
+    }
+
+    async createUserss(firstName, lastName, age, email, password) {
         try {
 
             const userFound = await userModel.findOne({ email });
@@ -43,6 +76,7 @@ export default class usersDAO{
     async findUserById (id) {
         try {   
             const userFound = await userModel.findById(id) 
+            
             if (!userFound)  return null
             
             return userFound;    

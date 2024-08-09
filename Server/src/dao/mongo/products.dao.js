@@ -4,24 +4,12 @@ import productModel from '../mongo/models/products.model.js'
 
 export default class productsDAO {
 
-    validaDatos(produc) {
-        if ((produc.ingrePrep === "" || !produc.ingrePrep) ||
-            (produc.nombre === "" || !produc.nombre) ||
-            (produc.pan === "" || !produc.pan) ||
-            (isNaN(produc.precio) || produc.precio < 0) ||
-            (produc.preparacion === "" || !produc.preparacion) ||
-            (!produc.tipo || produc.tipo === "") ||
-            ((produc.status != true && produc.status != false)) ||
-            (isNaN(produc.stock) || produc.stock < 0)
-        ) {
-            // console.log("Verifique que los campos esten coorectos o llenos");
-            throw new Error(`Verifique que los campos esten coorectos o llenos`)
-        }
-    }
+    
 
     async getProducts() {
         try {
             const productos = await productModel.find();
+            
 
             // Para traer productos creados por el usuario            
             // const productos = await productModel.find({ user: id}).populate('user');
@@ -30,32 +18,58 @@ export default class productsDAO {
 
         } catch (error) {
             console.log(error);
+            return null
         }
     }
 
     async findProductById(id) {
         try {
             const product = await productModel.findOne({ _id: id });
+
+            if(!product) return null
+
+            return product.toObject({ virtuals: true });
+        } catch (error) {
+            console.log('error  ->', error);
+            return null
+        }
+    }
+
+    async findProductByName(nombre) {
+        try {
+            const product = await productModel.findOne({ nombre: nombre });
+
+            if (!product) return null
+
             return product.toObject({ virtuals: true });
         } catch (error) {
             console.log(error);
+            return null
         }
     }
 
 
 
-    // falata agregar los campos de producto    ojo aca esta mal
+    // falata agregar los campos de producto
     async createProduct(produc) {
         console.log(produc);
         try {
-            this.validaDatos(produc);
             
-            await productModel.create(produc)
+            return await productModel.create(produc)
+            
         } catch (e) {
             console.log('Error al crear producto', e);
         }
     }
-    // 
+    
+    async findByIdAndUpdate(id, product){
+        try {
+            return productModel.findByIdAndUpdate(id, { $set: product }, { returnDocument: 'after' })
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
 
     // async deleteProduct(id = '6619a998eacc45356e34ea2c') {
     async deleteProduct(id) {
@@ -69,8 +83,8 @@ export default class productsDAO {
 
             return prod
 
-        } catch (exp) {
-            console.log(exp);
+        } catch (err) {
+            console.log(err);
             // return [];
         }
     }

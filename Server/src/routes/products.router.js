@@ -3,6 +3,7 @@ import { Router } from 'express'
 // import ProductManager from '../dao/dbManager/ProductManager.js';
 import { authMdw } from '../middlewares/auth.middleware.js';
 import { createProduct, deleteProduct, editProduct, getProductById, getProducts, getProductsByCat } from '../controllers/products.controller.js';
+import { verifyAdminRoleMdw } from '../middlewares/verifyRole.middleware.js';
 
 
 // import {  } from "../../public/img/menu/burguers/burgMex.png";
@@ -16,41 +17,23 @@ const router = Router()
 
 
 
+//Obtiene todos los productos
+router.get('/', authMdw, getProducts);
 
-router.get('/', authMdw,  getProducts);
-
+//Obtiene productos por id
 router.get('/:id', authMdw,  getProductById);
 
-//ESTO DE MODIFICO  ---OJO  en createProduct----
-router.post('/', authMdw, createProduct)
+//El usuario admin solo puede crear productos
+router.post('/', authMdw, verifyAdminRoleMdw, createProduct)
 
-router.put('/:id', authMdw, editProduct)
+//El usuario admin solo puede actue productos
+router.put('/:id', authMdw, verifyAdminRoleMdw, editProduct)
 
-router.delete('/:id', authMdw, deleteProduct)
+//El usuario admin solo puede crear productos
+router.delete('/:id', authMdw, verifyAdminRoleMdw, deleteProduct)
 
-// router.delete('/:id', async (req, res) => {
 
-//     try {
-//         await productManager.deleteProduct(req.params.id);
-
-//         // devuelce productos
-//         const products = await productManager.getProducts();
-//         // console.log('ggggggggggggggggggggggggggggg', products);
-
-//         req.app.get('ws').emit('deleteProduct', products)
-
-//         // req.app.get('ws').on('usr:deleteProduct', () => {
-//         //     console.log('rrrrrrrrrrrrrrrrrr');
-//         // })
-
-//         res.status(200)
-
-//     } catch (error) {
-//         res.status(400)
-//         console.log(error);
-//     }
-// })
-
+//Trae las categorias del los productos (hamburguesas) para llenar el menu de categorias
 router.get('/category/:ids', getProductsByCat);
 
 

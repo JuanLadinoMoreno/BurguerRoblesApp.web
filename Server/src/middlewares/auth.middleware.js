@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 // verificacion con JWT
 export const authMdw = (req, res, next) => {
-    try {
+    try {      
       const { token } = req.cookies;
       // verifica que exista token
       if (!token)

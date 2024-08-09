@@ -4,9 +4,16 @@ import userModel from "../dao/mongo/models/user.model.js"
 
 export const verifyAdminRoleMdw = async (req, res, next) => {
     try {
+        
+        if (!req.user.id) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'User Problem auth!',
+            });
+        }
         const usrId = new mongoose.Types.ObjectId(req.user)
+
         // const usrId = req.user
-        console.log('usrId', usrId);
 
         const userfind = await userModel.findOne(
             { 
@@ -25,9 +32,8 @@ export const verifyAdminRoleMdw = async (req, res, next) => {
             //     role: 0
             // }
         )
-        console.log('userfind', userfind);
         if (!userfind) {
-            return res.status(404).json({
+            return res.status(403).json({
                 message: ["You do not have permissions!"],
             });
         }
@@ -48,6 +54,13 @@ export const verifyAdminRoleMdw = async (req, res, next) => {
 
 export const verifyUserRoleMdw = async (req, res, next) => {
     try {
+
+        if (!req.user.id) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'User Problem auth!',
+            });
+        }
         const usrId = new mongoose.Types.ObjectId(req.user)
         // const usrId = req.user
         console.log('usrId', usrId);
@@ -71,7 +84,7 @@ export const verifyUserRoleMdw = async (req, res, next) => {
         )
         // console.log('userfind', userfind);
         if (!userfind) {
-            return res.status(404).json({
+            return res.status(403).json({
                 message: ["You do not have permissions!"],
             });
         }

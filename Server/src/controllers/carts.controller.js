@@ -2,23 +2,41 @@ import mongoose from "mongoose";
 // import CartsManager from "../dao/dbManager/CartsManager.js";
 import CartsManager from "../dao/mongo/carts.dao.js";
 import UserManager from "../dao/mongo/users.dao.js";
+import { CartsService } from "../services/carts.services.js";
+// import { usersService } from "../services/users.services.js";
+import UsersService from "../services/users.services.js";
+
+
 
 // import userModel from "../dao/mongo/models/user.model.js";
 
 const cartsManager = new CartsManager()
 const userManager = new UserManager()
 
-export const createCart = async (req, res) => {
+const cartsService = new CartsService()
+const usersService = new UsersService()
+
+
+
+export const createCart = async (req, res, next) => {
     
     try {
         const usrId = new mongoose.Types.ObjectId(req.user.id)
         // const userfind = await userModel.findOne({ _id: usrId }) //SE TENDRAÍA QUE VALIDAR??
+        
+        // const cart = {...req.body, user: usrId}  //poner id usuario en cart
+        const cart = req.body
+        
+        const cartCreado = await cartsService.createCart(usrId, cart)
+        
+        if(!cartCreado){
+            res.status(500).json({status: 'error', message: 'Error al crear producto'})
+        }
 
-        const cart = {...req.body, user: usrId}  //poner id usuario en cart
-        const cartCreado = await cartsManager.createCart(cart)
-        res.status(201).json(cartCreado)
+        res.status(201).json({status: 'succes', payload: cartCreado})
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        // return res.status(500).json({ message: error.message })
+        next(error)
     }
 
 }
@@ -27,7 +45,7 @@ export const getAllCarts = async (req, res) => {
     try {
 
         let limit = +req.query.limit
-        const carts = await cartsManager.getCarts()
+        const carts = await cartsService.getAllCarts()
         if (limit > 0) return res.json(carts.slice(0, limit))
         res.json(carts)
 
@@ -38,35 +56,42 @@ export const getAllCarts = async (req, res) => {
 }
 
 
-export const getUserCarts = async (req, res) => {
+export const getUserCarts = async (req, res, next) => {
     try {
         // console.log(req.user);
         // const usrId = new mongoose.Types.ObjectId(req.user.id)
+        
         const usrId = req.params.uid
+        // const userFound = usersService.findUserById(usrId)
+        // if (!userFound) {
+        //     return res.status(500).json({ message: 'not-found' })
+        // }
 
         // const userFound = await userModel.findOne({_id: usrId})
-        const userFound = await userManager.findUserById(usrId)
-        if (!userFound) return res.status(400).json({ message: 'User not found!' })
+        // const userFound = await userManager.findUserById(usrId)
+        // if (!userFound) return res.status(400).json({ message: 'User not found!' })
 
         let limit = +req.query.limit
-        const carts = await cartsManager.getUserCarts(usrId)
-        if (limit > 0) return res.json(carts.slice(0, limit))
-        res.json(carts)
+        const carts = await cartsService.getUserCarts(usrId)
+        if (limit > 0) return res.json({status: 'success', payload: carts.slice(0, limit)} )
+        res.json({status: 'success', payload: carts})
 
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        // return res.status(500).json({ message: error.message })
+        next(error)
     }
 
 }
 
 
-export const getCartById = async (req, res) => {
+export const getCartById = async (req, res, next) => {
     try {
-        const id = req.params.cid
-        const cart = await cartsManager.getCartById(id)
-        res.status(200).json(cart)
-    } catch (e) {
-        return res.status(500).json({ message: error.message });
+        const cid = req.params.cid
+        const cart = await cartsService.getCartById(cid)
+        res.status(200).json({status: 'success', payload: cart})
+    } catch (error) {
+        // return res.status(500).json({ message: error.message });
+        next(error)
     }
 }
 
