@@ -25,6 +25,19 @@ const ticketSchema = new Schema(
             ref: 'Carts',
             required: true
         },
+        productsSell: [
+            {
+                product: {
+                    type: mongoose.Types.ObjectId,
+                    ref: 'Product',
+                    required: true
+                },
+                quantity: {
+                    type: Number,
+                    required: true
+                }
+            }
+        ]
         // purchase_datetime: {
         //     type: String,
         //     default: Date.now

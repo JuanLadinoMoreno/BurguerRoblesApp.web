@@ -35,6 +35,19 @@ export default class productsDAO {
         }
     }
 
+    async findProductByIdd(id) {
+        try {
+            const product = await productModel.findOne({ _id: id });
+
+            if(!product) return null
+
+            return product
+        } catch (error) {
+            console.log('error  ->', error);
+            return null
+        }
+    }
+
     async findProductByName(nombre) {
         try {
             const product = await productModel.findOne({ nombre: nombre });

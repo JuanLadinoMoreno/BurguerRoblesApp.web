@@ -95,34 +95,55 @@ export const getCartById = async (req, res, next) => {
     }
 }
 
-export const deleteCartById = async (req, res) => {
+export const deleteCartById = async (req, res, next) => {
     try {
         const cartId = req.params.cid
-        const asa = await cartsManager.deleteCart(cartId)
+        const cartDel = await cartsService.deleteCartById(cartId)
 
-        if (!asa) return res.status(500).json({ message: `Carrito con ID ${cartId} no fue posibles ser eliminado, verifique que exista` })
+        if (!cartDel) return res.status(500).json({ payload: 'error', message: `Carrito con ID ${cartId} no fue posibles ser eliminado, verifique que exista` })
 
         // res.status(200).json(casrtDeleted)
-        res.status(200).json({ message: `Carrito con ID ${cartId} eliminado exitosamente` })
+        res.status(200).json({ payload: 'seccess', message: `Carrito con ID ${cartId} eliminado exitosamente` })
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        next(error)
+        // return res.status(500).json({ message: error.message })
     }
 
 }
 
-//Agrega producto al carrito
-export const addProdCart = async (req, res) => {
+export const empyCart = async (req, res, next) => {
     try {
-        const cart = req.params.cid
-        const product = req.params.pid
+        const cid = req.params.cid
+        
+        const empyCart = await cartsService.empyCart(cid);
 
-        console.log(cart, product);
-        const prodCreado = await cartsManager.addProductToCart(cart, product)
-        if (!prodCreado) return res.status(500).json({ message: 'error,producto o carrito no encontrado' })
-
-        res.status(201).json(prodCreado)
+        if (!empyCart) return res.status(500).json({ payload: 'error', message: `Carrito con ID ${cid} no fue posibles ser vaciado, verifique que exista` })
+        
+        res.status(200).json({ payload: 'seccess', message: `Carrito con ID ${cid} vaciado exitosamente` })
+        
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+
+        // console.log(error);
+        
+        next(error)
+    }
+}
+
+//Agrega producto al carrito
+export const addProdororQuantToCart = async (req, res, next) => {
+    try {
+        const cid = req.params.cid
+        const pid = req.params.pid
+
+        // console.log(cart, product);
+        const prodCreado = await cartsService.addProductToCart(cid, pid, 20)
+        if (!prodCreado) return res.status(500).json({ status:'error', message: 'error al actualizar carrito' })
+
+        res.status(201).json({ status: 'success', payload: prodCreado})
+    } catch (error) {
+        console.log(error);
+        next(error)
+        // return res.status(500).json({ message: error.message })
     }
 
 }
@@ -133,6 +154,7 @@ export const updProductQuant = async (req, res) => {
         const product = req.params.pid
 
         console.log(cart, product);
+        // const prodCreado = await cartsManager.updQuantToProduct(cart, product)
         const prodCreado = await cartsManager.updQuantToProduct(cart, product)
         if (!prodCreado) return res.status(500).json({ message: 'error,producto o carrito no encontrado' })
 
@@ -143,36 +165,44 @@ export const updProductQuant = async (req, res) => {
 
 }
 
-export const deleteProductCart = async (req, res) => {
+export const deleteProductCart = async (req, res, next) => {
     try {
-        const cart = req.params.cid
-        const product = req.params.pid
+        const cid = req.params.cid
+        const pid = req.params.pid
 
-        console.log(cart, product);
-        const prodCreado = await cartsManager.deleteProductCart(cart, product)
-        if (!prodCreado) return res.status(404).json({ message: 'error al eliminar el producto o el carrito no existe' })
+        // console.log(cart, product);
+        const prodCreado = await cartsService.deleteProductCart(cid, pid)
+        if (!prodCreado) return res.status(404).json({ status: 'error', message: 'error al eliminar el producto o el carrito no existe' })
 
-        res.status(200).json(prodCreado)
+        res.status(200).json({status: 'error', payload: prodCreado})
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        // return res.status(500).json({ message: error.message })
+        console.log(error);
+        next(error)        
     }
 
 }
 
-export const finPurchase = async (req, res) => {
+export const finPurchase = async (req, res, next) => {
     try{
-        const cartId = req.params.cid
+        const cid = req.params.cid
+        const uid = req.user.id
 
         //A la hora de generar el token se crea el objeto user para toda la aplicacion
         // req.user.id
 
-        const ticket = await cartsManager.finalizePurchase(cartId, req.user.id)
-        
-        if(!ticket) return res.status(400).json({ message: 'Prolemas de stock, carrito no encontrado o no pertenece al usuario, o ya está finalizado.' })
+        const ticket = await cartsService.finalizePurchase(cid, uid)
 
-         res.status(200).json({ status: 'Created', payload: ticket })
+        console.log('sdfsdfsdfsffdfsdfsdfsdfsdfsdf  ', ticket);
+        
+        
+        if(!ticket) return res.status(400).json({ status: 'seccess', message: 'Problem to create product.' })
+
+         res.status(200).json({ status: 'seccess', payload: ticket })
 
     }catch(error){
-        return res.status(500).json({ message: error.message })
+        console.log(error);
+        next(error)
+        // return res.status(500).json({ message: error.message })
     }
 }
