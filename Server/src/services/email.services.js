@@ -54,4 +54,27 @@ export default class EmailService{
 
         return inactiveUsers;
     }
+
+
+    async notifyProductPremiumDelete(prodDel) {        
+
+            try {
+                await transport.sendMail({
+                    from: 'Juan ',
+                    to: prodDel.user.email,
+                    subject: "Producto eliminado",
+                    html: `
+                        <div>
+                            <p>Hola ${prodDel.user.firstName},</p>
+                            <p>Tu producto " ${prodDel.nombre} " ha sido eliminado.</p>
+                            <p>Saludos</p>
+                        </div>
+                    `,
+                    attachments: [] 
+                });
+            } catch (error) {
+                console.error(`Error al enviar el correo`, error);
+            }
+
+    }
 }

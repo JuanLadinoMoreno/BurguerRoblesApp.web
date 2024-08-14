@@ -4,8 +4,10 @@ import { BurgerDTO }    from "../dto/products.dto.js";
 import ErrorCodes from "./errors/errorCodes.js";
 import CustomError from "./errors/CustomError.js";
 import mongoose from "mongoose";
+import EmailService from "./email.services.js";
 
 const productsDAO = new ProductsDAO();
+const emailService = new EmailService()
 
 export class ProductsService {
 
@@ -89,7 +91,6 @@ export class ProductsService {
         // const pid = new mongoose.Types.ObjectId(id)
         
         this.validaDatos(product);
-        console.log('pid    ', pid);
         await this.findProductById(pid) 
         // const findProd = await this.findProductById(pid)  
         // console.log('findProd   ', findProd);
@@ -103,7 +104,6 @@ export class ProductsService {
         //     })
         
         const prodUpd = await productsDAO.findByIdAndUpdate(pid, product)
-        console.log('prodUpd    ', prodUpd);
         
         if(!prodUpd)
             return CustomError.createError({
@@ -118,7 +118,6 @@ export class ProductsService {
 
     async deleteOne(pid){
         const findProd = await this.findProductById(pid)  
-              
         if(!findProd)
             return CustomError.createError({
                 name: 'Product data error',
@@ -126,6 +125,11 @@ export class ProductsService {
                 message: 'The product is not exists',
                 code: ErrorCodes.INVALID_CREDENTIALS
             })
+
+            if(findProd.user.role === 'premium') {
+                await emailService.notifyProductPremiumDelete(findProd)
+            }
+
         return productsDAO.deleteProduct(pid)
     }
 

@@ -8,7 +8,7 @@ export default class productsDAO {
 
     async getProducts() {
         try {
-            const productos = await productModel.find();
+            const productos = await productModel.find().populate('user');
             
 
             // Para traer productos creados por el usuario            
@@ -24,7 +24,7 @@ export default class productsDAO {
 
     async findProductById(id) {
         try {
-            const product = await productModel.findOne({ _id: id });
+            const product = await productModel.findOne({ _id: id }).populate('user');
 
             if(!product) return null
 

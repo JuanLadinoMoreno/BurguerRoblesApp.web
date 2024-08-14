@@ -3,7 +3,7 @@ import { Router } from 'express'
 // import ProductManager from '../dao/dbManager/ProductManager.js';
 import { authMdw } from '../middlewares/auth.middleware.js';
 import { createProduct, deleteProduct, editProduct, getProductById, getProducts, getProductsByCat } from '../controllers/products.controller.js';
-import { verifyAdminRoleMdw } from '../middlewares/verifyRole.middleware.js';
+import { verifyAdminPremRoleMdw, verifyAdminRoleMdw } from '../middlewares/verifyRole.middleware.js';
 
 
 // import {  } from "../../public/img/menu/burguers/burgMex.png";
@@ -24,13 +24,13 @@ router.get('/', authMdw, getProducts);
 router.get('/:id', authMdw,  getProductById);
 
 //El usuario admin solo puede crear productos
-router.post('/', authMdw, verifyAdminRoleMdw, createProduct)
+router.post('/', authMdw, verifyAdminPremRoleMdw, createProduct)
 
 //El usuario admin solo puede actue productos
 router.put('/:id', authMdw, verifyAdminRoleMdw, editProduct)
 
 //El usuario admin solo puede crear productos
-router.delete('/:id', authMdw, verifyAdminRoleMdw, deleteProduct)
+router.delete('/:id', authMdw, verifyAdminPremRoleMdw, deleteProduct)
 
 
 //Trae las categorias del los productos (hamburguesas) para llenar el menu de categorias
