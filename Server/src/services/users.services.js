@@ -99,10 +99,6 @@ export default class usersService {
 
         }
 
-        // Actualiza la fecha de última conexión
-
-        // userFound.lastConnection = new Date();
-
         // actualiza la fecha de ultima coneccion        
         const mome = moment();
         userFound.lastConnection = mome
@@ -145,17 +141,6 @@ export default class usersService {
 
 
         const users = await UsersDAO.getUsers()
-
-        // if (!userFound) {
-        //     return CustomError.createError({
-        //         name: 'User data error',
-        //         cause: '',
-        //         message: 'User not found',
-        //         code: ErrorCodes.INVALID_CREDENTIALS
-        //     })
-        // }
-
-        // const userDTO = new usersDto(userFound)
         return users
 
     }

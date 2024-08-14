@@ -10,9 +10,6 @@ export const getProducts = async (req, res) => {
         
         let limit = +req.query.limit
 
-        // este id se puede pasar a la funcion para que solo traiga productos creaos por ese usuario
-        // const id = req.user.id
-
         const products = await productService.getProducts();
         if(!products) return res.json({status: 'error', message: 'Products null'})
         // console.log('get products', products);
@@ -41,12 +38,10 @@ export const createProduct = async (req, res, next) => {
     const id = req.user.id //poner para usuario
     
     const product = {...req.body, user: id}  //poner para usuario
-    // const product = {...req.body} 
     const prodCreado = await productService.createProduct(product);
     
     res.status(201).json({status: 'success', payload: prodCreado})
     } catch (error) {
-        //  res.status(500).json({ messagessssss: error })
         next(error)
     }
     

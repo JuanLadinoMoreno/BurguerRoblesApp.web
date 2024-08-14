@@ -13,8 +13,6 @@ export const verifyAdminRoleMdw = async (req, res, next) => {
         }
         const usrId = new mongoose.Types.ObjectId(req.user)
 
-        // const usrId = req.user
-
         const userfind = await userModel.findOne(
             { 
                 _id: usrId,
@@ -28,7 +26,6 @@ export const verifyAdminRoleMdw = async (req, res, next) => {
         }
 
         next()
-        // return res.status(200).json(userfind)
 
     } catch (error) {
         console.log(error);
@@ -51,8 +48,6 @@ export const verifyAdminPremRoleMdw = async (req, res, next) => {
         }
         const usrId = new mongoose.Types.ObjectId(req.user)
 
-        // const usrId = req.user
-
         const userfind = await userModel.findOne(
             { 
                 _id: usrId,
@@ -66,7 +61,6 @@ export const verifyAdminPremRoleMdw = async (req, res, next) => {
         }
 
         next()
-        // return res.status(200).json(userfind)
 
     } catch (error) {
         console.log(error);
@@ -97,17 +91,6 @@ export const verifyUserRoleMdw = async (req, res, next) => {
                 _id: usrId,
                 role: 'user'
              }
-            // {
-            //     _id: 1,
-            //     firstName: 0,
-            //     lastName: 0,
-            //     age: 0,
-            //     email: 0,
-            //     password: 0,
-            //     createdAt: 0,
-            //     updatedAt: 0,
-            //     role: 0
-            // }
         )
         // console.log('userfind', userfind);
         if (!userfind) {
@@ -117,7 +100,6 @@ export const verifyUserRoleMdw = async (req, res, next) => {
         }
 
         next()
-        // return res.status(200).json(userfind)
 
     } catch (error) {
         console.log(error);

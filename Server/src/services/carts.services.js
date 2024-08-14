@@ -51,52 +51,22 @@ export class CartsService {
 
 
     async getAllCarts() {
-        // try {s
-
-        // let limit = +req.query.limit
+        
         const carts = await cartsDAO.getCarts()
-        return carts
-        // if (limit > 0) return res.json(carts.slice(0, limit))
-        // res.json(carts)
-
-        // } catch (error) {
-        //     return res.status(500).json({ message: error.message })
-        // }
-
+        return carts       
     }
 
     async getUserCarts(uid) {
-        // try {
-        // const userFound = await usersDAO.findUserById(uid)
-        // if (!userFound)
-        //     //  return res.status(400).json({ message: 'User not found!' })
-        //     return CustomError.createError({
-        //         name: 'User data error',
-        //         cause: '',
-        //         message: 'The user is not found',
-        //         code: ErrorCodes.INVALID_CREDENTIALS
-        //     })
-
+       
         await usersService.findUserById(uid)
-
-
-        // let limit = +req.query.limit
         const carts = await cartsDAO.getUserCarts(uid)
         return carts
-        // if (limit > 0) return res.json(carts.slice(0, limit))
-        // res.json(carts)
-
-        // } catch (error) {
-        //     console.log(error);
-        //     return 
-        // }
+        
 
     }
 
     async getCartById(cid) {
-        // try {
-
-        // const id = req.params.cid
+        
         const cart = await cartsDAO.getCartById(cid)
         if (!cart) {
             return CustomError.createError({
@@ -107,15 +77,11 @@ export class CartsService {
             })
         }
         return cart
-        // } catch (e) {
-        //     return res.status(500).json({ message: error.message });
-        // }
+        
     }
 
     async deleteCartById(cid) {
-        // try {
-
-        // const cartId = new mongoose.Types.ObjectId(cid)
+        
         // Verificar que el ID del carrito no esté vacío
         if (!cid) {
             return CustomError.createError({
@@ -135,8 +101,6 @@ export class CartsService {
                 message: `El carrito con ID ${cid} no existe`,
                 code: ErrorCodes.INVALID_CREDENTIALS
             })
-            // console.log(`El carrito con ID ${cid} no existe`);
-            // return null;
         }
         // Elimina cart
         const cartDel = await cartsDAO.deleteCart(cid)
@@ -150,16 +114,9 @@ export class CartsService {
             })
         }
 
-        // console.log(`Carrito con ID ${cid} eliminado exitosamente`);
         return cartDel;
 
-        // if (!asa) return res.status(500).json({ message: `Carrito con ID ${cartId} no fue posibles ser eliminado, verifique que exista` })
-
-        // res.status(200).json(casrtDeleted)
-        // res.status(200).json({ message: `Carrito con ID ${cartId} eliminado exitosamente` })
-        // } catch (error) {
-        //     return res.status(500).json({ message: error.message })
-        // }
+        
 
     }
 
@@ -202,7 +159,7 @@ export class CartsService {
     }
 
     async addProductToCart(cid, pid, quantity) {
-        // try {
+        
         //verifica que el producto y el carrito existan
         const carFind = await cartsDAO.getCartByIdStatusCreated(cid);
         const productFind = await productsDAO.findProductById(pid);
@@ -242,13 +199,6 @@ export class CartsService {
 
         }
 
-
-
-
-        // } catch (error) {
-        //     return res.status(500).json({ message: error.message })
-        // }
-
     }
 
     async updProductQuant(cid, pid) {
@@ -257,16 +207,6 @@ export class CartsService {
 
     }
     async deleteProductCart(cid, pid) {
-
-        // try {
-
-        // if (!cid || !pid) {
-        //     console.log('ID del producto/carrito no proporcionado');
-        //     return null;
-        // }
-
-        // const carFind = await cartModel.findById(cid);
-        // const productFind = await productsModel.findById(pid);
 
         const carFind = await this.getCartById(cid);
 
@@ -312,10 +252,6 @@ export class CartsService {
 
         return updatedCart
 
-
-        // } catch (e) {
-        //     console.log('Error al eliminar el carrito', e);
-        // }
     }
 
     async finalizePurchase(cid, uid) {
@@ -389,16 +325,6 @@ export class CartsService {
                 message: 'The user is not exists in the cart',
                 code: ErrorCodes.INVALID_CREDENTIALS
             })
-        // Crear y guardar el ticket de compra
-        // const tiket = new ticketModel({
-        //     code: nanoid(6), // Generar un código único para la compra
-        //     amount: cantiadTotal,
-        //     purchaser: usrEmail.email, // Suponiendo que el usuario tiene un campo `email`
-        //     user: cart.user._id,
-        //     cart: cid
-        // });
-
-        // await tiket.save();
 
         //Crae tiket en BD
         const ticket = cartsDAO.saveTicket(cantiadTotal, usrEmail.email, cart.user._id, cid, prodsSell)

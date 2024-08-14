@@ -22,9 +22,6 @@ export const createCart = async (req, res, next) => {
     
     try {
         const usrId = new mongoose.Types.ObjectId(req.user.id)
-        // const userfind = await userModel.findOne({ _id: usrId }) //SE TENDRAÍA QUE VALIDAR??
-        
-        // const cart = {...req.body, user: usrId}  //poner id usuario en cart
         const cart = req.body
         
         const cartCreado = await cartsService.createCart(usrId, cart)
@@ -35,7 +32,6 @@ export const createCart = async (req, res, next) => {
 
         res.status(201).json({status: 'succes', payload: cartCreado})
     } catch (error) {
-        // return res.status(500).json({ message: error.message })
         next(error)
     }
 
@@ -58,18 +54,8 @@ export const getAllCarts = async (req, res) => {
 
 export const getUserCarts = async (req, res, next) => {
     try {
-        // console.log(req.user);
-        // const usrId = new mongoose.Types.ObjectId(req.user.id)
         
         const usrId = req.params.uid
-        // const userFound = usersService.findUserById(usrId)
-        // if (!userFound) {
-        //     return res.status(500).json({ message: 'not-found' })
-        // }
-
-        // const userFound = await userModel.findOne({_id: usrId})
-        // const userFound = await userManager.findUserById(usrId)
-        // if (!userFound) return res.status(400).json({ message: 'User not found!' })
 
         let limit = +req.query.limit
         const carts = await cartsService.getUserCarts(usrId)
@@ -77,7 +63,6 @@ export const getUserCarts = async (req, res, next) => {
         res.json({status: 'success', payload: carts})
 
     } catch (error) {
-        // return res.status(500).json({ message: error.message })
         next(error)
     }
 
@@ -102,11 +87,9 @@ export const deleteCartById = async (req, res, next) => {
 
         if (!cartDel) return res.status(500).json({ payload: 'error', message: `Carrito con ID ${cartId} no fue posibles ser eliminado, verifique que exista` })
 
-        // res.status(200).json(casrtDeleted)
         res.status(200).json({ payload: 'seccess', message: `Carrito con ID ${cartId} eliminado exitosamente` })
     } catch (error) {
         next(error)
-        // return res.status(500).json({ message: error.message })
     }
 
 }
@@ -122,8 +105,6 @@ export const empyCart = async (req, res, next) => {
         res.status(200).json({ payload: 'seccess', message: `Carrito con ID ${cid} vaciado exitosamente` })
         
     } catch (error) {
-
-        // console.log(error);
         
         next(error)
     }
@@ -135,7 +116,6 @@ export const addProdororQuantToCart = async (req, res, next) => {
         const cid = req.params.cid
         const pid = req.params.pid
 
-        // console.log(cart, product);
         const prodCreado = await cartsService.addProductToCart(cid, pid, 20)
         if (!prodCreado) return res.status(500).json({ status:'error', message: 'error al actualizar carrito' })
 
@@ -143,7 +123,6 @@ export const addProdororQuantToCart = async (req, res, next) => {
     } catch (error) {
         console.log(error);
         next(error)
-        // return res.status(500).json({ message: error.message })
     }
 
 }
@@ -154,7 +133,6 @@ export const updProductQuant = async (req, res) => {
         const product = req.params.pid
 
         console.log(cart, product);
-        // const prodCreado = await cartsManager.updQuantToProduct(cart, product)
         const prodCreado = await cartsManager.updQuantToProduct(cart, product)
         if (!prodCreado) return res.status(500).json({ message: 'error,producto o carrito no encontrado' })
 
@@ -170,13 +148,11 @@ export const deleteProductCart = async (req, res, next) => {
         const cid = req.params.cid
         const pid = req.params.pid
 
-        // console.log(cart, product);
         const prodCreado = await cartsService.deleteProductCart(cid, pid)
         if (!prodCreado) return res.status(404).json({ status: 'error', message: 'error al eliminar el producto o el carrito no existe' })
 
         res.status(200).json({status: 'error', payload: prodCreado})
     } catch (error) {
-        // return res.status(500).json({ message: error.message })
         console.log(error);
         next(error)        
     }
@@ -188,13 +164,7 @@ export const finPurchase = async (req, res, next) => {
         const cid = req.params.cid
         const uid = req.user.id
 
-        //A la hora de generar el token se crea el objeto user para toda la aplicacion
-        // req.user.id
-
-        const ticket = await cartsService.finalizePurchase(cid, uid)
-
-        console.log('sdfsdfsdfsffdfsdfsdfsdfsdfsdf  ', ticket);
-        
+        const ticket = await cartsService.finalizePurchase(cid, uid)        
         
         if(!ticket) return res.status(400).json({ status: 'seccess', message: 'Problem to create product.' })
 
@@ -203,6 +173,5 @@ export const finPurchase = async (req, res, next) => {
     }catch(error){
         console.log(error);
         next(error)
-        // return res.status(500).json({ message: error.message })
     }
 }

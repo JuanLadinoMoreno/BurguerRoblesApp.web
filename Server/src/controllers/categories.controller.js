@@ -5,13 +5,14 @@ import ProductsCategoriesService from "../services/productsCategories.services.j
 const categoriesManager = new ProductsCategoriesService ()
 
 export const getCatProducts = async (req, res) => {
-    const products = await categoriesManager.getCategories();
-    console.log('products', products);
-    
-    // console.log('get products', products);
-    // if (limit > 0) return res.json(products.slice(0, limit))
+    try{
+        const products = await categoriesManager.getCategories();
+        res.status(200).json(products)
 
-    res.status(200).json(products)
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({status: error, message: error.message });        
+    }
 
 
 }

@@ -57,9 +57,6 @@ export class ProductsService {
     }
 
     async createProduct(prod) {
-            // const id = req.user.id //poner para usuario
-            // const product = {...prod, user: id}  //poner para usuario
-            // const product = {...req.body} 
             const veryUser = await productsDAO.findProductByName(prod.nombre)
             if(veryUser){
                 return CustomError.createError({
@@ -78,9 +75,6 @@ export class ProductsService {
     }
 
     async createProduct(prod) {
-        // const id = req.user.id //poner para usuario
-        // const product = {...prod, user: id}  //poner para usuario
-        // const product = {...req.body} 
         this.validaDatos(prod);
         const prodCreado = await productsDAO.createProduct(prod)
         const prodCreadoDTO = new BurgerDTO(prodCreado)
@@ -92,16 +86,6 @@ export class ProductsService {
         
         this.validaDatos(product);
         await this.findProductById(pid) 
-        // const findProd = await this.findProductById(pid)  
-        // console.log('findProd   ', findProd);
-              
-        // if(!findProd)
-        //     return CustomError.createError({
-        //         name: 'Product data error',
-        //         cause: '',
-        //         message: 'The product is not exists',
-        //         code: ErrorCodes.INVALID_CREDENTIALS
-        //     })
         
         const prodUpd = await productsDAO.findByIdAndUpdate(pid, product)
         

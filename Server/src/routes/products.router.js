@@ -1,20 +1,12 @@
 import { Router } from 'express'
-// import ProductManager from '../dao/fileManager/ProductManager.js';
-// import ProductManager from '../dao/dbManager/ProductManager.js';
 import { authMdw } from '../middlewares/auth.middleware.js';
 import { createProduct, deleteProduct, editProduct, getProductById, getProducts, getProductsByCat } from '../controllers/products.controller.js';
 import { verifyAdminPremRoleMdw, verifyAdminRoleMdw } from '../middlewares/verifyRole.middleware.js';
 
 
-// import {  } from "../../public/img/menu/burguers/burgMex.png";
-// import ProductManager from  'src/ProductManager.js'
 
 
 const router = Router()
-
-// const fileName = `./server/assets/Products.json`
-// const fileName = `${_dirname}/../../assets/Products.json`
-
 
 
 //Obtiene todos los productos
@@ -38,4 +30,3 @@ router.get('/category/:ids', getProductsByCat);
 
 
 export default router
-// module.exports = router
