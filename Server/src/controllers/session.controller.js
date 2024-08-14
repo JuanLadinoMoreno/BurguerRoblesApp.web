@@ -16,17 +16,15 @@ export const register = async (req, res, next) => {
         const usr = await usersService.createUser(firstName, lastName, age, email, password)
         
         // const userFound = await userModel.findOne({ email });
-        
-        if (usr) {
-            return res.status(200).json({
-                status: 'success',
-                payload: {
-                    id: userFound.id,
-                    fisrtsName: userFound.firstName,
-                    email: userFound.email,
-                }
-            });
-        }
+
+        return res.status(200).json({
+            status: 'success',
+            payload: {
+                id: userFound.id,
+                fisrtsName: userFound.firstName,
+                email: userFound.email,
+            }
+        });
 
     }
     catch (error) {
@@ -87,13 +85,16 @@ export const dash = async (req, res, next) => {
         if (!userFound) return res.status(400).json({ message: 'User not found!' })
     
         console.log(userFound)
-    
-        res.json({
-            id: userFound._id,
-            fisrtsName: userFound.firstName,
-            email: userFound.email,
+
+        return res.status(200).json({
+            status: 'success',
+            payload: {
+                id: userFound.id,
+                fisrtsName: userFound.firstName,
+                email: userFound.email,
+            }
         });
-        
+
     } catch (error) {
         next(error)
     }
@@ -110,10 +111,13 @@ export const verifyToken = async (req, res) => {
         const userFound = await usersService.findUserById(user.id);
         if (!userFound) return res.sendStatus(401).json({ message: "No autorizado" });
 
-        return res.json({
-            id: userFound._id,
-            fisrtsName: userFound.firstName,
-            email: userFound.email,
+        return res.status(200).json({
+            status: 'success',
+            payload: {
+                id: userFound.id,
+                fisrtsName: userFound.firstName,
+                email: userFound.email,
+            }
         });
     });
 

@@ -43,7 +43,7 @@ export const getAllCarts = async (req, res) => {
         let limit = +req.query.limit
         const carts = await cartsService.getAllCarts()
         if (limit > 0) return res.json(carts.slice(0, limit))
-        res.json(carts)
+        res.json({status: 'succes', payload: carts})
 
     } catch (error) {
         return res.status(500).json({ message: error.message })
@@ -116,8 +116,10 @@ export const addProdororQuantToCart = async (req, res, next) => {
         const cid = req.params.cid
         const pid = req.params.pid
 
-        const prodCreado = await cartsService.addProductToCart(cid, pid, 20)
-        if (!prodCreado) return res.status(500).json({ status:'error', message: 'error al actualizar carrito' })
+        const { quantity } = req.body
+
+        const prodCreado = await cartsService.addProductToCart(cid, pid, quantity)
+        // if (!prodCreado) return res.status(500).json({ status:'error', message: 'error al actualizar carrito' })
 
         res.status(201).json({ status: 'success', payload: prodCreado})
     } catch (error) {
@@ -132,8 +134,10 @@ export const updProductQuant = async (req, res) => {
         const cart = req.params.cid
         const product = req.params.pid
 
+        const { quantity } = req.body
+
         console.log(cart, product);
-        const prodCreado = await cartsManager.updQuantToProduct(cart, product)
+        const prodCreado = await cartsManager.updQuantToProduct(cart, product, quantity)
         if (!prodCreado) return res.status(500).json({ message: 'error,producto o carrito no encontrado' })
 
         res.status(201).json(prodCreado)

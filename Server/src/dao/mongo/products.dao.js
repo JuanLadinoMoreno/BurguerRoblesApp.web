@@ -65,7 +65,6 @@ export default class productsDAO {
 
     // falata agregar los campos de producto
     async createProduct(produc) {
-        console.log(produc);
         try {
             
             return await productModel.create(produc)
@@ -87,13 +86,8 @@ export default class productsDAO {
     // async deleteProduct(id = '6619a998eacc45356e34ea2c') {
     async deleteProduct(id) {
         try {
-            console.log(id);
-            // console.log('id deleteProduct', id);
-            // await productModel.deleteOne({ _id: id })
+            
             const prod = await productModel.findByIdAndDelete(id)
-            console.log(prod);
-           
-
             return prod
 
         } catch (err) {

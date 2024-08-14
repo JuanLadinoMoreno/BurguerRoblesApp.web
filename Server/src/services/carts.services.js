@@ -21,8 +21,8 @@ export class CartsService {
             return CustomError.createError({
                 name: 'User data error',
                 cause: '',
-                message: 'The user is not exists',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                message: 'Proporcione id',
+                code: ErrorCodes.MISSING_REQUIRED_FIELDS
             })
         }
 
@@ -33,7 +33,7 @@ export class CartsService {
                 name: 'User data error',
                 cause: '',
                 message: 'The user is not found',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.NOT_FOUND
             })
         }
 
@@ -42,17 +42,19 @@ export class CartsService {
         const cartCreado = await cartsDAO.createCart(cartUsr)
         return cartCreado
 
-        // res.status(201).json({status: 'succes'cartCreado})
-        // } catch (error) {
-        //     return res.status(500).json({ message: error.message })
-        // }
-
     }
 
 
     async getAllCarts() {
         
         const carts = await cartsDAO.getCarts()
+        if(!carts)
+            return CustomError.createError({
+                name: 'User data error',
+                cause: '',
+                message: 'The user is not found',
+                code: ErrorCodes.NOT_FOUND
+            })
         return carts       
     }
 
@@ -60,6 +62,13 @@ export class CartsService {
        
         await usersService.findUserById(uid)
         const carts = await cartsDAO.getUserCarts(uid)
+        if(!carts)
+            return CustomError.createError({
+                name: 'User data error',
+                cause: '',
+                message: 'The user is not found',
+                code: ErrorCodes.NOT_FOUND
+            })
         return carts
         
 
@@ -73,7 +82,7 @@ export class CartsService {
                 name: 'Cart data error',
                 cause: '',
                 message: 'The cart is not found',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.NOT_FOUND
             })
         }
         return cart
@@ -88,7 +97,7 @@ export class CartsService {
                 name: 'Cart data error',
                 cause: '',
                 message: 'The cart is not found',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.MISSING_REQUIRED_FIELDS
             })
         }
 
@@ -99,7 +108,7 @@ export class CartsService {
                 name: 'Cart data error',
                 cause: '',
                 message: `El carrito con ID ${cid} no existe`,
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.NOT_FOUND
             })
         }
         // Elimina cart
@@ -110,7 +119,7 @@ export class CartsService {
                 name: 'Cart data error',
                 cause: '',
                 message: `Error al eliminar el carrito con ID ${cid}`,
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.NOT_FOUND
             })
         }
 
@@ -126,7 +135,7 @@ export class CartsService {
                 name: 'Cart data error',
                 cause: '',
                 message: 'The cart is not found to empty',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.MISSING_REQUIRED_FIELDS
             })
         }
 
@@ -139,7 +148,7 @@ export class CartsService {
                 name: 'Cart data error',
                 cause: '',
                 message: 'the card is already empty',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.NOT_FOUND
             })
 
 
@@ -169,8 +178,8 @@ export class CartsService {
             return CustomError.createError({
                 name: 'Cart data error',
                 cause: '',
-                message: 'The card or product is not found',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                message: 'Verifique datos a mandar',
+                code: ErrorCodes.MISSING_REQUIRED_FIELDS
             })
 
 
@@ -183,7 +192,7 @@ export class CartsService {
                     name: 'Cart data error',
                     cause: '',
                     message: 'Error al actualizar catidad',
-                    code: ErrorCodes.INVALID_CREDENTIALS
+                    code: ErrorCodes.NOT_FOUND
                 })
             return cartUpd
         } else {
@@ -193,7 +202,7 @@ export class CartsService {
                     name: 'Cart data error',
                     cause: '',
                     message: 'Error to create product in cart',
-                    code: ErrorCodes.INVALID_CREDENTIALS
+                    code: ErrorCodes.NOT_FOUND
                 })
             return cartUpd
 
@@ -208,6 +217,14 @@ export class CartsService {
     }
     async deleteProductCart(cid, pid) {
 
+        if (!cid || !pid)
+            return CustomError.createError({
+                name: 'Cart data error',
+                cause: '',
+                message: 'Verifique datos a mandar',
+                code: ErrorCodes.MISSING_REQUIRED_FIELDS
+            })
+
         const carFind = await this.getCartById(cid);
 
 
@@ -218,7 +235,7 @@ export class CartsService {
                 name: 'Cart data error',
                 cause: '',
                 message: 'The card or product is not found',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.NOT_FOUND
             })
 
         // const productId = new mongoose.Types.ObjectId(pid); // Convierte pid a ObjectId
@@ -232,7 +249,7 @@ export class CartsService {
                 name: 'Cart data error',
                 cause: '',
                 message: 'The product is not exists in the cart',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.NOT_FOUND
             })
             // console.log(`El producto con ID ${pid} no se encuentra en el carrito`);
             // return null //code 404 ????

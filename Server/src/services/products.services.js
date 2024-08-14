@@ -29,7 +29,7 @@ export class ProductsService {
                 name: 'Product data error',
                 cause: '',
                 message: 'Verify that the fields are correct',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.INVALID_TYPES_ERROR
             })
         }
     }
@@ -37,6 +37,14 @@ export class ProductsService {
     async getProducts ()  {        
        
             const products =  await productsDAO.getProducts();
+            if (!products) {
+                return CustomError.createError({
+                    name: "ProductsNotFoundError",
+                    cause: '',
+                    message: "No se encontraron productos en la base de datos.",
+                    code: ErrorCodes.NOT_FOUND
+                });
+            }
             return products
             // return new BurgerDTO(products)
     }
@@ -50,7 +58,7 @@ export class ProductsService {
                     name: 'Product data error',
                     cause: '',
                     message: 'The product is not exists',
-                    code: ErrorCodes.INVALID_CREDENTIALS
+                    code: ErrorCodes.NOT_FOUND
                 })
             }
             return new BurgerDTO(product)
@@ -62,30 +70,43 @@ export class ProductsService {
                 return CustomError.createError({
                     name: 'User error',
                     cause: '',
-                    message: 'The user exists',
-                    code: ErrorCodes.INVALID_CREDENTIALS
+                    message: 'The product name exists',
+                    code: ErrorCodes.EXISTING_DATA
                 })      
  
             }
+
             this.validaDatos(prod);
+
             const prodCreado = await productsDAO.createProduct(prod)
+            if(!prodCreado){
+                return CustomError.createError({
+                    name: 'ProductError',
+                    cause: '',
+                    message: 'Error to create product',
+                    code: ErrorCodes.EXISTING_DATA
+                })      
+ 
+            }
             const prodCreadoDTO = new BurgerDTO(prodCreado)
             return prodCreadoDTO
             
-    }
-
-    async createProduct(prod) {
-        this.validaDatos(prod);
-        const prodCreado = await productsDAO.createProduct(prod)
-        const prodCreadoDTO = new BurgerDTO(prodCreado)
-        return prodCreadoDTO
     }
     
     async updateOne(pid, product) {
         // const pid = new mongoose.Types.ObjectId(id)
         
         this.validaDatos(product);
-        await this.findProductById(pid) 
+        const productF = await this.findProductById(pid)
+        if(!productF){
+
+            return CustomError.createError({
+                name: 'Product data error',
+                cause: '',
+                message: 'The product is not exists',
+                code: ErrorCodes.NOT_FOUND
+            })
+        }
         
         const prodUpd = await productsDAO.findByIdAndUpdate(pid, product)
         
@@ -94,7 +115,7 @@ export class ProductsService {
                 name: 'Product update error',
                 cause: '',
                 message: 'The product can not be updated',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.EXISTING_DATA
             })
         const prodUpdDTO = new BurgerDTO(prodUpd)
         return prodUpdDTO
@@ -107,14 +128,24 @@ export class ProductsService {
                 name: 'Product data error',
                 cause: '',
                 message: 'The product is not exists',
-                code: ErrorCodes.INVALID_CREDENTIALS
+                code: ErrorCodes.NOT_FOUND
             })
 
             if(findProd.user.role === 'premium') {
                 await emailService.notifyProductPremiumDelete(findProd)
             }
 
-        return productsDAO.deleteProduct(pid)
+        const prodDel = await productsDAO.deleteProduct(pid)
+        
+        if(!prodDel)
+            return CustomError.createError({
+                name: 'ProductError',
+                cause: '',
+                message: 'Problem to delete product',
+                code: ErrorCodes.NOT_FOUND
+            })
+
+        return prodDel
     }
 
     async getProductsByCategory(id){

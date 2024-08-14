@@ -87,30 +87,12 @@ export default class CartsManager {
     async deleteCart(cid) {
         // console.log('cartCreate', cart );
         try {
-            // // const cartId = new mongoose.Types.ObjectId(cid) // Convierte pid a ObjectId
-            // const cartId = new mongoose.Types.ObjectId(cid)
-            // // Verificar que el ID del carrito no esté vacío
-            // if (!cid) {
-            //     console.log('ID del carrito no proporcionado');
-            //     return null;
-            // }
-
-            // // Verificar que el carrito exista antes de intentar eliminarlo
-            // const carFind = await cartModel.findById(cartId);
-            // if (!carFind) {
-            //     console.log(`El carrito con ID ${cid} no existe`);
-            //     return null;
-            // }
+    
 
             // Eliminar el carrito
             const deletedCart = await cartModel.findByIdAndDelete(cid);
             if (!deletedCart) return null
 
-            // // Verificar que la eliminación fue exitosa
-            // if (!deletedCart) {
-            //     console.log(`Error al eliminar el carrito con ID ${cid}`);
-            //     return null;
-            // }
 
             // console.log(`Carrito con ID ${cid} eliminado exitosamente`);
             return deletedCart;
@@ -176,15 +158,9 @@ export default class CartsManager {
 
     async addProductToCart(cid, pid) {
         try {
-            // Validar que el carrito y el producto existan
-            // const carFind = await cartModel.findById(cid);
-            // const productFind = await productsModel.findById(pid);
-            // if (!carFind || !productFind) return null;
-
+  
             const productId = new mongoose.Types.ObjectId(pid); // Convierte pid a ObjectId
-
-            // // Buscar si el producto ya está en el carrito
-            // const existingProduct = carFind.products.find(p => p.pid.equals(productId));
+;
 
             let cart;
             if (existingProduct) {
@@ -203,10 +179,9 @@ export default class CartsManager {
                 ).populate('products.pid');
             }
 
-            console.log(cart);
+         
 
             const cartF = await cartModel.findById(cid).populate('products.pid');
-            // console.log(cartF);
 
             return cart;
         } catch (e) {
@@ -215,7 +190,7 @@ export default class CartsManager {
     }
 
 
-    async updQuantToProduct(cid, pid) {
+    async updQuantToProduct(cid, pid,quantity) {
         try {
             const carFind = await cartModel.findById(cid);
             const productFind = await productsModel.findById(pid);
@@ -232,7 +207,7 @@ export default class CartsManager {
                 // Si el producto ya está en el carrito, actualizar la cantidad
                 cart = await cartModel.findOneAndUpdate(
                     { _id: cid, 'products.pid': productId },
-                    { $inc: { 'products.$.quantity': 100 } }, // Incrementar la cantidad  ¿Duda en donde va a pasar la cantidad?
+                    { $inc: { 'products.$.quantity': quantity } }, // Incrementar la cantidad  ¿Duda en donde va a pasar la cantidad?
                     { new: true }
                 ).populate('products.pid');
             } else {
@@ -242,9 +217,6 @@ export default class CartsManager {
 
 
             const cartF = await cartModel.findById(cid)//.populate('products');
-            console.log(cartF);
-
-            console.log(cart);
             return cart
         } catch (e) {
             console.log('Error al actualizar cantidad', e);
@@ -277,7 +249,6 @@ export default class CartsManager {
 
     async productInStockSave(productInStock) {
         try {
-            console.log('productInStock--------------------> ',productInStock);
             
             return await productInStock.save();
         } catch (error) {
@@ -345,7 +316,6 @@ export default class CartsManager {
             let cantiadTotal = 0;
             let productInStock = null
 
-            console.log('cart.products', cart.products);
 
             for (const product of cart.products) {
                 productInStock = await productsModel.findById(product.pid);

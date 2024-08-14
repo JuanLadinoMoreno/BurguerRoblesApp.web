@@ -65,7 +65,7 @@ export const deleteProduct = async (req, res, next) => {
     try {
         const prodDel = await productService.deleteOne(req.params.id)
         if (!prodDel) {
-            return res.status(400).json({ status: 'error', message: 'Product not found' })
+            return res.status(404).json({ status: 'error', message: 'Product not found' })
         }
         //204?
         res.status(200).json({status: 'success', message: 'Producto eliminado'})

@@ -8,7 +8,7 @@ export const authMdw = (req, res, next) => {
       if (!token)
         return res
     .status(401)
-    .json({ message: "No token, authorization denied" });
+    .json({status: 'error', message: "No token, authorization denied" });
     
     // verifica que el token sea el del servidor
       jwt.verify(token, 'TOKEN_SECRET', (error, user) => {
@@ -19,7 +19,7 @@ export const authMdw = (req, res, next) => {
         next();
       });
     } catch (error) {
-      return res.status(500).json({ message: error.message });
+      return res.status(500).json({status: 'error', message: error.message });
     }
   };
 
