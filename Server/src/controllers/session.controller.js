@@ -1,19 +1,13 @@
 import { TOKEN_SECRET } from "../config/config.js";
 import { createAccessToken } from "../libs/jwts.js";
-// import userModel from "../dao/mongo/models/user.model.js";
 import bcryptjs from "bcryptjs";
-import jwt from 'jsonwebtoken'
-import UsersManager from "../dao/mongo/users.dao.js";
-
-import CustomError from "../services/errors/CustomError.js";
-import ErrorCodes from "../services/errors/errorCodes.js";
-import { generateInvalidUserDataError } from "../services/errors/info.js";
+import jwt from 'jsonwebtoken';
 
 import UsersService from "../services/users.services.js";
+import EmailService from "../services/email.services.js";
 
-
-const usersManager = new UsersManager()
 const usersService = new UsersService()
+const emailService = new EmailService()
 
 export const register = async (req, res, next) => {
 
@@ -117,6 +111,7 @@ export const login = async (req, res, next) => {
         const { email, password } = req.body;
         
         
+        
         // const userFound = await userModel.findOne({ email });
         const userFound = await usersService.onLogin(email, password)
 
@@ -200,4 +195,54 @@ export const verifyToken = async (req, res) => {
         });
     });
 
+}
+
+export const getUsers = async (req, res, next) => {
+    try {
+        const users = await usersService.getUsers();
+        res.status(200).json({status: 'success', payload: users})
+    } catch (error) {
+        console.log(error);
+        
+        next(error)
+    }
+}
+
+export const getUsersById = async (req, res, next) => {
+    try {
+        const uid = req.params.uid
+        const user = await usersService.findUserById(uid);
+        res.status(200).json({status: 'success', payload: user})
+    } catch (error) {
+        console.log(error);
+        
+        next(error)
+    }
+}
+
+export const deleteUserInactive = async (req, res, next) => {
+    try {
+        const uid = req.params.uid
+        const user = await usersService.deleteUserInactive(uid);
+        res.status(200).json({status: 'success', payload: user})
+    } catch (error) {
+        console.log(error);
+        
+        next(error)
+    }
+}
+
+// 2024-08-13T19:21:04.068+00:00
+export const notifyInactiveUsers = async (req, res, next) => {
+    try {
+        const users = await emailService.notifyInactiveUsers();
+        if(!users) return res.status(500).json({status: 'error', message: 'Error al eliminar y enviar correos'})
+        // console.log('-------------------    ',users);
+        
+        res.status(200).json({status: 'success', payload: users})
+    } catch (error) {
+        console.log(error);
+        
+        next(error)
+    }
 }

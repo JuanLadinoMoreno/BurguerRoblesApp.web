@@ -27,6 +27,10 @@ const usrSchema = new Schema(
         role: {
             type: String,
             required: true,
+        },
+        lastConnection: { 
+            type: Date,
+             default: null 
         }
         // user: {
         //     type: mongoose.Types.ObjectId,

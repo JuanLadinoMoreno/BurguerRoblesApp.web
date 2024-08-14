@@ -1,5 +1,7 @@
+import moment from "moment";
 import userModel from "../mongo/models/user.model.js";
 import bcryptjs from "bcryptjs";
+
 
 export default class usersDAO{
 
@@ -40,18 +42,18 @@ export default class usersDAO{
         try {
 
             const userFound = await userModel.findOne({ email });
-
             if (userFound)
                 return null;
-    
+            
             const pswHash = await bcryptjs.hash(password, 11)
+            const now = moment()
 
             const usr = await userModel.create({
                 firstName,
                 lastName,
                 age: +age,
                 email,
-                password: pswHash
+                password: pswHash,
             })
 
             return usr
@@ -87,8 +89,24 @@ export default class usersDAO{
         }
     }
 
-        
+    async getUsers() {
+        try {
+            const users = await userModel.find();
+            return users
+        } catch (error) {
+            console.log('Error on login', e);
+            return null
+        }
+    }
 
+    async deleteUserById(uid) {
+        try {
+            return await userModel.findByIdAndDelete(uid)
+        } catch (error) {
+            console.log('Error on login', e);
+            return null
+        }
+    }
 
 
 }

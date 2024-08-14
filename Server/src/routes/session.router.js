@@ -5,7 +5,7 @@ import { Router } from "express";
 import { authMdw } from "../middlewares/auth.middleware.js";
 // import jwt from 'jsonwebtoken'
 // import { TOKEN_SECRET } from "../config/config.js";
-import { dash, login, logout, register, verifyToken } from "../controllers/session.controller.js";
+import { dash, deleteUserInactive, getUsers, getUsersById, login, logout, notifyInactiveUsers, register, verifyToken } from "../controllers/session.controller.js";
 
 
 // import {userIsLoggedIn} from "../middlewares/auth.middleware.js";
@@ -103,10 +103,17 @@ router.post('/login', login);
 
 router.post('/logout', logout)
 
-
 router.get('/profile', authMdw, dash)
 
 router.get('/verify', verifyToken);
+
+router.get('/', getUsers)
+
+router.get('/:uid', getUsersById)
+
+router.delete('/:uid', deleteUserInactive)
+
+router.delete('/', notifyInactiveUsers)
 
 
 
