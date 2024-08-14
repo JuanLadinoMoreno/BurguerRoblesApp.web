@@ -1,8 +1,9 @@
 
 import express from 'express'
 import cors from 'cors'
-
 import cookieParser from 'cookie-parser';
+
+import { PORT } from './config/config.js';
 
 import productsRouter from './routes/products.router.js'
 import categoriesRouter from './routes/categories.router.js'
@@ -18,7 +19,7 @@ import 'dotenv/config'
 
 
 
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
 
 const app = express();
 

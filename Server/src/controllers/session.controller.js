@@ -1,6 +1,8 @@
 import { createAccessToken } from "../libs/jwts.js";
 import jwt from 'jsonwebtoken';
 
+import { TOKEN_SECRET } from "../config/config.js";
+
 import UsersService from "../services/users.services.js";
 import EmailService from "../services/email.services.js";
 
@@ -104,7 +106,7 @@ export const verifyToken = async (req, res) => {
     const { token } = req.cookies;
     if (!token) return res.send(false).json({ message: "No autorizado" });
 
-    jwt.verify(token, 'TOKEN_SECRET', async (error, user) => {
+    jwt.verify(token, TOKEN_SECRET, async (error, user) => {
         if (error) return res.sendStatus(401).json({ message: "No autorizado" });
 
         // const userFound = await userModel.findById(user.id);
