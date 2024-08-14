@@ -49,9 +49,7 @@ export default class usersService {
         const pswHash = await bcryptjs.hash(password, 11)
 
         const usr = await UsersDAO.createUser(firstName, lastName, age, email, pswHash)
-        console.log('dsdfsdfsdfsdfsdfsdfsd', usr);
         const userDTO = new usersDto(usr)
-        console.log('5+65+65+5+565+65+65', userDTO);
         return userDTO
 
         // } catch (error) {

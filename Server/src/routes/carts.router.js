@@ -6,7 +6,7 @@ import { verifyAdminRoleMdw } from "../middlewares/verifyRole.middleware.js";
 
 const router = Router()
 
-router.post('/', authMdw, verifyAdminRoleMdw, createCart)
+router.post('/', authMdw, createCart)
 
 router.get('/', authMdw, verifyAdminRoleMdw, getAllCarts)
 

@@ -47,6 +47,7 @@ export const verifyAdminPremRoleMdw = async (req, res, next) => {
             });
         }
         const usrId = new mongoose.Types.ObjectId(req.user)
+        
 
         const userfind = await userModel.findOne(
             { 

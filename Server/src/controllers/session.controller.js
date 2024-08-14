@@ -15,7 +15,7 @@ export const register = async (req, res, next) => {
 
         const { firstName, lastName, email, age, password } = req.body
 
-        const usr = await usersService.createUser(firstName, lastName, age, email, password)
+        const userFound = await usersService.createUser(firstName, lastName, age, email, password)
         
         // const userFound = await userModel.findOne({ email });
 
@@ -29,7 +29,8 @@ export const register = async (req, res, next) => {
         });
 
     }
-    catch (error) {
+    catch (error) { 
+        console.log(error);    
         next(error); 
     }
 }
@@ -85,8 +86,7 @@ export const dash = async (req, res, next) => {
         const userFound = await usersService.findUserById(req.user.id);
     
         if (!userFound) return res.status(400).json({ message: 'User not found!' })
-    
-        console.log(userFound)
+
 
         return res.status(200).json({
             status: 'success',
